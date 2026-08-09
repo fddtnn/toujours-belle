@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 20 33% 97%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 0 0% 10%;
+    --primary-foreground: 20 33% 97%;
+    --secondary: 0 25% 91%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 0 25% 91%;
+    --muted-foreground: 0 0% 54%;
+    --accent: 0 25% 74%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 25% 91%;
+    --input: 0 25% 91%;
+    --ring: 0 25% 74%;
+    --radius: 0.625rem;
+    --sidebar-background: 20 33% 97%;
+    --sidebar-foreground: 0 0% 10%;
+    --sidebar-primary: 0 0% 10%;
+    --sidebar-primary-foreground: 20 33% 97%;
+    --sidebar-accent: 0 25% 91%;
+    --sidebar-accent-foreground: 0 0% 10%;
+    --sidebar-border: 0 25% 91%;
+    --sidebar-ring: 0 25% 74%;
+
+    /* Custom theme colors */
+    --tb-bg: #faf6f4;
+    --tb-bg-secondary: #ffffff;
+    --tb-text: #0d0d0d;
+    --tb-text-secondary: #4a4a4a;
+    --tb-text-muted: #6b6b6b;
+    --tb-border: #f0e0e0;
+    --tb-card: #ffffff;
+  }
+
+  .dark {
+    --background: 0 0% 7%;
+    --foreground: 20 20% 92%;
+    --card: 0 0% 11%;
+    --card-foreground: 20 20% 92%;
+    --popover: 0 0% 11%;
+    --popover-foreground: 20 20% 92%;
+    --primary: 0 25% 74%;
+    --primary-foreground: 0 0% 7%;
+    --secondary: 0 0% 16%;
+    --secondary-foreground: 20 20% 92%;
+    --muted: 0 0% 16%;
+    --muted-foreground: 0 0% 56%;
+    --accent: 0 25% 74%;
+    --accent-foreground: 0 0% 7%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 25% 74%;
+    --sidebar-background: 0 0% 7%;
+    --sidebar-foreground: 20 20% 92%;
+    --sidebar-primary: 0 25% 74%;
+    --sidebar-primary-foreground: 0 0% 7%;
+    --sidebar-accent: 0 0% 16%;
+    --sidebar-accent-foreground: 20 20% 92%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 0 25% 74%;
+
+    /* Custom dark theme colors */
+    --tb-bg: #121212;
+    --tb-bg-secondary: #1a1a1a;
+    --tb-text: #e8d8d4;
+    --tb-text-secondary: #a89890;
+    --tb-text-muted: #8a7a72;
+    --tb-border: #2a2020;
+    --tb-card: #1a1a1a;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--tb-bg);
+    color: var(--tb-text);
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    color: var(--tb-text);
+    transition: color 0.4s ease;
+  }
+  html[dir="rtl"] body {
+    font-family: 'Noto Sans Arabic', 'Inter', sans-serif;
+  }
+  html[dir="rtl"] h1,
+  html[dir="rtl"] h2,
+  html[dir="rtl"] h3,
+  html[dir="rtl"] h4,
+  html[dir="rtl"] h5,
+  html[dir="rtl"] h6 {
+    font-family: 'Noto Sans Arabic', 'Playfair Display', serif;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Menu Conflict Prevention ──
+   When hamburger menu is active, hide the Magic Menu (worm character)
+   on the Extensions page. WhatsApp button is NEVER affected.
+*/
+
+/* When hamburger menu is active, hide Magic Menu (worm) */
+body[data-active-menu="hamburger"] #wormBox {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Smooth fade transition on Magic Menu (worm) */
+#wormBox {
+  transition: opacity 250ms ease !important;
+}
