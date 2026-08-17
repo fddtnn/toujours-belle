@@ -2,13 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
 import { useLanguage } from '../context/LanguageContext';
 import {
-  Star, Heart, ShoppingCart, Minus, Plus, Truck, Shield,
+  Star, Heart, Minus, Plus, Truck, Shield,
   ChevronRight, Sparkles, Check, Zap, Package, AlertTriangle, ArrowLeft
 } from 'lucide-react';
 import Footer from '../sections/Footer';
 
 /* ═══════════════════════════════════════════
-   PRODUCT DATA — 51 Long Wigs by Color Category
+   PRODUCT DATA — 48 Extra Long Wigs by Color Category
    ═══════════════════════════════════════════ */
 
 interface WigProduct {
@@ -29,57 +29,54 @@ interface WigProduct {
 }
 
 const products: WigProduct[] = [
-  { id: 'll001', nameFr: 'Frange Noire Lisse Élégance', nameAr: 'غرة سوداء ناعمة أنيقة', image: '/images/perruques/long/ll001.jpg', typeFr: 'Perruque Longue — Noir Naturel', typeAr: 'باروكة طويلة — أسود طبيعي', basePrice: 444, rating: 4.2, reviews: 35, sold: 26, stock: 62, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
-  { id: 'll002', nameFr: 'Frange Noire Lisse Glamour', nameAr: 'غرة سوداء ناعمة جلامور', image: '/images/perruques/long/ll002.jpg', typeFr: 'Perruque Longue — Noir Naturel', typeAr: 'باروكة طويلة — أسود طبيعي', basePrice: 489, rating: 4.2, reviews: 29, sold: 48, stock: 54, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
-  { id: 'll003', nameFr: 'Frange Noire Lisse Soyeuse', nameAr: 'غرة سوداء ناعمة حريرية', image: '/images/perruques/long/ll003.jpg', typeFr: 'Perruque Longue — Noir Naturel', typeAr: 'باروكة طويلة — أسود طبيعي', basePrice: 411, rating: 4.7, reviews: 54, sold: 64, stock: 50, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
-  { id: 'll048', nameFr: 'Noir Lisse Long Intense', nameAr: 'أسود ناعم طويل كثيف', image: '/images/perruques/long/ll048.jpg', typeFr: 'Perruque Longue — Noir Naturel', typeAr: 'باروكة طويلة — أسود طبيعي', basePrice: 415, rating: 4.3, reviews: 48, sold: 44, stock: 41, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
-  { id: 'll004', nameFr: 'Châtain Foncé Vague Élégance', nameAr: 'كستنائي داكن مموج أنيق', image: '/images/perruques/long/ll004.jpg', typeFr: 'Perruque Longue — Châtain Foncé', typeAr: 'باروكة طويلة — كستنائي داكن', basePrice: 503, rating: 4.9, reviews: 10, sold: 52, stock: 58, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
-  { id: 'll005', nameFr: 'Châtain Foncé Vague Glamour', nameAr: 'كستنائي داكن مموج جلامور', image: '/images/perruques/long/ll005.jpg', typeFr: 'Perruque Longue — Châtain Foncé', typeAr: 'باروكة طويلة — كستنائي داكن', basePrice: 393, rating: 4.8, reviews: 11, sold: 32, stock: 60, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
-  { id: 'll006', nameFr: 'Châtain Foncé Vague Soyeuse', nameAr: 'كستنائي داكن مموج حريري', image: '/images/perruques/long/ll006.jpg', typeFr: 'Perruque Longue — Châtain Foncé', typeAr: 'باروكة طويلة — كستنائي داكن', basePrice: 510, rating: 4.6, reviews: 8, sold: 52, stock: 36, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
-  { id: 'll007', nameFr: 'Châtain Foncé Vague Volume', nameAr: 'كستنائي داكن مموج كثيف', image: '/images/perruques/long/ll007.jpg', typeFr: 'Perruque Longue — Châtain Foncé', typeAr: 'باروكة طويلة — كستنائي داكن', basePrice: 429, rating: 4.7, reviews: 43, sold: 59, stock: 57, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
-  { id: 'll008', nameFr: 'Frange Châtain Foncé Lisse', nameAr: 'غرة كستنائية داكنة ناعمة', image: '/images/perruques/long/ll008.jpg', typeFr: 'Perruque Longue — Châtain Foncé', typeAr: 'باروكة طويلة — كستنائي داكن', basePrice: 402, rating: 4.4, reviews: 27, sold: 51, stock: 37, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
-  { id: 'll012', nameFr: 'Frange Châtain Foncé Vague Douce', nameAr: 'غرة كستنائية داكنة مموجة ناعمة', image: '/images/perruques/long/ll012.jpg', typeFr: 'Perruque Longue — Châtain Foncé', typeAr: 'باروكة طويلة — كستنائي داكن', basePrice: 518, rating: 4.6, reviews: 46, sold: 15, stock: 42, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
-  { id: 'll015', nameFr: 'Frange Châtain Foncé Lisse Intense', nameAr: 'غرة كستنائية داكنة ناعمة كثيفة', image: '/images/perruques/long/ll015.jpg', typeFr: 'Perruque Longue — Châtain Foncé', typeAr: 'باروكة طويلة — كستنائي داكن', basePrice: 409, rating: 4.4, reviews: 49, sold: 20, stock: 65, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
-  { id: 'll036', nameFr: 'Balayage Châtain Foncé Vague', nameAr: 'كستنائي داكن مموج بالياج', image: '/images/perruques/long/ll036.jpg', typeFr: 'Perruque Longue — Châtain Foncé', typeAr: 'باروكة طويلة — كستنائي داكن', basePrice: 414, rating: 4.2, reviews: 9, sold: 28, stock: 38, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
-  { id: 'll037', nameFr: 'Balayage Châtain Foncé Vague Soyeux', nameAr: 'كستنائي داكن مموج بالياج حريري', image: '/images/perruques/long/ll037.jpg', typeFr: 'Perruque Longue — Châtain Foncé', typeAr: 'باروكة طويلة — كستنائي داكن', basePrice: 396, rating: 4.8, reviews: 35, sold: 22, stock: 44, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
-  { id: 'll038', nameFr: 'Balayage Châtain Foncé Vague Glamour', nameAr: 'كستنائي داكن مموج بالياج جلامور', image: '/images/perruques/long/ll038.jpg', typeFr: 'Perruque Longue — Châtain Foncé', typeAr: 'باروكة طويلة — كستنائي داكن', basePrice: 456, rating: 4.4, reviews: 47, sold: 17, stock: 64, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
-  { id: 'll040', nameFr: 'Châtain Foncé Vague Royal', nameAr: 'كستنائي داكن مموج ملكي', image: '/images/perruques/long/ll040.jpg', typeFr: 'Perruque Longue — Châtain Foncé', typeAr: 'باروكة طويلة — كستنائي داكن', basePrice: 457, rating: 4.4, reviews: 37, sold: 21, stock: 42, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
-  { id: 'll041', nameFr: 'Triptyque Châtain Foncé Mixte', nameAr: 'ثلاثي كستنائي داكن مختلط', image: '/images/perruques/long/ll041.jpg', typeFr: 'Perruque Longue — Châtain Foncé', typeAr: 'باروكة طويلة — كستنائي داكن', basePrice: 467, rating: 4.7, reviews: 31, sold: 20, stock: 50, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
-  { id: 'll009', nameFr: 'Balayage Châtain Clair Lisse', nameAr: 'كستنائي فاتح ناعم بالياج', image: '/images/perruques/long/ll009.jpg', typeFr: 'Perruque Longue — Châtain', typeAr: 'باروكة طويلة — كستنائي', basePrice: 397, rating: 5.0, reviews: 38, sold: 49, stock: 44, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
-  { id: 'll010', nameFr: 'Balayage Châtain Doré Lisse', nameAr: 'كستنائي ذهبي ناعم بالياج', image: '/images/perruques/long/ll010.jpg', typeFr: 'Perruque Longue — Châtain', typeAr: 'باروكة طويلة — كستنائي', basePrice: 503, rating: 4.5, reviews: 45, sold: 62, stock: 51, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
-  { id: 'll013', nameFr: 'Ombré Châtain Blond Lisse', nameAr: 'كستنائي أشقر ناعم أومبره', image: '/images/perruques/long/ll013.jpg', typeFr: 'Perruque Longue — Châtain', typeAr: 'باروكة طويلة — كستنائي', basePrice: 390, rating: 4.4, reviews: 49, sold: 47, stock: 65, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
-  { id: 'll049', nameFr: 'Balayage Châtain Blond Vague', nameAr: 'كستنائي أشقر مموج بالياج', image: '/images/perruques/long/ll049.jpg', typeFr: 'Perruque Longue — Châtain', typeAr: 'باروكة طويلة — كستنائي', basePrice: 508, rating: 4.8, reviews: 20, sold: 42, stock: 59, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
-  { id: 'll051', nameFr: 'Frange Cuivre Vague Intense', nameAr: 'غرة نحاسية مموجة كثيفة', image: '/images/perruques/long/ll051.jpg', typeFr: 'Perruque Longue — Rouge', typeAr: 'باروكة طويلة — أحمر', basePrice: 475, rating: 4.7, reviews: 32, sold: 38, stock: 55, category: 'red', categoryFr: 'Rouge', categoryAr: 'أحمر' },
-  { id: 'll011', nameFr: 'Triptyque Balayage Mixte Élégance', nameAr: 'ثلاثي بالياج مختلط أنيق', image: '/images/perruques/long/ll011.jpg', typeFr: 'Perruque Longue — Highlight', typeAr: 'باروكة طويلة — هايلايت', basePrice: 390, rating: 4.2, reviews: 36, sold: 56, stock: 53, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
-  { id: 'll014', nameFr: 'Balayage Blond Vague Élégance', nameAr: 'أشقر مموج بالياج أنيق', image: '/images/perruques/long/ll014.jpg', typeFr: 'Perruque Longue — Highlight', typeAr: 'باروكة طويلة — هايلايت', basePrice: 495, rating: 4.3, reviews: 42, sold: 29, stock: 64, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
-  { id: 'll016', nameFr: 'Balayage Blond Vague Glamour', nameAr: 'أشقر مموج بالياج جلامور', image: '/images/perruques/long/ll016.jpg', typeFr: 'Perruque Longue — Highlight', typeAr: 'باروكة طويلة — هايلايت', basePrice: 497, rating: 4.3, reviews: 45, sold: 45, stock: 63, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
-  { id: 'll017', nameFr: 'Balayage Blond Vague Douce', nameAr: 'أشقر مموج بالياج ناعم', image: '/images/perruques/long/ll017.jpg', typeFr: 'Perruque Longue — Highlight', typeAr: 'باروكة طويلة — هايلايت', basePrice: 451, rating: 4.1, reviews: 16, sold: 22, stock: 43, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
-  { id: 'll022', nameFr: 'Racines Foncées Blond Lisse', nameAr: 'أشقر ناعم بجذور داكنة', image: '/images/perruques/long/ll022.jpg', typeFr: 'Perruque Longue — Highlight', typeAr: 'باروكة طويلة — هايلايت', basePrice: 407, rating: 4.6, reviews: 49, sold: 47, stock: 59, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
-  { id: 'll018', nameFr: 'Blond Bouclé Volume Intense', nameAr: 'أشقر مجعد كثيف كثيف', image: '/images/perruques/long/ll018.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 493, rating: 4.7, reviews: 20, sold: 13, stock: 41, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll019', nameFr: 'Blond Bouclé Glamour', nameAr: 'أشقر مجعد جلامور', image: '/images/perruques/long/ll019.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 390, rating: 4.3, reviews: 55, sold: 47, stock: 52, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll020', nameFr: 'Blond Bouclé Soyeux Arrière', nameAr: 'أشقر مجعد حريري خلفي', image: '/images/perruques/long/ll020.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 455, rating: 4.2, reviews: 25, sold: 63, stock: 58, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll021', nameFr: 'Blond Vague Élégance', nameAr: 'أشقر مموج أنيق', image: '/images/perruques/long/ll021.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 513, rating: 4.5, reviews: 26, sold: 13, stock: 46, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll023', nameFr: 'Triptyque Racines Foncées Blond Vague', nameAr: 'ثلاثي أشقر مموج بجذور داكنة', image: '/images/perruques/long/ll023.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 418, rating: 4.6, reviews: 41, sold: 31, stock: 57, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll024', nameFr: 'Racines Foncées Blond Vague', nameAr: 'أشقر مموج بجذور داكنة', image: '/images/perruques/long/ll024.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 445, rating: 4.5, reviews: 18, sold: 70, stock: 61, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll025', nameFr: 'Racines Foncées Blond Arrière', nameAr: 'أشقر خلفي بجذور داكنة', image: '/images/perruques/long/ll025.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 432, rating: 4.9, reviews: 30, sold: 63, stock: 44, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll026', nameFr: 'Blond Vague Side Élégance', nameAr: 'أشقر مموج جانبي أنيق', image: '/images/perruques/long/ll026.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 457, rating: 5.0, reviews: 52, sold: 49, stock: 43, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll027', nameFr: 'Balayage Blond Lisse Racines Foncées', nameAr: 'أشقر ناعم بالياج بجذور داكنة', image: '/images/perruques/long/ll027.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 520, rating: 4.4, reviews: 17, sold: 22, stock: 57, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll028', nameFr: 'Balayage Blond Lisse Soyeux', nameAr: 'أشقر ناعم بالياج حريري', image: '/images/perruques/long/ll028.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 428, rating: 4.5, reviews: 20, sold: 56, stock: 39, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll029', nameFr: 'Balayage Blond Vague Side', nameAr: 'أشقر مموج بالياج جانبي', image: '/images/perruques/long/ll029.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 436, rating: 4.3, reviews: 34, sold: 52, stock: 39, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll030', nameFr: 'Balayage Blond Vague Glamour', nameAr: 'أشقر مموج بالياج جلامور', image: '/images/perruques/long/ll030.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 461, rating: 4.3, reviews: 11, sold: 57, stock: 60, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll031', nameFr: 'Triptyque Balayage Blond Mixte', nameAr: 'ثلاثي أشقر بالياج مختلط', image: '/images/perruques/long/ll031.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 432, rating: 4.4, reviews: 18, sold: 19, stock: 43, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll032', nameFr: 'Platine Lisse Argenté Intense', nameAr: 'فضي ناعم بلاتيني كثيف', image: '/images/perruques/long/ll032.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 425, rating: 4.2, reviews: 29, sold: 64, stock: 49, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll033', nameFr: 'Balayage Blond Vague Soyeuse', nameAr: 'أشقر مموج بالياج حريري', image: '/images/perruques/long/ll033.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 453, rating: 4.6, reviews: 26, sold: 30, stock: 51, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll034', nameFr: 'Bleu Nuit Lisse Intense', nameAr: 'أزرق ليلي ناعم كثيف', image: '/images/perruques/long/ll034.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 429, rating: 4.6, reviews: 35, sold: 51, stock: 47, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll035', nameFr: 'Balayage Blond Vague Intense', nameAr: 'أشقر مموج بالياج كثيف', image: '/images/perruques/long/ll035.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 514, rating: 4.5, reviews: 14, sold: 33, stock: 56, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll039', nameFr: 'Balayage Blond Vague Élégance', nameAr: 'أشقر مموج بالياج أنيق', image: '/images/perruques/long/ll039.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 469, rating: 4.6, reviews: 20, sold: 22, stock: 39, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll042', nameFr: 'Balayage Châtain Foncé Vague Floral', nameAr: 'كستنائي داكن مموج بالياج زهري', image: '/images/perruques/long/ll042.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 464, rating: 4.6, reviews: 42, sold: 21, stock: 64, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll043', nameFr: 'Racines Foncées Blond Balayage', nameAr: 'أشقر بالياج بجذور داكنة', image: '/images/perruques/long/ll043.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 512, rating: 4.8, reviews: 16, sold: 32, stock: 53, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll044', nameFr: 'Balayage Blond Vague Royal', nameAr: 'أشقر مموج بالياج ملكي', image: '/images/perruques/long/ll044.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 456, rating: 4.5, reviews: 24, sold: 56, stock: 38, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll045', nameFr: 'Blond Lisse Soyeux Arrière', nameAr: 'أشقر ناعم حريري خلفي', image: '/images/perruques/long/ll045.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 442, rating: 4.1, reviews: 37, sold: 27, stock: 40, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll046', nameFr: 'Frange Blonde Lisse Élégance', nameAr: 'غرة أشقر ناعمة أنيقة', image: '/images/perruques/long/ll046.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 502, rating: 4.9, reviews: 24, sold: 62, stock: 47, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll047', nameFr: 'Balayage Blond Vague Prestige', nameAr: 'أشقر مموج بالياج بريستيج', image: '/images/perruques/long/ll047.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 391, rating: 4.7, reviews: 42, sold: 16, stock: 55, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'll050', nameFr: 'Balayage Blond Platine Vague', nameAr: 'أشقر بلاتيني مموج بالياج', image: '/images/perruques/long/ll050.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 494, rating: 4.5, reviews: 12, sold: 45, stock: 60, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl001', nameFr: 'Noir Naturel Lisse Extra Luxe', nameAr: 'أسود طبيعي ناعم فاخر جداً', image: '/images/perruques/extra-long/xl001.jpg', typeFr: 'Perruque Extra Longue — Noir Naturel', typeAr: 'باروكة طويلة جداً — أسود طبيعي', basePrice: 585, rating: 4.8, reviews: 34, sold: 46, stock: 44, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
+  { id: 'xl002', nameFr: 'Châtain Foncé Lisse Prestige', nameAr: 'كستنائي داكن ناعم بريستيج', image: '/images/perruques/extra-long/xl002.jpg', typeFr: 'Perruque Extra Longue — Châtain Foncé', typeAr: 'باروكة طويلة جداً — كستنائي داكن', basePrice: 595, rating: 4.7, reviews: 32, sold: 44, stock: 46, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'xl003', nameFr: 'Châtain Foncé Lisse Soyeux', nameAr: 'كستنائي داكن ناعم حريري', image: '/images/perruques/extra-long/xl003.jpg', typeFr: 'Perruque Extra Longue — Châtain Foncé', typeAr: 'باروكة طويلة جداً — كستنائي داكن', basePrice: 588, rating: 4.6, reviews: 29, sold: 41, stock: 48, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'xl004', nameFr: 'Châtain Foncé Frange Extra Long', nameAr: 'كستنائي داكن غرة طويلة جداً', image: '/images/perruques/extra-long/xl004.jpg', typeFr: 'Perruque Extra Longue — Châtain Foncé', typeAr: 'باروكة طويلة جداً — كستنائي داكن', basePrice: 605, rating: 4.8, reviews: 37, sold: 49, stock: 43, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'xl005', nameFr: 'Châtain Foncé Lisse Volume', nameAr: 'كستنائي داكن ناعم كثيف', image: '/images/perruques/extra-long/xl005.jpg', typeFr: 'Perruque Extra Longue — Châtain Foncé', typeAr: 'باروكة طويلة جداً — كستنائي داكن', basePrice: 592, rating: 4.7, reviews: 31, sold: 43, stock: 47, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'xl006', nameFr: 'Châtain Foncé Porté Naturel', nameAr: 'كستنائي داكن مطبق طبيعي', image: '/images/perruques/extra-long/xl006.jpg', typeFr: 'Perruque Extra Longue — Châtain Foncé', typeAr: 'باروكة طويلة جداً — كستنائي داكن', basePrice: 610, rating: 4.8, reviews: 39, sold: 51, stock: 41, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'xl007', nameFr: 'Châtain Foncé Porté Élégance', nameAr: 'كستنائي داكن مطبق أنيق', image: '/images/perruques/extra-long/xl007.jpg', typeFr: 'Perruque Extra Longue — Châtain Foncé', typeAr: 'باروكة طويلة جداً — كستنائي داكن', basePrice: 608, rating: 4.7, reviews: 35, sold: 47, stock: 44, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'xl008', nameFr: 'Châtain Foncé Lisse Miroir', nameAr: 'كستنائي داكن ناعم مرآة', image: '/images/perruques/extra-long/xl008.jpg', typeFr: 'Perruque Extra Longue — Châtain Foncé', typeAr: 'باروكة طويلة جداً — كستنائي داكن', basePrice: 598, rating: 4.6, reviews: 28, sold: 40, stock: 49, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'xl009', nameFr: 'Châtain Clair Lisse Extra Long', nameAr: 'كستنائي فاتح ناعم طويل جداً', image: '/images/perruques/extra-long/xl009.jpg', typeFr: 'Perruque Extra Longue — Châtain', typeAr: 'باروكة طويلة جداً — كستنائي', basePrice: 615, rating: 4.7, reviews: 33, sold: 45, stock: 45, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'xl010', nameFr: 'Châtain Lisse Reflets Dorés', nameAr: 'كستنائي ناعم بانعكاسات ذهبية', image: '/images/perruques/extra-long/xl010.jpg', typeFr: 'Perruque Extra Longue — Châtain', typeAr: 'باروكة طويلة جداً — كستنائي', basePrice: 620, rating: 4.8, reviews: 36, sold: 48, stock: 43, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'xl011', nameFr: 'Châtain Caramel Lisse Luxe', nameAr: 'كستنائي كراميل ناعم فاخر', image: '/images/perruques/extra-long/xl011.jpg', typeFr: 'Perruque Extra Longue — Châtain', typeAr: 'باروكة طويلة جداً — كستنائي', basePrice: 625, rating: 4.7, reviews: 34, sold: 46, stock: 42, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'xl012', nameFr: 'Châtain Vague Extra Volume', nameAr: 'كستنائي موجات كثيفة جداً', image: '/images/perruques/extra-long/xl012.jpg', typeFr: 'Perruque Extra Longue — Châtain', typeAr: 'باروكة طويلة جداً — كستنائي', basePrice: 630, rating: 4.8, reviews: 38, sold: 50, stock: 40, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'xl013', nameFr: 'Balayage Cendré Vague Prestige', nameAr: 'بالياج رمادي مموج بريستيج', image: '/images/perruques/extra-long/xl013.jpg', typeFr: 'Perruque Extra Longue — Highlight', typeAr: 'باروكة طويلة جداً — هايلايت', basePrice: 645, rating: 4.7, reviews: 35, sold: 47, stock: 42, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'xl014', nameFr: 'Balayage Beige Frisé Extra Long', nameAr: 'بالياج بيج مجعد طويل جداً', image: '/images/perruques/extra-long/xl014.jpg', typeFr: 'Perruque Extra Longue — Highlight', typeAr: 'باروكة طويلة جداً — هايلايت', basePrice: 660, rating: 4.6, reviews: 30, sold: 41, stock: 38, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'xl015', nameFr: 'Balayage Sable Vague Luxe', nameAr: 'بالياج رملي موجات فاخرة', image: '/images/perruques/extra-long/xl015.jpg', typeFr: 'Perruque Extra Longue — Highlight', typeAr: 'باروكة طويلة جداً — هايلايت', basePrice: 650, rating: 4.8, reviews: 39, sold: 51, stock: 40, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'xl016', nameFr: 'Balayage Blond Lisse Signature', nameAr: 'بالياج أشقر ناعم مميز', image: '/images/perruques/extra-long/xl016.jpg', typeFr: 'Perruque Extra Longue — Highlight', typeAr: 'باروكة طويلة جداً — هايلايت', basePrice: 655, rating: 4.7, reviews: 34, sold: 46, stock: 43, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'xl017', nameFr: 'Balayage Cendré Vague Élégance', nameAr: 'بالياج رمادي مموج أنيق', image: '/images/perruques/extra-long/xl017.jpg', typeFr: 'Perruque Extra Longue — Highlight', typeAr: 'باروكة طويلة جداً — هايلايت', basePrice: 648, rating: 4.6, reviews: 31, sold: 42, stock: 45, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'xl018', nameFr: 'Balayage Miel Vague Volume', nameAr: 'بالياج عسلي مموج كثيف', image: '/images/perruques/extra-long/xl018.jpg', typeFr: 'Perruque Extra Longue — Highlight', typeAr: 'باروكة طويلة جداً — هايلايت', basePrice: 652, rating: 4.8, reviews: 40, sold: 52, stock: 39, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'xl019', nameFr: 'Balayage Beige Vague Glamour', nameAr: 'بالياج بيج مموج جلامور', image: '/images/perruques/extra-long/xl019.jpg', typeFr: 'Perruque Extra Longue — Highlight', typeAr: 'باروكة طويلة جداً — هايلايت', basePrice: 658, rating: 4.7, reviews: 36, sold: 48, stock: 41, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'xl020', nameFr: 'Balayage Doré Vague Naturel', nameAr: 'بالياج ذهبي مموج طبيعي', image: '/images/perruques/extra-long/xl020.jpg', typeFr: 'Perruque Extra Longue — Highlight', typeAr: 'باروكة طويلة جداً — هايلايت', basePrice: 642, rating: 4.6, reviews: 29, sold: 40, stock: 46, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'xl021', nameFr: 'Balayage Cendré Porté Prestige', nameAr: 'بالياج رمادي مطبق بريستيج', image: '/images/perruques/extra-long/xl021.jpg', typeFr: 'Perruque Extra Longue — Highlight', typeAr: 'باروكة طويلة جداً — هايلايت', basePrice: 670, rating: 4.8, reviews: 42, sold: 54, stock: 37, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'xl022', nameFr: 'Balayage Cendré Porté Élégance', nameAr: 'بالياج رمادي مطبق أنيق', image: '/images/perruques/extra-long/xl022.jpg', typeFr: 'Perruque Extra Longue — Highlight', typeAr: 'باروكة طويلة جداً — هايلايت', basePrice: 665, rating: 4.7, reviews: 37, sold: 49, stock: 40, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'xl023', nameFr: 'Balayage Caramel Lisse Premium', nameAr: 'بالياج كراميل ناعم بريميوم', image: '/images/perruques/extra-long/xl023.jpg', typeFr: 'Perruque Extra Longue — Highlight', typeAr: 'باروكة طويلة جداً — هايلايت', basePrice: 656, rating: 4.8, reviews: 38, sold: 50, stock: 42, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'xl024', nameFr: 'Balayage Miel Porté Glamour', nameAr: 'بالياج عسلي مطبق جلامور', image: '/images/perruques/extra-long/xl024.jpg', typeFr: 'Perruque Extra Longue — Highlight', typeAr: 'باروكة طويلة جداً — هايلايت', basePrice: 675, rating: 4.7, reviews: 35, sold: 47, stock: 38, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'xl025', nameFr: 'Balayage Caramel Lisse Signature', nameAr: 'بالياج كراميل ناعم مميز', image: '/images/perruques/extra-long/xl025.jpg', typeFr: 'Perruque Extra Longue — Highlight', typeAr: 'باروكة طويلة جداً — هايلايت', basePrice: 662, rating: 4.6, reviews: 32, sold: 44, stock: 44, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'xl026', nameFr: 'Balayage Sable Porté Lisse', nameAr: 'بالياج رملي مطبق ناعم', image: '/images/perruques/extra-long/xl026.jpg', typeFr: 'Perruque Extra Longue — Highlight', typeAr: 'باروكة طويلة جداً — هايلايت', basePrice: 668, rating: 4.8, reviews: 41, sold: 53, stock: 39, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'xl027', nameFr: 'Balayage Blond Porté Naturel', nameAr: 'بالياج أشقر مطبق طبيعي', image: '/images/perruques/extra-long/xl027.jpg', typeFr: 'Perruque Extra Longue — Highlight', typeAr: 'باروكة طويلة جداً — هايلايت', basePrice: 672, rating: 4.7, reviews: 36, sold: 48, stock: 41, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'xl028', nameFr: 'Blond Frange Extra Long', nameAr: 'أشقر غرة طويلة جداً', image: '/images/perruques/extra-long/xl028.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 680, rating: 4.7, reviews: 34, sold: 46, stock: 40, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl029', nameFr: 'Blond Vague Extra Volume', nameAr: 'أشقر موجات كثيفة جداً', image: '/images/perruques/extra-long/xl029.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 690, rating: 4.8, reviews: 40, sold: 52, stock: 38, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl030', nameFr: 'Blond Beige Vague Luxe', nameAr: 'أشقر بيج موجات فاخرة', image: '/images/perruques/extra-long/xl030.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 685, rating: 4.7, reviews: 37, sold: 49, stock: 41, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl031', nameFr: 'Blond Platine Lisse Prestige', nameAr: 'أشقر بلاتيني ناعم بريستيج', image: '/images/perruques/extra-long/xl031.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 695, rating: 4.8, reviews: 42, sold: 54, stock: 37, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl032', nameFr: 'Blond Duo Vague Signature', nameAr: 'أشقر ثنائي مموج مميز', image: '/images/perruques/extra-long/xl032.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 688, rating: 4.6, reviews: 31, sold: 43, stock: 44, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl033', nameFr: 'Blond Cendré Lisse Longueur', nameAr: 'أشقر رمادي ناعم طويل', image: '/images/perruques/extra-long/xl033.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 678, rating: 4.7, reviews: 33, sold: 45, stock: 43, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl034', nameFr: 'Blond Cendré Vague Élégance', nameAr: 'أشقر رمادي مموج أنيق', image: '/images/perruques/extra-long/xl034.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 686, rating: 4.8, reviews: 39, sold: 51, stock: 39, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl035', nameFr: 'Blond Nacré Vague Premium', nameAr: 'أشقر لؤلؤي مموج بريميوم', image: '/images/perruques/extra-long/xl035.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 692, rating: 4.7, reviews: 36, sold: 48, stock: 40, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl036', nameFr: 'Blond Trio Lisse Collection', nameAr: 'أشقر ثلاثي ناعم مجموعة', image: '/images/perruques/extra-long/xl036.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 682, rating: 4.6, reviews: 30, sold: 42, stock: 45, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl037', nameFr: 'Blond Duo Lisse Prestige', nameAr: 'أشقر ثنائي ناعم بريستيج', image: '/images/perruques/extra-long/xl037.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 684, rating: 4.7, reviews: 35, sold: 47, stock: 42, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl038', nameFr: 'Blond Platine Lisse Glamour', nameAr: 'أشقر بلاتيني ناعم جلامور', image: '/images/perruques/extra-long/xl038.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 698, rating: 4.8, reviews: 41, sold: 53, stock: 36, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl039', nameFr: 'Blond Duo Lisse Signature', nameAr: 'أشقر ثنائي ناعم مميز', image: '/images/perruques/extra-long/xl039.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 687, rating: 4.6, reviews: 32, sold: 44, stock: 43, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl040', nameFr: 'Blond Platine Porté Extra Long', nameAr: 'أشقر بلاتيني مطبق طويل جداً', image: '/images/perruques/extra-long/xl040.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 710, rating: 4.8, reviews: 44, sold: 56, stock: 34, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl041', nameFr: 'Blond Platine Porté Élégance', nameAr: 'أشقر بلاتيني مطبق أنيق', image: '/images/perruques/extra-long/xl041.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 705, rating: 4.7, reviews: 38, sold: 50, stock: 38, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl042', nameFr: 'Blond Perle Lisse Luxe', nameAr: 'أشقر لؤلؤي ناعم فاخر', image: '/images/perruques/extra-long/xl042.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 700, rating: 4.8, reviews: 43, sold: 55, stock: 35, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl043', nameFr: 'Blond Vague Porté Prestige', nameAr: 'أشقر مموج مطبق بريستيج', image: '/images/perruques/extra-long/xl043.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 712, rating: 4.7, reviews: 37, sold: 49, stock: 37, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl044', nameFr: 'Blond Vague Porté Volume', nameAr: 'أشقر مموج مطبق كثيف', image: '/images/perruques/extra-long/xl044.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 708, rating: 4.8, reviews: 42, sold: 54, stock: 36, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl045', nameFr: 'Blond Vague Porté Glamour', nameAr: 'أشقر مموج مطبق جلامور', image: '/images/perruques/extra-long/xl045.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 715, rating: 4.7, reviews: 39, sold: 51, stock: 35, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl046', nameFr: 'Blond Vague Porté Signature', nameAr: 'أشقر مموج مطبق مميز', image: '/images/perruques/extra-long/xl046.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 718, rating: 4.8, reviews: 45, sold: 57, stock: 33, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl047', nameFr: 'Blond Lisse Porté Naturel', nameAr: 'أشقر ناعم مطبق طبيعي', image: '/images/perruques/extra-long/xl047.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 702, rating: 4.7, reviews: 36, sold: 48, stock: 39, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'xl048', nameFr: 'Blond Beige Lisse Extra Long', nameAr: 'أشقر بيج ناعم طويل جداً', image: '/images/perruques/extra-long/xl048.jpg', typeFr: 'Perruque Extra Longue — Blond', typeAr: 'باروكة طويلة جداً — أشقر', basePrice: 696, rating: 4.8, reviews: 40, sold: 52, stock: 38, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
 ];
 
 
@@ -88,7 +85,7 @@ const products: WigProduct[] = [
    VARIANT OPTIONS (shared)
    ═══════════════════════════════════════════ */
 
-const lengths = ['10 pouces', '12 pouces', '14 pouces', '16 pouces', '18 pouces'];
+const lengths = ['20 pouces', '22 pouces', '24 pouces', '26 pouces', '28 pouces', '30 pouces'];
 const densities = ['120%', '150%', '180%', '220%', '280%'];
 const hairTypes = ['Lisses', 'Ondul\u00e9s', 'Cr\u00e9pus', 'Fris\u00e9s'];
 const wigCaps = [
@@ -99,24 +96,24 @@ const wigCaps = [
 const wigSizes = ['Standard', 'Taille S', 'Taille M', 'Taille L', 'Sur Mesure'];
 
 const priceMap: Record<string, number> = {
-  '10 pouces': -150, '12 pouces': -100, '14 pouces': -50, '16 pouces': 0, '18 pouces': 80,
+  '20 pouces': -160, '22 pouces': -90, '24 pouces': 0, '26 pouces': 90, '28 pouces': 190, '30 pouces': 300,
 };
 const originalMap: Record<string, number> = {
-  '10 pouces': -350, '12 pouces': -250, '14 pouces': -120, '16 pouces': 0, '18 pouces': 180,
+  '20 pouces': -360, '22 pouces': -200, '24 pouces': 0, '26 pouces': 200, '28 pouces': 420, '30 pouces': 660,
 };
 
 /* ═══════════════════════════════════════════
    MAIN COMPONENT
    ═══════════════════════════════════════════ */
 
-export default function PerruquesMiLong() {
+export default function PerruquesExtraLong() {
   const { lang } = useLanguage();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedId = searchParams.get('product');
 
   const [mainIdx, setMainIdx] = useState(0);
-  const [selLength, setSelLength] = useState('14 pouces');
+  const [selLength, setSelLength] = useState('24 pouces');
   const [selDensity, setSelDensity] = useState('180%');
   const [selHairType, setSelHairType] = useState('Ondul\u00e9s');
   const [selCap, setSelCap] = useState('13\u00d76 Lace Front Wig');
@@ -129,9 +126,9 @@ export default function PerruquesMiLong() {
 
   const selectedProduct = products.find(p => p.id === selectedId);
 
-  const basePrice = selectedProduct?.basePrice || 420;
+  const basePrice = selectedProduct?.basePrice || 660;
   const price = basePrice + (priceMap[selLength] || 0);
-  const original = (basePrice + 400) + (originalMap[selLength] || 0);
+  const original = (basePrice + 520) + (originalMap[selLength] || 0);
   const discount = Math.round((1 - price / original) * 100);
 
   useEffect(() => { window.scrollTo(0, 0); }, [selectedId]);
@@ -150,7 +147,7 @@ export default function PerruquesMiLong() {
   const openProduct = (id: string) => {
     setSearchParams({ product: id });
     setMainIdx(0);
-    setSelLength('14 pouces');
+    setSelLength('24 pouces');
     setSelDensity('180%');
     setSelHairType('Ondul\u00e9s');
     setSelCap('13\u00d76 Lace Front Wig');
@@ -161,13 +158,6 @@ export default function PerruquesMiLong() {
   const backToGrid = () => {
     setSearchParams({});
   };
-
-  // Group products by category
-  const grouped = products.reduce((acc, p) => {
-    if (!acc[p.category]) acc[p.category] = [];
-    acc[p.category].push(p);
-    return acc;
-  }, {} as Record<string, WigProduct[]>);
 
   /* ───── GRID VIEW ───── */
   if (!selectedProduct) {
@@ -182,13 +172,13 @@ export default function PerruquesMiLong() {
             <ChevronRight size={12} />
             <span>Perruques</span>
             <ChevronRight size={12} />
-            <span style={{ color: 'var(--tb-text)' }}>Longues</span>
+            <span style={{ color: 'var(--tb-text)' }}>Extra Long</span>
           </div>
           <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#d4a5a5', marginBottom: '8px' }}>
-            {lang === 'fr' ? 'COLLECTION PERRUQUES LONGUES \u2014 51 MOD\u00c8LES' : '\u0645\u062c\u0645\u0648\u0639\u0629 \u0627\u0644\u0628\u0627\u0631\u0648\u0643\u0627\u062a \u0627\u0644\u0637\u0648\u064a\u0644\u0629 \u2014 51 \u0645\u0648\u062f\u064a\u0644'}
+            {lang === 'fr' ? 'COLLECTION PERRUQUES EXTRA LONGUES \u2014 48 MOD\u00c8LES' : '\u0645\u062c\u0645\u0648\u0639\u0629 \u0627\u0644\u0628\u0627\u0631\u0648\u0643\u0627\u062a \u0627\u0644\u0637\u0648\u064a\u0644\u0629 \u062c\u062f\u0627\u064b \u2014 48 \u0645\u0648\u062f\u064a\u0644'}
           </p>
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400, fontSize: 'clamp(2rem, 4vw, 3rem)', color: '#d4a5a5', lineHeight: 1.15, marginBottom: '8px' }}>
-            {lang === 'fr' ? 'Perruques Longues' : '\u0628\u0627\u0631\u0648\u0643\u0627\u062a \u0637\u0648\u064a\u0644\u0629'}
+            {lang === 'fr' ? 'Perruques Extra Longues' : '\u0628\u0627\u0631\u0648\u0643\u0627\u062a \u0637\u0648\u064a\u0644\u0629 \u062c\u062f\u0627\u064b'}
           </h1>
         </div>
 
@@ -295,12 +285,12 @@ export default function PerruquesMiLong() {
 
   const descBlocks = lang === 'fr' ? [
     `Perruque Lace Front Premium ${name} \u2014 Qualit\u00e9 Haut de Gamme`,
-    `Cette magnifique perruque longue de couleur ${catLabel.toLowerCase()} est confectionn\u00e9e avec des cheveux humains Remy de premi\u00e8re qualit\u00e9. Les fibres offrent une douceur soyeuse, une brillance naturelle et un mouvement fluide pour un r\u00e9sultat ultra-r\u00e9aliste.`,
-    `La lace front HD transparente assure une int\u00e9gration parfaite et une ligne frontale discr\u00e8te. Densit\u00e9 personnalisable de 130% \u00e0 280%, longueurs disponibles de 10" \u00e0 18".`,
+    `Cette magnifique perruque extra longue de couleur ${catLabel.toLowerCase()} est confectionn\u00e9e avec des cheveux humains Remy de premi\u00e8re qualit\u00e9. Les fibres offrent une douceur soyeuse, une brillance naturelle et un mouvement fluide pour un r\u00e9sultat ultra-r\u00e9aliste.`,
+    `La lace front HD transparente assure une int\u00e9gration parfaite et une ligne frontale discr\u00e8te. Densit\u00e9 personnalisable de 130% \u00e0 280%, longueurs disponibles de 20" \u00e0 30".`,
   ] : [
     `\u0628\u0627\u0631\u0648\u0643\u0629 \u0644\u064a\u0633 \u0641\u0631\u0648\u0646\u062a \u0628\u0631\u064a\u0645\u064a\u0648\u0645 ${name} \u2014 \u062c\u0648\u062f\u0629 \u0639\u0627\u0644\u064a\u0629`,
-    `\u0647\u0630\u0647 \u0627\u0644\u0628\u0627\u0631\u0648\u0643\u0629 \u0627\u0644\u0645\u062a\u0648\u0633\u0637\u0629 \u0627\u0644\u0631\u0627\u0626\u0639\u0629 \u0628\u0627\u0644\u0644\u0648\u0646 ${catLabel} \u0645\u0635\u0646\u0648\u0639\u0629 \u0645\u0646 \u0634\u0639\u0631 \u0628\u0634\u0631\u064a \u0631\u064a\u0645\u064a \u0641\u0627\u0626\u0642 \u0627\u0644\u062c\u0648\u062f\u0629. \u062a\u0648\u0641\u0631 \u0627\u0644\u0623\u0644\u064a\u0627\u0641 \u0646\u0639\u0648\u0645\u0629 \u062d\u0631\u064a\u0631\u064a\u0629 \u0648\u0644\u0645\u0639\u0627\u0646 \u0637\u0628\u064a\u0639\u064a \u0648\u062d\u0631\u0643\u0629 \u0633\u0644\u0633\u0629 \u0644\u0646\u062a\u064a\u062c\u0629 \u0641\u0627\u0626\u0642\u0629 \u0627\u0644\u0648\u0627\u0642\u0639\u064a\u0629.`,
-    `\u064a\u0636\u0645\u0646 \u0627\u0644\u0644\u064a\u0633 \u0641\u0631\u0648\u0646\u062a \u0627\u0644\u0634\u0641\u0627\u0641 HD \u0627\u0646\u062f\u0645\u0627\u062c\u0627\u064b \u0645\u062b\u0627\u0644\u064a\u0627\u064b \u0648\u062e\u0637\u0627\u064b \u0623\u0645\u0627\u0645\u064a\u0627\u064b \u062f\u0642\u064a\u0642\u0627\u064b. \u0643\u062b\u0627\u0641\u0629 \u0642\u0627\u0628\u0644\u0629 \u0644\u0644\u062a\u062e\u0635\u064a\u0635 \u0645\u0646 130% \u0625\u0644\u0649 280%\u060c \u0648\u0623\u0637\u0648\u0627\u0644 \u0645\u062a\u0648\u0641\u0631\u0629 \u0645\u0646 10" \u0625\u0644\u0649 18".`,
+    `\u0647\u0630\u0647 \u0627\u0644\u0628\u0627\u0631\u0648\u0643\u0629 \u0627\u0644\u0637\u0648\u064a\u0644\u0629 \u062c\u062f\u0627\u064b \u0627\u0644\u0631\u0627\u0626\u0639\u0629 \u0628\u0627\u0644\u0644\u0648\u0646 ${catLabel} \u0645\u0635\u0646\u0648\u0639\u0629 \u0645\u0646 \u0634\u0639\u0631 \u0628\u0634\u0631\u064a \u0631\u064a\u0645\u064a \u0641\u0627\u0626\u0642 \u0627\u0644\u062c\u0648\u062f\u0629. \u062a\u0648\u0641\u0631 \u0627\u0644\u0623\u0644\u064a\u0627\u0641 \u0646\u0639\u0648\u0645\u0629 \u062d\u0631\u064a\u0631\u064a\u0629 \u0648\u0644\u0645\u0639\u0627\u0646 \u0637\u0628\u064a\u0639\u064a \u0648\u062d\u0631\u0643\u0629 \u0633\u0644\u0633\u0629 \u0644\u0646\u062a\u064a\u062c\u0629 \u0641\u0627\u0626\u0642\u0629 \u0627\u0644\u0648\u0627\u0642\u0639\u064a\u0629.`,
+    `\u064a\u0636\u0645\u0646 \u0627\u0644\u0644\u064a\u0633 \u0641\u0631\u0648\u0646\u062a \u0627\u0644\u0634\u0641\u0627\u0641 HD \u0627\u0646\u062f\u0645\u0627\u062c\u0627\u064b \u0645\u062b\u0627\u0644\u064a\u0627\u064b \u0648\u062e\u0637\u0627\u064b \u0623\u0645\u0627\u0645\u064a\u0627\u064b \u062f\u0642\u064a\u0642\u0627\u064b. \u0643\u062b\u0627\u0641\u0629 \u0642\u0627\u0628\u0644\u0629 \u0644\u0644\u062a\u062e\u0635\u064a\u0635 \u0645\u0646 130% \u0625\u0644\u0649 280%\u060c \u0648\u0623\u0637\u0648\u0627\u0644 \u0645\u062a\u0648\u0641\u0631\u0629 \u0645\u0646 20" \u0625\u0644\u0649 30".`,
   ];
 
   const aiItems = lang === 'fr' ? [
@@ -368,8 +358,8 @@ export default function PerruquesMiLong() {
             <h1 className="text-xl sm:text-2xl font-semibold leading-snug mb-2" style={{ color: 'var(--tb-text)', fontWeight: 600 }}>{name}</h1>
             <p className="text-sm leading-relaxed mb-3" style={{ color: 'var(--tb-text-secondary)' }}>
               {lang === 'fr'
-                ? `Perruque Lace Front longue de couleur ${catLabel.toLowerCase()} aux longueurs ondul\u00e9es volumineuses. Cheveux humains Remy premium pour un r\u00e9sultat naturel, doux et brillant.`
-                : `\u0628\u0627\u0631\u0648\u0643\u0629 \u0644\u064a\u0633 \u0641\u0631\u0648\u0646\u062a \u0645\u062a\u0648\u0633\u0637\u0629 \u0628\u0627\u0644\u0644\u0648\u0646 ${catLabel} \u0628\u0623\u0637\u0648\u0627\u0644 \u0645\u0645\u0648\u062c\u0629 \u0643\u062b\u064a\u0641\u0629. \u0634\u0639\u0631 \u0628\u0634\u0631\u064a \u0631\u064a\u0645\u064a \u0628\u0631\u064a\u0645\u064a\u0648\u0645 \u0644\u0646\u062a\u064a\u062c\u0629 \u0637\u0628\u064a\u0639\u064a\u0629 \u0648\u0646\u0627\u0639\u0645\u0629 \u0648\u0644\u0627\u0645\u0639\u0629.`}
+                ? `Perruque Lace Front extra longue de couleur ${catLabel.toLowerCase()} aux longueurs ondul\u00e9es volumineuses. Cheveux humains Remy premium pour un r\u00e9sultat naturel, doux et brillant.`
+                : `\u0628\u0627\u0631\u0648\u0643\u0629 \u0644\u064a\u0633 \u0641\u0631\u0648\u0646\u062a \u0637\u0648\u064a\u0644\u0629 \u062c\u062f\u0627\u064b \u0628\u0627\u0644\u0644\u0648\u0646 ${catLabel} \u0628\u0623\u0637\u0648\u0627\u0644 \u0645\u0645\u0648\u062c\u0629 \u0643\u062b\u064a\u0641\u0629. \u0634\u0639\u0631 \u0628\u0634\u0631\u064a \u0631\u064a\u0645\u064a \u0628\u0631\u064a\u0645\u064a\u0648\u0645 \u0644\u0646\u062a\u064a\u062c\u0629 \u0637\u0628\u064a\u0639\u064a\u0629 \u0648\u0646\u0627\u0639\u0645\u0629 \u0648\u0644\u0627\u0645\u0639\u0629.`}
             </p>
             <div className="flex items-center gap-3 mb-3 flex-wrap">
               <div className="flex items-center gap-1">

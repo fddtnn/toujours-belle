@@ -205,13 +205,13 @@ export default function Wedding() {
   };
 
   return (
-    <div ref={pageRef} style={{ backgroundColor: '#ffffff', fontFamily: "'Inter', sans-serif" }}>
+    <div ref={pageRef} style={{ backgroundColor: 'var(--tb-card)', fontFamily: "'Inter', sans-serif" }}>
       {/* ========== SECTION 1 — HERO BANNER ========== */}
       <section
         className="relative w-full overflow-hidden"
         style={{
           minHeight: '85vh',
-          background: '#faf6f4',
+          background: 'var(--tb-bg)',
         }}
       >
         <div className="wed-reveal max-w-[1400px] mx-auto flex flex-col md:flex-row items-stretch" style={{ minHeight: '85vh' }}>
@@ -228,7 +228,7 @@ export default function Wedding() {
               className="absolute top-0 right-0 bottom-0 hidden md:block"
               style={{
                 width: '120px',
-                background: 'linear-gradient(to right, transparent 0%, #faf6f4 100%)',
+                background: 'linear-gradient(to right, transparent 0%, var(--tb-bg) 100%)',
               }}
             />
           </div>
@@ -236,7 +236,7 @@ export default function Wedding() {
           {/* Text right */}
           <div
             className="w-full md:w-2/5 flex flex-col justify-center"
-            style={{ padding: '80px 40px', backgroundColor: '#faf6f4' }}
+            style={{ padding: '80px 40px', backgroundColor: 'var(--tb-bg)' }}
           >
             <p
               className="uppercase tracking-widest mb-6"
@@ -249,7 +249,7 @@ export default function Wedding() {
                 fontFamily: "'Playfair Display', serif",
                 fontSize: 'clamp(32px, 4.5vw, 52px)',
                 fontWeight: 500,
-                color: '#1a1a1a',
+                color: 'var(--tb-text)',
                 lineHeight: 1.12,
                 letterSpacing: '0.02em',
                 marginBottom: '16px',
@@ -269,8 +269,8 @@ export default function Wedding() {
                 style={{
                   padding: '14px 32px',
                   borderRadius: '50px',
-                  backgroundColor: '#1a1a1a',
-                  color: '#ffffff',
+                  backgroundColor: 'var(--tb-text)',
+                  color: 'var(--tb-card)',
                   fontFamily: "'Inter', sans-serif",
                   fontSize: '13px',
                   fontWeight: 500,
@@ -287,10 +287,10 @@ export default function Wedding() {
       </section>
 
       {/* ========== SECTION 2 — MEET OUR MUSES ========== */}
-      <section style={{ padding: '80px 24px', backgroundColor: '#ffffff' }}>
+      <section style={{ padding: '80px 24px', backgroundColor: 'var(--tb-card)' }}>
         <div className="wed-reveal max-w-[720px] mx-auto text-center">
           <h2
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(26px, 4vw, 36px)', fontWeight: 500, color: '#1a1a1a', letterSpacing: '0.02em', marginBottom: '24px' }}
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(26px, 4vw, 36px)', fontWeight: 500, color: 'var(--tb-text)', letterSpacing: '0.02em', marginBottom: '24px' }}
           >
             {t.musesTitle}
           </h2>
@@ -313,11 +313,11 @@ export default function Wedding() {
       </section>
 
       {/* ========== SECTION 3 — STYLE FILTER + GALLERY ========== */}
-      <section style={{ padding: '0 0 80px', backgroundColor: '#ffffff' }}>
+      <section style={{ padding: '0 0 80px', backgroundColor: 'var(--tb-card)' }}>
         <div className="max-w-[1200px] mx-auto px-6">
           <h2
             className="wed-reveal mb-8"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(26px, 4vw, 36px)', fontWeight: 500, color: '#1a1a1a', letterSpacing: '0.02em' }}
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(26px, 4vw, 36px)', fontWeight: 500, color: 'var(--tb-text)', letterSpacing: '0.02em' }}
           >
             {t.chooseStyle}
           </h2>
@@ -336,9 +336,9 @@ export default function Wedding() {
                   fontSize: '13px',
                   fontWeight: 500,
                   cursor: 'pointer',
-                  backgroundColor: activeFilter === f ? '#1a1a1a' : '#ffffff',
-                  color: activeFilter === f ? '#ffffff' : '#1a1a1a',
-                  border: activeFilter === f ? '1px solid #1a1a1a' : '1px solid #e0d0d0',
+                  backgroundColor: activeFilter === f ? 'var(--tb-text)' : 'var(--tb-card)',
+                  color: activeFilter === f ? 'var(--tb-card)' : 'var(--tb-text)',
+                  border: activeFilter === f ? '1px solid var(--tb-text)' : '1px solid var(--tb-border)',
                 }}
               >
                 {filterLabels[f]}
@@ -361,7 +361,7 @@ export default function Wedding() {
                     style={{
                       borderRadius: '16px',
                       aspectRatio: '1/1.05',
-                      background: item.image || item.video ? '#f0e8e4' : `linear-gradient(135deg, #F9E8E4 0%, #f0e0d8 50%, #E8D5B0 100%)`,
+                      background: item.image || item.video ? 'var(--tb-surface)' : `linear-gradient(135deg, #F9E8E4 0%, #f0e0d8 50%, #E8D5B0 100%)`,
                       cursor: item.video ? 'pointer' : 'default',
                       display: 'flex',
                       alignItems: 'center',
@@ -393,7 +393,7 @@ export default function Wedding() {
                           onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(0,0,0,0.1)'; }}
                         >
                           <div style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.9)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 16px rgba(0,0,0,0.12)' }}>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#1a1a1a"><polygon points="8,5 8,19 19,12" /></svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--tb-text)"><polygon points="8,5 8,19 19,12" /></svg>
                           </div>
                         </button>
                       </>
@@ -406,7 +406,7 @@ export default function Wedding() {
                         loading="lazy"
                       />
                     ) : (
-                      <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '16px', color: '#1a1a1a', opacity: 0.35 }}>
+                      <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '16px', color: 'var(--tb-text)', opacity: 0.35 }}>
                         {item.label}
                       </span>
                     )}
@@ -418,15 +418,15 @@ export default function Wedding() {
                 <div className="flex justify-center gap-4 mt-4">
                   <button
                     className="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110"
-                    style={{ backgroundColor: '#faf6f4', border: '1px solid #e0d0d0', cursor: 'pointer' }}
+                    style={{ backgroundColor: 'var(--tb-bg)', border: '1px solid var(--tb-border)', cursor: 'pointer' }}
                   >
-                    <ChevronLeft size={18} color="#1a1a1a" />
+                    <ChevronLeft size={18} color="var(--tb-text)" />
                   </button>
                   <button
                     className="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110"
-                    style={{ backgroundColor: '#faf6f4', border: '1px solid #e0d0d0', cursor: 'pointer' }}
+                    style={{ backgroundColor: 'var(--tb-bg)', border: '1px solid var(--tb-border)', cursor: 'pointer' }}
                   >
-                    <ChevronRight size={18} color="#1a1a1a" />
+                    <ChevronRight size={18} color="var(--tb-text)" />
                   </button>
                 </div>
               )}
@@ -440,7 +440,7 @@ export default function Wedding() {
                 if (!detail) return null;
                 return (
                   <div>
-                    <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '28px', fontWeight: 500, color: '#1a1a1a', marginBottom: '12px' }}>
+                    <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '28px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
                       {lang === 'fr' ? detail.titleFr : detail.titleAr}
                     </h3>
                     <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '14px', color: '#5a5a5a', lineHeight: 1.7, marginBottom: '24px' }}>
@@ -449,31 +449,31 @@ export default function Wedding() {
 
                     {/* Product Grid */}
                     <div className="grid grid-cols-2 gap-2 mb-4">
-                      <div style={{ borderRadius: '12px', overflow: 'hidden', aspectRatio: '1', backgroundColor: '#f0e8e4' }}>
+                      <div style={{ borderRadius: '12px', overflow: 'hidden', aspectRatio: '1', backgroundColor: 'var(--tb-surface)' }}>
                         <img src="/images/braid-1.jpg" alt="Product" className="w-full h-full object-cover" />
                       </div>
                       <div className="flex flex-col gap-2">
-                        <div style={{ borderRadius: '12px', overflow: 'hidden', aspectRatio: '1', backgroundColor: '#f0e8e4' }}>
+                        <div style={{ borderRadius: '12px', overflow: 'hidden', aspectRatio: '1', backgroundColor: 'var(--tb-surface)' }}>
                           <img src="/images/braid-2.jpg" alt="Product" className="w-full h-full object-cover" />
                         </div>
-                        <div style={{ borderRadius: '12px', overflow: 'hidden', aspectRatio: '1', backgroundColor: '#f0e8e4' }}>
+                        <div style={{ borderRadius: '12px', overflow: 'hidden', aspectRatio: '1', backgroundColor: 'var(--tb-surface)' }}>
                           <img src="/images/braid-3.jpg" alt="Product" className="w-full h-full object-cover" />
                         </div>
                       </div>
                     </div>
 
                     {/* Shop Now Card */}
-                    <div className="flex items-center gap-3 mb-6" style={{ backgroundColor: '#f0e8e4', borderRadius: '12px', padding: '14px 16px' }}>
+                    <div className="flex items-center gap-3 mb-6" style={{ backgroundColor: 'var(--tb-surface)', borderRadius: '12px', padding: '14px 16px' }}>
                       <div style={{ width: '48px', height: '48px', borderRadius: '8px', overflow: 'hidden', flexShrink: 0 }}>
                         <img src="/images/braid-1.jpg" alt="Product" className="w-full h-full object-cover" />
                       </div>
                       <div style={{ flex: 1 }}>
-                        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#1a1a1a', fontWeight: 500 }}>{detail.productName}</p>
+                        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: 'var(--tb-text)', fontWeight: 500 }}>{detail.productName}</p>
                       </div>
                       <button
                         className="transition-all hover:opacity-80"
                         style={{
-                          padding: '10px 20px', borderRadius: '8px', backgroundColor: '#1a1a1a', color: '#ffffff',
+                          padding: '10px 20px', borderRadius: '8px', backgroundColor: 'var(--tb-text)', color: 'var(--tb-card)',
                           fontFamily: "'Inter', sans-serif", fontSize: '12px', fontWeight: 500, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap',
                         }}
                       >
@@ -482,12 +482,12 @@ export default function Wedding() {
                     </div>
 
                     {/* Stylist Testimonial */}
-                    <div style={{ backgroundColor: '#faf6f4', borderRadius: '16px', padding: '24px', border: '1px solid #f0e0e0' }}>
+                    <div style={{ backgroundColor: 'var(--tb-bg)', borderRadius: '16px', padding: '24px', border: '1px solid var(--tb-border)' }}>
                       <div className="flex items-center gap-2 mb-3">
-                        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '15px', fontWeight: 600, color: '#1a1a1a' }}>{detail.stylistName}</span>
-                        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#8a8a8a' }}>{detail.stylistTitle}</span>
+                        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '15px', fontWeight: 600, color: 'var(--tb-text)' }}>{detail.stylistName}</span>
+                        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: 'var(--tb-text-muted)' }}>{detail.stylistTitle}</span>
                         <div className="flex gap-0.5">
-                          {[1,2,3,4,5].map(s => <Star key={s} size={12} fill="#1a1a1a" color="#1a1a1a" />)}
+                          {[1,2,3,4,5].map(s => <Star key={s} size={12} fill="var(--tb-text)" color="var(--tb-text)" />)}
                         </div>
                       </div>
                       <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#5a5a5a', lineHeight: 1.7 }}>
@@ -503,11 +503,11 @@ export default function Wedding() {
       </section>
 
       {/* ========== SECTION 4 — THREE CTA CARDS ========== */}
-      <section style={{ padding: '80px 24px', backgroundColor: '#faf6f4' }}>
+      <section style={{ padding: '80px 24px', backgroundColor: 'var(--tb-bg)' }}>
         <div className="max-w-[1200px] mx-auto">
           <h2
             className="wed-reveal text-center mb-12"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(26px, 4vw, 36px)', fontWeight: 500, color: '#1a1a1a', letterSpacing: '0.02em' }}
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(26px, 4vw, 36px)', fontWeight: 500, color: 'var(--tb-text)', letterSpacing: '0.02em' }}
           >
             {t.ctaTitle}
           </h2>
@@ -539,7 +539,7 @@ export default function Wedding() {
                   style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.05) 100%)' }}
                 />
                 <div style={{ position: 'relative', zIndex: 2 }}>
-                  <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: '#ffffff', marginBottom: '8px', textShadow: '0 1px 4px rgba(0,0,0,0.4)' }}>
+                  <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-card)', marginBottom: '8px', textShadow: '0 1px 4px rgba(0,0,0,0.4)' }}>
                     {card.title}
                   </h3>
                   <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '14px', color: 'rgba(255,255,255,0.9)', marginBottom: '16px', lineHeight: 1.6 }}>
@@ -550,8 +550,8 @@ export default function Wedding() {
                     style={{
                       padding: '12px 28px',
                       borderRadius: '8px',
-                      backgroundColor: '#1a1a1a',
-                      color: '#ffffff',
+                      backgroundColor: 'var(--tb-text)',
+                      color: 'var(--tb-card)',
                       fontFamily: "'Inter', sans-serif",
                       fontSize: '13px',
                       fontWeight: 500,
@@ -570,14 +570,14 @@ export default function Wedding() {
 
       {/* ========== SECTION 5 — BRIDES REVIEWS CAROUSEL ========== */}
       <section
-        style={{ padding: '80px 24px', backgroundColor: '#ffffff' }}
+        style={{ padding: '80px 24px', backgroundColor: 'var(--tb-card)' }}
         onMouseEnter={() => { if (autoplayRef.current) clearInterval(autoplayRef.current); }}
         onMouseLeave={startAutoplay}
       >
         <div className="max-w-[1000px] mx-auto">
           <h2
             className="wed-reveal text-center mb-12"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(26px, 4vw, 36px)', fontWeight: 500, color: '#1a1a1a', letterSpacing: '0.02em' }}
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(26px, 4vw, 36px)', fontWeight: 500, color: 'var(--tb-text)', letterSpacing: '0.02em' }}
           >
             {t.reviewsTitle}
           </h2>
@@ -600,10 +600,10 @@ export default function Wedding() {
                         key={globalIdx}
                         className="flex-1"
                         style={{
-                          backgroundColor: '#faf6f4',
+                          backgroundColor: 'var(--tb-bg)',
                           borderRadius: '16px',
                           padding: '32px',
-                          border: '1px solid #f0e0e0',
+                          border: '1px solid var(--tb-border)',
                         }}
                       >
                         <div className="flex items-center gap-3 mb-4">
@@ -611,12 +611,12 @@ export default function Wedding() {
                             className="w-10 h-10 rounded-full flex items-center justify-center"
                             style={{ backgroundColor: avatarColors[globalIdx % avatarColors.length] }}
                           >
-                            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '16px', fontWeight: 600, color: '#ffffff' }}>
+                            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '16px', fontWeight: 600, color: 'var(--tb-card)' }}>
                               {initial}
                             </span>
                           </div>
                           <div>
-                            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '15px', fontWeight: 600, color: '#1a1a1a' }}>
+                            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '15px', fontWeight: 600, color: 'var(--tb-text)' }}>
                               {review.name}
                             </p>
                             <div className="flex gap-0.5">
@@ -631,7 +631,7 @@ export default function Wedding() {
 
                         <div className="overflow-hidden transition-all duration-500" style={{ maxHeight: isExpanded ? '300px' : '60px' }}>
                           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '14px', lineHeight: 1.7, color: '#666666' }}>
-                            <strong style={{ color: '#1a1a1a' }}>{review.text.split('.')[0]}.</strong>{' '}
+                            <strong style={{ color: 'var(--tb-text)' }}>{review.text.split('.')[0]}.</strong>{' '}
                             {review.text.split('.').slice(1).join('.')}
                           </p>
                         </div>
@@ -654,16 +654,16 @@ export default function Wedding() {
             <button
               onClick={handlePrev}
               className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110"
-              style={{ backgroundColor: '#ffffff', boxShadow: '0 2px 12px rgba(0,0,0,0.1)', zIndex: 10 }}
+              style={{ backgroundColor: 'var(--tb-card)', boxShadow: '0 2px 12px rgba(0,0,0,0.1)', zIndex: 10 }}
             >
-              <ChevronLeft size={20} color="#1a1a1a" />
+              <ChevronLeft size={20} color="var(--tb-text)" />
             </button>
             <button
               onClick={handleNext}
               className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110"
-              style={{ backgroundColor: '#ffffff', boxShadow: '0 2px 12px rgba(0,0,0,0.1)', zIndex: 10 }}
+              style={{ backgroundColor: 'var(--tb-card)', boxShadow: '0 2px 12px rgba(0,0,0,0.1)', zIndex: 10 }}
             >
-              <ChevronRight size={20} color="#1a1a1a" />
+              <ChevronRight size={20} color="var(--tb-text)" />
             </button>
           </div>
 
@@ -678,7 +678,7 @@ export default function Wedding() {
                   width: carouselIdx === i ? '24px' : '8px',
                   height: '8px',
                   borderRadius: '4px',
-                  backgroundColor: carouselIdx === i ? '#c8adad' : '#e0d0d0',
+                  backgroundColor: carouselIdx === i ? '#c8adad' : 'var(--tb-border)',
                   border: 'none',
                   cursor: 'pointer',
                 }}
@@ -689,11 +689,11 @@ export default function Wedding() {
       </section>
 
       {/* ========== SECTION 6 — UGC SOCIAL PROOF ========== */}
-      <section style={{ padding: '80px 24px', backgroundColor: '#faf6f4' }}>
+      <section style={{ padding: '80px 24px', backgroundColor: 'var(--tb-bg)' }}>
         <div className="max-w-[1200px] mx-auto">
           <h2
             className="wed-reveal text-center mb-4"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 500, color: '#1a1a1a', letterSpacing: '0.02em' }}
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 500, color: 'var(--tb-text)', letterSpacing: '0.02em' }}
           >
             {t.ugcTitle}
           </h2>
@@ -727,7 +727,7 @@ export default function Wedding() {
                     justifyContent: 'center',
                   }}
                 >
-                  <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '48px', color: '#1a1a1a', opacity: 0.15 }}>
+                  <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '48px', color: 'var(--tb-text)', opacity: 0.15 }}>
                     {card.name.charAt(0)}
                   </span>
                 </div>
@@ -736,10 +736,10 @@ export default function Wedding() {
                 <div className="flex items-start gap-3">
                   <div
                     className="flex-shrink-0"
-                    style={{ width: '40px', height: '40px', borderRadius: '6px', backgroundColor: '#e0d0d0' }}
+                    style={{ width: '40px', height: '40px', borderRadius: '6px', backgroundColor: 'var(--tb-border)' }}
                   />
                   <div>
-                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#1a1a1a', lineHeight: 1.5, marginBottom: '4px' }}>
+                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: 'var(--tb-text)', lineHeight: 1.5, marginBottom: '4px' }}>
                       <strong>{card.name}</strong> — coiffure par {card.stylist}, porte <strong>{card.product}</strong>
                     </p>
                     <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', color: '#c8adad', fontWeight: 500 }}>
@@ -760,7 +760,7 @@ export default function Wedding() {
       </section>
 
       {/* Back link */}
-      <div className="max-w-7xl mx-auto px-6 py-6" style={{ backgroundColor: '#ffffff' }}>
+      <div className="max-w-7xl mx-auto px-6 py-6" style={{ backgroundColor: 'var(--tb-card)' }}>
         <button
           onClick={() => navigate('/')}
           className="text-sm hover:text-[#c8adad] transition-colors duration-300"
@@ -793,7 +793,7 @@ export default function Wedding() {
                 width: '36px', height: '36px', borderRadius: '50%',
                 backgroundColor: 'rgba(0,0,0,0.6)', border: 'none', cursor: 'pointer',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: '#fff', fontSize: '18px', transition: 'background 0.2s',
+                color: 'var(--tb-card)', fontSize: '18px', transition: 'background 0.2s',
               }}
               onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.9)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.6)'; }}

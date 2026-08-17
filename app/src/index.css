@@ -41,6 +41,10 @@
     --tb-text-muted: #6b6b6b;
     --tb-border: #f0e0e0;
     --tb-card: #ffffff;
+    /* tinted surfaces used by the product pages */
+    --tb-surface: #f5ece8;
+    --tb-tint: #faf0ec;
+    --tb-tint-text: #8a6b5d;
   }
 
   .dark {
@@ -80,6 +84,10 @@
     --tb-text-muted: #8a7a72;
     --tb-border: #2a2020;
     --tb-card: #1a1a1a;
+    /* tinted surfaces used by the product pages */
+    --tb-surface: #241c1c;
+    --tb-tint: #2a2020;
+    --tb-tint-text: #d4a5a5;
   }
 }
 

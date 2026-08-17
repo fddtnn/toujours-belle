@@ -8,7 +8,7 @@ import {
 import Footer from '../sections/Footer';
 
 /* ═══════════════════════════════════════════
-   PRODUCT DATA — 191 Mi-Long Wigs by Color Category
+   PRODUCT DATA — 242 Mi-Long Wigs by Color Category
    ═══════════════════════════════════════════ */
 
 interface WigProduct {
@@ -48,6 +48,10 @@ const products: WigProduct[] = [
   { id: 'ml163', nameFr: 'Noir Vague Élégance', nameAr: 'أسود مموج أنيق', image: '/images/perruques/mi-long/ml163.jpg', typeFr: 'Perruque Mi-Longue — Noir', typeAr: 'باروكة متوسطة — أسود', basePrice: 450, rating: 4.7, reviews: 30, sold: 48, stock: 52, category: 'natural-black', categoryFr: 'Noir', categoryAr: 'أسود' },
   { id: 'ml176', nameFr: 'Noir Festive Élégance', nameAr: 'أسود احتفالي أنيق', image: '/images/perruques/mi-long/ml176.jpg', typeFr: 'Perruque Mi-Longue — Noir', typeAr: 'باروكة متوسطة — أسود', basePrice: 450, rating: 4.8, reviews: 32, sold: 40, stock: 48, category: 'natural-black', categoryFr: 'Noir', categoryAr: 'أسود' },
   { id: 'ml178', nameFr: 'Noir Lisse Intense', nameAr: 'أسود ناعم كثيف', image: '/images/perruques/mi-long/ml178.jpg', typeFr: 'Perruque Mi-Longue — Noir', typeAr: 'باروكة متوسطة — أسود', basePrice: 450, rating: 4.6, reviews: 28, sold: 50, stock: 52, category: 'natural-black', categoryFr: 'Noir', categoryAr: 'أسود' },
+  { id: 'ml192', nameFr: 'Noir Naturel Vague Prestige', nameAr: 'أسود طبيعي مموج بريستيج', image: '/images/perruques/mi-long/ml192.jpg', typeFr: 'Perruque Mi-Longue — Noir Naturel', typeAr: 'باروكة متوسطة — أسود طبيعي', basePrice: 455, rating: 4.7, reviews: 31, sold: 44, stock: 52, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
+  { id: 'ml193', nameFr: 'Noir Naturel Lisse Duo Élégance', nameAr: 'أسود طبيعي ناعم ثنائي أنيق', image: '/images/perruques/mi-long/ml193.jpg', typeFr: 'Perruque Mi-Longue — Noir Naturel', typeAr: 'باروكة متوسطة — أسود طبيعي', basePrice: 440, rating: 4.6, reviews: 27, sold: 38, stock: 55, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
+  { id: 'ml194', nameFr: 'Noir Naturel Lisse Volume', nameAr: 'أسود طبيعي ناعم كثيف', image: '/images/perruques/mi-long/ml194.jpg', typeFr: 'Perruque Mi-Longue — Noir Naturel', typeAr: 'باروكة متوسطة — أسود طبيعي', basePrice: 448, rating: 4.5, reviews: 24, sold: 35, stock: 50, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
+  { id: 'ml195', nameFr: 'Noir Naturel Frange Glamour', nameAr: 'أسود طبيعي غرة جلامور', image: '/images/perruques/mi-long/ml195.jpg', typeFr: 'Perruque Mi-Longue — Noir Naturel', typeAr: 'باروكة متوسطة — أسود طبيعي', basePrice: 462, rating: 4.8, reviews: 36, sold: 47, stock: 46, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
   { id: 'ml033', nameFr: 'Châtain Foncé Lisse', nameAr: 'كستنائي داكن ناعم', image: '/images/perruques/mi-long/ml033.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 380, rating: 5.0, reviews: 54, sold: 28, stock: 51, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
   { id: 'ml034', nameFr: 'Châtain Foncé Balayage', nameAr: 'كستنائي داكن بالياج', image: '/images/perruques/mi-long/ml034.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 402, rating: 4.5, reviews: 14, sold: 67, stock: 55, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
   { id: 'ml035', nameFr: 'Châtain Foncé Ondulé', nameAr: 'كستنائي داكن مموج', image: '/images/perruques/mi-long/ml035.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 418, rating: 4.8, reviews: 40, sold: 50, stock: 41, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
@@ -87,6 +91,21 @@ const products: WigProduct[] = [
   { id: 'ml152', nameFr: 'Châtain Foncé Lisse Élégance', nameAr: 'كستنائي داكن ناعم أنيق', image: '/images/perruques/mi-long/ml152.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 475, rating: 4.7, reviews: 28, sold: 45, stock: 55, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
   { id: 'ml182', nameFr: 'Châtain Foncé Lisse', nameAr: 'كستنائي داكن ناعم', image: '/images/perruques/mi-long/ml182.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 475, rating: 4.5, reviews: 25, sold: 48, stock: 52, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
   { id: 'ml185', nameFr: 'Châtain Foncé Vague Élégance', nameAr: 'كستنائي داكن مموج أنيق', image: '/images/perruques/mi-long/ml185.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 475, rating: 4.8, reviews: 32, sold: 40, stock: 48, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'ml196', nameFr: 'Châtain Foncé Vague Luxe', nameAr: 'كستنائي داكن موجات فاخرة', image: '/images/perruques/mi-long/ml196.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 470, rating: 4.7, reviews: 33, sold: 45, stock: 52, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'ml197', nameFr: 'Châtain Foncé Vague Volume', nameAr: 'كستنائي داكن مموج كثيف', image: '/images/perruques/mi-long/ml197.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 465, rating: 4.6, reviews: 29, sold: 41, stock: 55, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'ml198', nameFr: 'Châtain Foncé Vague Élégance', nameAr: 'كستنائي داكن مموج أنيق', image: '/images/perruques/mi-long/ml198.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 478, rating: 4.8, reviews: 38, sold: 50, stock: 48, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'ml199', nameFr: 'Châtain Foncé Frange Soyeuse', nameAr: 'كستنائي داكن غرة حريرية', image: '/images/perruques/mi-long/ml199.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 452, rating: 4.5, reviews: 26, sold: 36, stock: 54, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'ml200', nameFr: 'Châtain Foncé Vague Prestige', nameAr: 'كستنائي داكن مموج بريستيج', image: '/images/perruques/mi-long/ml200.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 485, rating: 4.7, reviews: 35, sold: 48, stock: 50, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'ml201', nameFr: 'Châtain Foncé Lisse Dégradé', nameAr: 'كستنائي داكن ناعم متدرج', image: '/images/perruques/mi-long/ml201.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 458, rating: 4.6, reviews: 30, sold: 42, stock: 53, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'ml202', nameFr: 'Châtain Foncé Lisse Glamour', nameAr: 'كستنائي داكن ناعم جلامور', image: '/images/perruques/mi-long/ml202.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 468, rating: 4.8, reviews: 34, sold: 46, stock: 49, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'ml203', nameFr: 'Châtain Foncé Lisse Premium', nameAr: 'كستنائي داكن ناعم بريميوم', image: '/images/perruques/mi-long/ml203.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 460, rating: 4.5, reviews: 25, sold: 39, stock: 56, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'ml204', nameFr: 'Châtain Foncé Vague Intense', nameAr: 'كستنائي داكن مموج كثيف', image: '/images/perruques/mi-long/ml204.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 475, rating: 4.7, reviews: 32, sold: 44, stock: 51, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'ml205', nameFr: 'Châtain Foncé Vague Douce', nameAr: 'كستنائي داكن موجات ناعمة', image: '/images/perruques/mi-long/ml205.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 466, rating: 4.6, reviews: 28, sold: 40, stock: 54, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'ml206', nameFr: 'Châtain Foncé Frange Rideau', nameAr: 'كستنائي داكن غرة ستائرية', image: '/images/perruques/mi-long/ml206.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 472, rating: 4.8, reviews: 37, sold: 49, stock: 47, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'ml207', nameFr: 'Châtain Foncé Vague Duo Festive', nameAr: 'كستنائي داكن مموج ثنائي', image: '/images/perruques/mi-long/ml207.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 480, rating: 4.7, reviews: 31, sold: 43, stock: 50, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'ml208', nameFr: 'Châtain Foncé Lisse Soyeux', nameAr: 'كستنائي داكن ناعم حريري', image: '/images/perruques/mi-long/ml208.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 455, rating: 4.5, reviews: 23, sold: 37, stock: 57, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'ml209', nameFr: 'Châtain Foncé Vague Brushing', nameAr: 'كستنائي داكن موجات بروشينغ', image: '/images/perruques/mi-long/ml209.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 488, rating: 4.8, reviews: 40, sold: 52, stock: 45, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'ml210', nameFr: 'Châtain Foncé Vague Naturel', nameAr: 'كستنائي داكن مموج طبيعي', image: '/images/perruques/mi-long/ml210.jpg', typeFr: 'Perruque Mi-Longue — Châtain Foncé', typeAr: 'باروكة متوسطة — كستنائي داكن', basePrice: 463, rating: 4.6, reviews: 27, sold: 41, stock: 53, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
   { id: 'ml021', nameFr: 'Châtain Clair Lisse', nameAr: 'كستنائي فاتح ناعم', image: '/images/perruques/mi-long/ml021.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 407, rating: 4.2, reviews: 10, sold: 63, stock: 45, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
   { id: 'ml022', nameFr: 'Châtain Miel Ondulé', nameAr: 'كستنائي عسلي مموج', image: '/images/perruques/mi-long/ml022.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 451, rating: 4.3, reviews: 21, sold: 48, stock: 63, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
   { id: 'ml023', nameFr: 'Châtain Doré Balayage', nameAr: 'كستنائي ذهبي بالياج', image: '/images/perruques/mi-long/ml023.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 440, rating: 4.2, reviews: 39, sold: 37, stock: 63, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
@@ -116,6 +135,19 @@ const products: WigProduct[] = [
   { id: 'ml183', nameFr: 'Châtain Balayage Soyeux', nameAr: 'كستنائي بالياج حريري', image: '/images/perruques/mi-long/ml183.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 480, rating: 4.7, reviews: 30, sold: 42, stock: 50, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
   { id: 'ml184', nameFr: 'Châtain sur Modèle Élégance', nameAr: 'كستنائي على عارضة أنيقة', image: '/images/perruques/mi-long/ml184.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 475, rating: 4.6, reviews: 28, sold: 45, stock: 55, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
   { id: 'ml186', nameFr: 'Châtain sur Modèle Glamour', nameAr: 'كستنائي على عارضة جلامور', image: '/images/perruques/mi-long/ml186.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 475, rating: 4.7, reviews: 28, sold: 48, stock: 52, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'ml211', nameFr: 'Châtain Crépu Volume Naturel', nameAr: 'كستنائي مجعد كثيف طبيعي', image: '/images/perruques/mi-long/ml211.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 495, rating: 4.6, reviews: 29, sold: 40, stock: 44, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'ml212', nameFr: 'Châtain Lisse Satiné', nameAr: 'كستنائي ناعم حريري', image: '/images/perruques/mi-long/ml212.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 470, rating: 4.7, reviews: 33, sold: 45, stock: 50, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'ml213', nameFr: 'Châtain Cuivré Lisse Élégance', nameAr: 'كستنائي نحاسي ناعم أنيق', image: '/images/perruques/mi-long/ml213.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 482, rating: 4.8, reviews: 36, sold: 48, stock: 47, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'ml214', nameFr: 'Châtain Frisé Glamour', nameAr: 'كستنائي مجعد جلامور', image: '/images/perruques/mi-long/ml214.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 498, rating: 4.5, reviews: 26, sold: 35, stock: 42, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'ml215', nameFr: 'Châtain Cendré Lisse Premium', nameAr: 'كستنائي رمادي ناعم بريميوم', image: '/images/perruques/mi-long/ml215.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 490, rating: 4.7, reviews: 34, sold: 46, stock: 49, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'ml216', nameFr: 'Châtain Clair Lisse Luxe', nameAr: 'كستنائي فاتح ناعم فاخر', image: '/images/perruques/mi-long/ml216.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 486, rating: 4.6, reviews: 30, sold: 42, stock: 51, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'ml217', nameFr: 'Châtain Vague Brushing', nameAr: 'كستنائي موجات بروشينغ', image: '/images/perruques/mi-long/ml217.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 492, rating: 4.8, reviews: 38, sold: 50, stock: 46, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'ml218', nameFr: 'Châtain Lisse Longueur Prestige', nameAr: 'كستنائي ناعم طويل بريستيج', image: '/images/perruques/mi-long/ml218.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 478, rating: 4.6, reviews: 28, sold: 39, stock: 53, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'ml219', nameFr: 'Châtain Frange Duo Douceur', nameAr: 'كستنائي غرة ثنائي ناعم', image: '/images/perruques/mi-long/ml219.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 474, rating: 4.5, reviews: 24, sold: 36, stock: 55, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'ml220', nameFr: 'Châtain Vague Caramel', nameAr: 'كستنائي موجات كراميل', image: '/images/perruques/mi-long/ml220.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 488, rating: 4.7, reviews: 32, sold: 44, stock: 48, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'ml221', nameFr: 'Châtain Vague Miel Glamour', nameAr: 'كستنائي موجات عسلية جلامور', image: '/images/perruques/mi-long/ml221.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 494, rating: 4.8, reviews: 37, sold: 49, stock: 45, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'ml222', nameFr: 'Châtain Porté Naturel', nameAr: 'كستنائي مطبق طبيعي', image: '/images/perruques/mi-long/ml222.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 500, rating: 4.7, reviews: 35, sold: 47, stock: 43, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'ml223', nameFr: 'Châtain Lisse Chocolat', nameAr: 'كستنائي ناعم شوكولاتة', image: '/images/perruques/mi-long/ml223.jpg', typeFr: 'Perruque Mi-Longue — Châtain', typeAr: 'باروكة متوسطة — كستنائي', basePrice: 480, rating: 4.6, reviews: 31, sold: 43, stock: 52, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
   { id: 'ml055', nameFr: 'Rouge Cuivré Frange Glamour', nameAr: 'شعر أحمر نحاسي غرة جلامور', image: '/images/perruques/mi-long/ml055.jpg', typeFr: 'Perruque Mi-Longue — Rouge', typeAr: 'باروكة متوسطة — أحمر', basePrice: 460, rating: 4.8, reviews: 15, sold: 25, stock: 40, category: 'red', categoryFr: 'Rouge', categoryAr: 'أحمر' },
   { id: 'ml041', nameFr: 'Balayage Blond Châtain', nameAr: 'بالياج أشقر كستنائي', image: '/images/perruques/mi-long/ml041.jpg', typeFr: 'Perruque Mi-Longue — Highlight', typeAr: 'باروكة متوسطة — هايلايت', basePrice: 508, rating: 4.8, reviews: 16, sold: 54, stock: 50, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
   { id: 'ml042', nameFr: 'Balayage Miel Intense', nameAr: 'بالياج عسلي كثيف', image: '/images/perruques/mi-long/ml042.jpg', typeFr: 'Perruque Mi-Longue — Highlight', typeAr: 'باروكة متوسطة — هايلايت', basePrice: 510, rating: 4.2, reviews: 41, sold: 67, stock: 54, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
@@ -132,6 +164,14 @@ const products: WigProduct[] = [
   { id: 'ml110', nameFr: 'Diptyque Balayage Mixte', nameAr: 'ثنائي بالياج مختلط', image: '/images/perruques/mi-long/ml110.jpg', typeFr: 'Perruque Mi-Longue — Highlight', typeAr: 'باروكة متوسطة — هايلايت', basePrice: 495, rating: 4.7, reviews: 30, sold: 42, stock: 50, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
   { id: 'ml111', nameFr: 'Balayage Châtain Clair Lisse', nameAr: 'كستنائي فاتح ناعم بالياج', image: '/images/perruques/mi-long/ml111.jpg', typeFr: 'Perruque Mi-Longue — Highlight', typeAr: 'باروكة متوسطة — هايلايت', basePrice: 490, rating: 4.8, reviews: 33, sold: 40, stock: 48, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
   { id: 'ml145', nameFr: 'Balayage Châtain Clair Élégance', nameAr: 'كستنائي فاتح بالياج أنيق', image: '/images/perruques/mi-long/ml145.jpg', typeFr: 'Perruque Mi-Longue — Highlight', typeAr: 'باروكة متوسطة — هايلايت', basePrice: 490, rating: 4.7, reviews: 30, sold: 42, stock: 50, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'ml224', nameFr: 'Balayage Cendré Duo Prestige', nameAr: 'بالياج رمادي ثنائي بريستيج', image: '/images/perruques/mi-long/ml224.jpg', typeFr: 'Perruque Mi-Longue — Highlight', typeAr: 'باروكة متوسطة — هايلايت', basePrice: 505, rating: 4.7, reviews: 34, sold: 46, stock: 44, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'ml225', nameFr: 'Balayage Blond Brushing Luxe', nameAr: 'بالياج أشقر بروشينغ فاخر', image: '/images/perruques/mi-long/ml225.jpg', typeFr: 'Perruque Mi-Longue — Highlight', typeAr: 'باروكة متوسطة — هايلايت', basePrice: 512, rating: 4.8, reviews: 39, sold: 51, stock: 42, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'ml226', nameFr: 'Balayage Miel Vague Élégance', nameAr: 'بالياج عسلي مموج أنيق', image: '/images/perruques/mi-long/ml226.jpg', typeFr: 'Perruque Mi-Longue — Highlight', typeAr: 'باروكة متوسطة — هايلايت', basePrice: 508, rating: 4.7, reviews: 35, sold: 47, stock: 45, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'ml227', nameFr: 'Balayage Caramel Volume', nameAr: 'بالياج كراميل كثيف', image: '/images/perruques/mi-long/ml227.jpg', typeFr: 'Perruque Mi-Longue — Highlight', typeAr: 'باروكة متوسطة — هايلايت', basePrice: 502, rating: 4.6, reviews: 30, sold: 42, stock: 48, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'ml228', nameFr: 'Balayage Blond Glamour', nameAr: 'بالياج أشقر جلامور', image: '/images/perruques/mi-long/ml228.jpg', typeFr: 'Perruque Mi-Longue — Highlight', typeAr: 'باروكة متوسطة — هايلايت', basePrice: 515, rating: 4.8, reviews: 41, sold: 53, stock: 40, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'ml229', nameFr: 'Ombré Blond Trio Signature', nameAr: 'أومبريه أشقر ثلاثي مميز', image: '/images/perruques/mi-long/ml229.jpg', typeFr: 'Perruque Mi-Longue — Highlight', typeAr: 'باروكة متوسطة — هايلايت', basePrice: 510, rating: 4.7, reviews: 33, sold: 45, stock: 43, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'ml230', nameFr: 'Balayage Cendré Trio Élégance', nameAr: 'بالياج رمادي ثلاثي أنيق', image: '/images/perruques/mi-long/ml230.jpg', typeFr: 'Perruque Mi-Longue — Highlight', typeAr: 'باروكة متوسطة — هايلايت', basePrice: 506, rating: 4.6, reviews: 29, sold: 41, stock: 46, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'ml231', nameFr: 'Balayage Doré Vague Prestige', nameAr: 'بالياج ذهبي مموج بريستيج', image: '/images/perruques/mi-long/ml231.jpg', typeFr: 'Perruque Mi-Longue — Highlight', typeAr: 'باروكة متوسطة — هايلايت', basePrice: 518, rating: 4.8, reviews: 42, sold: 54, stock: 39, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
   { id: 'ml001', nameFr: 'Blond Balayage Lumière', nameAr: 'شعر أشقر بالياج لامع', image: '/images/perruques/mi-long/ml001.jpg', typeFr: 'Perruque Mi-Longue — Blond', typeAr: 'باروكة متوسطة — أشقر', basePrice: 501, rating: 4.1, reviews: 55, sold: 29, stock: 42, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
   { id: 'ml002', nameFr: 'Blond Miel Ondulé', nameAr: 'شعر عسلي مموج', image: '/images/perruques/mi-long/ml002.jpg', typeFr: 'Perruque Mi-Longue — Blond', typeAr: 'باروكة متوسطة — أشقر', basePrice: 448, rating: 4.1, reviews: 14, sold: 55, stock: 58, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
   { id: 'ml003', nameFr: 'Blond Sable Glamour', nameAr: 'شعر رملي جلامور', image: '/images/perruques/mi-long/ml003.jpg', typeFr: 'Perruque Mi-Longue — Blond', typeAr: 'باروكة متوسطة — أشقر', basePrice: 489, rating: 4.1, reviews: 35, sold: 14, stock: 35, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
@@ -220,6 +260,17 @@ const products: WigProduct[] = [
   { id: 'ml189', nameFr: 'Blond Vague Élégance', nameAr: 'أشقر مموج أنيق', image: '/images/perruques/mi-long/ml189.jpg', typeFr: 'Perruque Mi-Longue — Blond', typeAr: 'باروكة متوسطة — أشقر', basePrice: 475, rating: 4.7, reviews: 30, sold: 45, stock: 55, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
   { id: 'ml190', nameFr: 'Blond Balayage Glamour', nameAr: 'أشقر بالياج جلامور', image: '/images/perruques/mi-long/ml190.jpg', typeFr: 'Perruque Mi-Longue — Blond', typeAr: 'باروكة متوسطة — أشقر', basePrice: 490, rating: 4.6, reviews: 28, sold: 48, stock: 52, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
   { id: 'ml191', nameFr: 'Blond Vague Prestige', nameAr: 'أشقر مموج بريستيج', image: '/images/perruques/mi-long/ml191.jpg', typeFr: 'Perruque Mi-Longue — Blond', typeAr: 'باروكة متوسطة — أشقر', basePrice: 475, rating: 4.7, reviews: 30, sold: 42, stock: 50, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'ml232', nameFr: 'Blond Platine Lisse Racines', nameAr: 'أشقر بلاتيني ناعم بجذور', image: '/images/perruques/mi-long/ml232.jpg', typeFr: 'Perruque Mi-Longue — Blond', typeAr: 'باروكة متوسطة — أشقر', basePrice: 515, rating: 4.7, reviews: 36, sold: 48, stock: 44, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'ml233', nameFr: 'Blond Beige Vague Luxe', nameAr: 'أشقر بيج موجات فاخرة', image: '/images/perruques/mi-long/ml233.jpg', typeFr: 'Perruque Mi-Longue — Blond', typeAr: 'باروكة متوسطة — أشقر', basePrice: 508, rating: 4.8, reviews: 40, sold: 52, stock: 41, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'ml234', nameFr: 'Blond Sable Vague Douce', nameAr: 'أشقر رملي موجات ناعمة', image: '/images/perruques/mi-long/ml234.jpg', typeFr: 'Perruque Mi-Longue — Blond', typeAr: 'باروكة متوسطة — أشقر', basePrice: 500, rating: 4.6, reviews: 31, sold: 43, stock: 47, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'ml235', nameFr: 'Blond Miel Vague Glamour', nameAr: 'أشقر عسلي مموج جلامور', image: '/images/perruques/mi-long/ml235.jpg', typeFr: 'Perruque Mi-Longue — Blond', typeAr: 'باروكة متوسطة — أشقر', basePrice: 512, rating: 4.7, reviews: 35, sold: 47, stock: 45, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'ml236', nameFr: 'Blond Doré Vague Volume', nameAr: 'أشقر ذهبي مموج كثيف', image: '/images/perruques/mi-long/ml236.jpg', typeFr: 'Perruque Mi-Longue — Blond', typeAr: 'باروكة متوسطة — أشقر', basePrice: 506, rating: 4.8, reviews: 38, sold: 50, stock: 43, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'ml237', nameFr: 'Blond Clair Lisse Prestige', nameAr: 'أشقر فاتح ناعم بريستيج', image: '/images/perruques/mi-long/ml237.jpg', typeFr: 'Perruque Mi-Longue — Blond', typeAr: 'باروكة متوسطة — أشقر', basePrice: 498, rating: 4.6, reviews: 30, sold: 42, stock: 49, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'ml238', nameFr: 'Blond Cendré Vague Élégance', nameAr: 'أشقر رمادي مموج أنيق', image: '/images/perruques/mi-long/ml238.jpg', typeFr: 'Perruque Mi-Longue — Blond', typeAr: 'باروكة متوسطة — أشقر', basePrice: 510, rating: 4.7, reviews: 34, sold: 46, stock: 46, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'ml239', nameFr: 'Blond Nacré Vague Premium', nameAr: 'أشقر لؤلؤي مموج بريميوم', image: '/images/perruques/mi-long/ml239.jpg', typeFr: 'Perruque Mi-Longue — Blond', typeAr: 'باروكة متوسطة — أشقر', basePrice: 516, rating: 4.8, reviews: 41, sold: 53, stock: 40, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'ml240', nameFr: 'Blond Ombré Vague Signature', nameAr: 'أشقر أومبريه مموج مميز', image: '/images/perruques/mi-long/ml240.jpg', typeFr: 'Perruque Mi-Longue — Blond', typeAr: 'باروكة متوسطة — أشقر', basePrice: 520, rating: 4.7, reviews: 37, sold: 49, stock: 38, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'ml241', nameFr: 'Blond Duo Vague Festive', nameAr: 'أشقر ثنائي مموج احتفالي', image: '/images/perruques/mi-long/ml241.jpg', typeFr: 'Perruque Mi-Longue — Blond', typeAr: 'باروكة متوسطة — أشقر', basePrice: 504, rating: 4.6, reviews: 32, sold: 44, stock: 48, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'ml242', nameFr: 'Blond Vanille Vague Luxe', nameAr: 'أشقر فانيليا موجات فاخرة', image: '/images/perruques/mi-long/ml242.jpg', typeFr: 'Perruque Mi-Longue — Blond', typeAr: 'باروكة متوسطة — أشقر', basePrice: 514, rating: 4.8, reviews: 39, sold: 51, stock: 42, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
 ];
 
 
@@ -312,20 +363,20 @@ export default function PerruquesMiLong() {
   /* ───── GRID VIEW ───── */
   if (!selectedProduct) {
     return (
-      <div style={{ backgroundColor: '#faf6f4', fontFamily: "'Inter', sans-serif", minHeight: '100vh' }}>
+      <div style={{ backgroundColor: 'var(--tb-bg)', fontFamily: "'Inter', sans-serif", minHeight: '100vh' }}>
         {/* Header */}
         <div className="max-w-7xl mx-auto px-3 sm:px-6 pt-24 sm:pt-28 pb-3 sm:pb-4">
-          <div className="flex items-center gap-2 text-xs mb-2 sm:mb-4" style={{ color: '#8a8a8a' }}>
+          <div className="flex items-center gap-2 text-xs mb-2 sm:mb-4" style={{ color: 'var(--tb-text-muted)' }}>
             <button onClick={() => navigate('/')} className="hover:text-[#d4a5a5] transition-colors">Home</button>
             <ChevronRight size={12} />
             <span>Cheveux</span>
             <ChevronRight size={12} />
             <span>Perruques</span>
             <ChevronRight size={12} />
-            <span style={{ color: '#333' }}>Mi-Long</span>
+            <span style={{ color: 'var(--tb-text)' }}>Mi-Long</span>
           </div>
           <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#d4a5a5', marginBottom: '8px' }}>
-            {lang === 'fr' ? 'COLLECTION PERRUQUES MI-LONGUES \u2014 191 MOD\u00c8LES' : '\u0645\u062c\u0645\u0648\u0639\u0629 \u0627\u0644\u0628\u0627\u0631\u0648\u0643\u0627\u062a \u0645\u062a\u0648\u0633\u0637\u0629 \u2014 191 \u0645\u0648\u062f\u064a\u0644'}
+            {lang === 'fr' ? 'COLLECTION PERRUQUES MI-LONGUES \u2014 242 MOD\u00c8LES' : '\u0645\u062c\u0645\u0648\u0639\u0629 \u0627\u0644\u0628\u0627\u0631\u0648\u0643\u0627\u062a \u0645\u062a\u0648\u0633\u0637\u0629 \u2014 242 \u0645\u0648\u062f\u064a\u0644'}
           </p>
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400, fontSize: 'clamp(2rem, 4vw, 3rem)', color: '#d4a5a5', lineHeight: 1.15, marginBottom: '8px' }}>
             {lang === 'fr' ? 'Perruques Mi-Longues' : '\u0628\u0627\u0631\u0648\u0643\u0627\u062a \u0645\u062a\u0648\u0633\u0637\u0629'}
@@ -354,19 +405,19 @@ export default function PerruquesMiLong() {
                       <div
                         key={q.id}
                         className="group cursor-pointer rounded-xl overflow-hidden"
-                        style={{ backgroundColor: '#ffffff', transition: 'all 0.4s ease' }}
+                        style={{ backgroundColor: 'var(--tb-card)', transition: 'all 0.4s ease' }}
                         onClick={() => openProduct(q.id)}
                         onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.08)'; }}
                         onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
                       >
-                        <div className="relative overflow-hidden flex items-center justify-center" style={{ aspectRatio: '1/1.15', backgroundColor: '#f5ece8' }}>
-                          <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md text-xs font-semibold z-10" style={{ backgroundColor: 'rgba(255,255,255,0.85)', color: '#555', fontSize: '10px', letterSpacing: '0.05em' }}>
+                        <div className="relative overflow-hidden flex items-center justify-center" style={{ aspectRatio: '1/1.15', backgroundColor: 'var(--tb-surface)' }}>
+                          <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md text-xs font-semibold z-10" style={{ backgroundColor: 'rgba(255,255,255,0.85)', color: 'var(--tb-text-secondary)', fontSize: '10px', letterSpacing: '0.05em' }}>
                             {String(products.indexOf(q) + 1).padStart(2, '0')}
                           </span>
                           <img src={q.image} alt={lang === 'fr' ? q.nameFr : q.nameAr} className="w-full h-full object-cover sm:object-contain transition-transform duration-500 group-hover:scale-105" loading="lazy" />
                         </div>
                         <div className="p-2 sm:p-4">
-                          <h3 className="text-xs sm:text-sm font-medium leading-snug mb-1 sm:mb-2" style={{ fontFamily: "'Inter', sans-serif", color: '#1a1a1a', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', lineHeight: 1.4 }}>
+                          <h3 className="text-xs sm:text-sm font-medium leading-snug mb-1 sm:mb-2" style={{ fontFamily: "'Inter', sans-serif", color: 'var(--tb-text)', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', lineHeight: 1.4 }}>
                             {lang === 'fr' ? q.nameFr : q.nameAr}
                           </h3>
                           <div className="flex items-center justify-between mb-1 sm:mb-2">
@@ -375,7 +426,7 @@ export default function PerruquesMiLong() {
                               <span className="hidden sm:inline">{lang === 'fr' ? `\u00c0 partir de ${q.basePrice} TND` : `\u0627\u0628\u062a\u062f\u0627\u0621\u064b \u0645\u0646 ${q.basePrice} \u062f.\u062a`}</span>
                             </span>
                           </div>
-                          <button className="w-full py-1.5 sm:py-2.5 rounded-lg transition-colors duration-300" style={{ backgroundColor: '#3a1a2a', color: '#ffffff', fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '10px', letterSpacing: '0.04em', border: 'none', cursor: 'pointer' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#d4a5a5'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#3a1a2a'; }}>
+                          <button className="w-full py-1.5 sm:py-2.5 rounded-lg transition-colors duration-300" style={{ backgroundColor: '#3a1a2a', color: 'var(--tb-card)', fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '10px', letterSpacing: '0.04em', border: 'none', cursor: 'pointer' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#d4a5a5'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#3a1a2a'; }}>
                             <span className="sm:hidden">{lang === 'fr' ? 'Voir +' : '\u0639\u0631\u0636 \u0627\u0644\u0645\u0632\u064a\u062f'}</span>
                             <span className="hidden sm:inline">{lang === 'fr' ? 'Voir le Produit' : '\u0639\u0631\u0636 \u0627\u0644\u0645\u0646\u062a\u062c'}</span>
                           </button>
@@ -466,17 +517,17 @@ export default function PerruquesMiLong() {
   const tags = ['Premium Quality', lang === 'fr' ? `Couleur ${catLabel}` : `\u0644\u0648\u0646 ${catLabel}`, 'Best Seller'];
 
   return (
-    <div style={{ backgroundColor: '#ffffff', fontFamily: "'Inter', sans-serif", minHeight: '100vh' }}>
+    <div style={{ backgroundColor: 'var(--tb-card)', fontFamily: "'Inter', sans-serif", minHeight: '100vh' }}>
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-28 pb-2">
-        <div className="flex items-center gap-2 text-xs flex-wrap" style={{ color: '#8a8a8a' }}>
+        <div className="flex items-center gap-2 text-xs flex-wrap" style={{ color: 'var(--tb-text-muted)' }}>
           <button onClick={() => navigate('/')} className="hover:text-[#d4a5a5] transition-colors">Home</button>
           <ChevronRight size={12} />
           <span>Cheveux</span>
           <ChevronRight size={12} />
           <button onClick={backToGrid} className="hover:text-[#d4a5a5] transition-colors">Perruques</button>
           <ChevronRight size={12} />
-          <span style={{ color: '#333' }}>{name}</span>
+          <span style={{ color: 'var(--tb-text)' }}>{name}</span>
         </div>
       </div>
 
@@ -492,9 +543,9 @@ export default function PerruquesMiLong() {
                 </button>
               ))}
             </div>
-            <div ref={imgRef} className="relative flex-1 overflow-hidden bg-gray-50 cursor-crosshair" style={{ minHeight: '400px', maxHeight: '600px' }} onMouseEnter={() => setZoom(true)} onMouseLeave={() => setZoom(false)} onMouseMove={handleMouseMove}>
+            <div ref={imgRef} className="relative flex-1 overflow-hidden cursor-crosshair" style={{ minHeight: '400px', maxHeight: '600px' }} onMouseEnter={() => setZoom(true)} onMouseLeave={() => setZoom(false)} onMouseMove={handleMouseMove}>
               <img src={images[mainIdx].src} alt={images[mainIdx].alt} className="w-full h-full object-contain transition-transform duration-300" style={{ transform: zoom ? `scale(2)` : 'scale(1)', transformOrigin: `${zoomPos.x * 100}% ${zoomPos.y * 100}%` }} />
-              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(0,0,0,0.6)', color: '#fff' }}>
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(0,0,0,0.6)', color: 'var(--tb-card)' }}>
                 {mainIdx + 1} / {images.length}
               </div>
             </div>
@@ -505,8 +556,8 @@ export default function PerruquesMiLong() {
             <button onClick={backToGrid} className="flex items-center gap-1 text-xs mb-4 hover:text-[#d4a5a5] transition-colors" style={{ color: '#888' }}>
               <ArrowLeft size={14} /> {t.back}
             </button>
-            <h1 className="text-xl sm:text-2xl font-semibold leading-snug mb-2" style={{ color: '#1a1a1a', fontWeight: 600 }}>{name}</h1>
-            <p className="text-sm leading-relaxed mb-3" style={{ color: '#666' }}>
+            <h1 className="text-xl sm:text-2xl font-semibold leading-snug mb-2" style={{ color: 'var(--tb-text)', fontWeight: 600 }}>{name}</h1>
+            <p className="text-sm leading-relaxed mb-3" style={{ color: 'var(--tb-text-secondary)' }}>
               {lang === 'fr'
                 ? `Perruque Lace Front mi-longue de couleur ${catLabel.toLowerCase()} aux longueurs ondul\u00e9es volumineuses. Cheveux humains Remy premium pour un r\u00e9sultat naturel, doux et brillant.`
                 : `\u0628\u0627\u0631\u0648\u0643\u0629 \u0644\u064a\u0633 \u0641\u0631\u0648\u0646\u062a \u0645\u062a\u0648\u0633\u0637\u0629 \u0628\u0627\u0644\u0644\u0648\u0646 ${catLabel} \u0628\u0623\u0637\u0648\u0627\u0644 \u0645\u0645\u0648\u062c\u0629 \u0643\u062b\u064a\u0641\u0629. \u0634\u0639\u0631 \u0628\u0634\u0631\u064a \u0631\u064a\u0645\u064a \u0628\u0631\u064a\u0645\u064a\u0648\u0645 \u0644\u0646\u062a\u064a\u062c\u0629 \u0637\u0628\u064a\u0639\u064a\u0629 \u0648\u0646\u0627\u0639\u0645\u0629 \u0648\u0644\u0627\u0645\u0639\u0629.`}
@@ -514,19 +565,19 @@ export default function PerruquesMiLong() {
             <div className="flex items-center gap-3 mb-3 flex-wrap">
               <div className="flex items-center gap-1">
                 {[1,2,3,4,5].map(s => <Star key={s} size={16} fill={s <= Math.floor(selectedProduct.rating) ? "#f4c430" : "none"} color="#f4c430" />)}
-                <span className="text-sm font-semibold ml-1" style={{ color: '#333' }}>{selectedProduct.rating}</span>
+                <span className="text-sm font-semibold ml-1" style={{ color: 'var(--tb-text)' }}>{selectedProduct.rating}</span>
               </div>
               <span className="text-sm" style={{ color: '#888' }}>{selectedProduct.reviews} {lang === 'fr' ? 'Avis' : '\u062a\u0642\u064a\u064a\u0645'}</span>
               <span className="text-sm" style={{ color: '#888' }}>|</span>
               <span className="text-sm font-medium" style={{ color: '#c44' }}>{selectedProduct.sold} {lang === 'fr' ? 'vendus' : '\u0645\u0628\u0627\u0639'}</span>
             </div>
             <div className="flex gap-2 mb-4 flex-wrap">
-              {tags.map(tag => <span key={tag} className="px-3 py-1 rounded-full text-xs font-medium" style={{ backgroundColor: '#f0e8e4', color: '#8a6b5d' }}>{tag}</span>)}
+              {tags.map(tag => <span key={tag} className="px-3 py-1 rounded-full text-xs font-medium" style={{ backgroundColor: 'var(--tb-surface)', color: 'var(--tb-tint-text)' }}>{tag}</span>)}
             </div>
             <div className="flex items-end gap-3 mb-4 flex-wrap">
               <span className="text-3xl font-bold" style={{ color: '#c44' }}>TND {price.toFixed(2)}</span>
               <span className="text-lg line-through" style={{ color: '#aaa' }}>TND {original.toFixed(2)}</span>
-              <span className="px-2 py-0.5 rounded text-xs font-bold" style={{ backgroundColor: '#c44', color: '#fff' }}>-{discount}%</span>
+              <span className="px-2 py-0.5 rounded text-xs font-bold" style={{ backgroundColor: '#c44', color: 'var(--tb-card)' }}>-{discount}%</span>
             </div>
             <div className="flex items-center gap-2 p-3 rounded-lg mb-5" style={{ backgroundColor: '#fff0f0', border: '1px solid #ffd0d0' }}>
               <Zap size={16} color="#c44" />
@@ -535,51 +586,51 @@ export default function PerruquesMiLong() {
 
             {/* Variant Selectors */}
             <div className="mb-4">
-              <p className="text-sm font-medium mb-2" style={{ color: '#333' }}>{t.length}: <span style={{ color: '#888' }}>{selLength}</span></p>
+              <p className="text-sm font-medium mb-2" style={{ color: 'var(--tb-text)' }}>{t.length}: <span style={{ color: '#888' }}>{selLength}</span></p>
               <div className="flex gap-2 flex-wrap">
-                {lengths.map(l => <button key={l} onClick={() => setSelLength(l)} className="px-3 py-2 text-xs border transition-all" style={{ borderColor: selLength === l ? '#d4a5a5' : '#ddd', backgroundColor: selLength === l ? '#faf0ec' : '#fff', color: selLength === l ? '#8a6b5d' : '#333', fontWeight: selLength === l ? 500 : 400 }}>{l}</button>)}
+                {lengths.map(l => <button key={l} onClick={() => setSelLength(l)} className="px-3 py-2 text-xs border transition-all" style={{ borderColor: selLength === l ? '#d4a5a5' : 'var(--tb-border)', backgroundColor: selLength === l ? 'var(--tb-tint)' : 'var(--tb-card)', color: selLength === l ? 'var(--tb-tint-text)' : 'var(--tb-text)', fontWeight: selLength === l ? 500 : 400 }}>{l}</button>)}
               </div>
             </div>
             <div className="mb-4">
-              <p className="text-sm font-medium mb-2" style={{ color: '#333' }}>{t.density}: <span style={{ color: '#888' }}>{selDensity}</span></p>
+              <p className="text-sm font-medium mb-2" style={{ color: 'var(--tb-text)' }}>{t.density}: <span style={{ color: '#888' }}>{selDensity}</span></p>
               <div className="flex gap-2 flex-wrap">
-                {densities.map(d => <button key={d} onClick={() => setSelDensity(d)} className="px-3 py-2 text-xs border transition-all" style={{ borderColor: selDensity === d ? '#d4a5a5' : '#ddd', backgroundColor: selDensity === d ? '#faf0ec' : '#fff', color: selDensity === d ? '#8a6b5d' : '#333', fontWeight: selDensity === d ? 500 : 400 }}>{d}</button>)}
+                {densities.map(d => <button key={d} onClick={() => setSelDensity(d)} className="px-3 py-2 text-xs border transition-all" style={{ borderColor: selDensity === d ? '#d4a5a5' : 'var(--tb-border)', backgroundColor: selDensity === d ? 'var(--tb-tint)' : 'var(--tb-card)', color: selDensity === d ? 'var(--tb-tint-text)' : 'var(--tb-text)', fontWeight: selDensity === d ? 500 : 400 }}>{d}</button>)}
               </div>
             </div>
             <div className="mb-4">
-              <p className="text-sm font-medium mb-2" style={{ color: '#333' }}>{t.hairType}: <span style={{ color: '#888' }}>{selHairType}</span></p>
+              <p className="text-sm font-medium mb-2" style={{ color: 'var(--tb-text)' }}>{t.hairType}: <span style={{ color: '#888' }}>{selHairType}</span></p>
               <div className="flex gap-2 flex-wrap">
-                {hairTypes.map(h => <button key={h} onClick={() => setSelHairType(h)} className="px-4 py-2 text-sm border transition-all" style={{ borderColor: selHairType === h ? '#d4a5a5' : '#ddd', backgroundColor: selHairType === h ? '#faf0ec' : '#fff', color: selHairType === h ? '#8a6b5d' : '#333', fontWeight: selHairType === h ? 500 : 400 }}>{h}</button>)}
+                {hairTypes.map(h => <button key={h} onClick={() => setSelHairType(h)} className="px-4 py-2 text-sm border transition-all" style={{ borderColor: selHairType === h ? '#d4a5a5' : 'var(--tb-border)', backgroundColor: selHairType === h ? 'var(--tb-tint)' : 'var(--tb-card)', color: selHairType === h ? 'var(--tb-tint-text)' : 'var(--tb-text)', fontWeight: selHairType === h ? 500 : 400 }}>{h}</button>)}
               </div>
             </div>
             <div className="mb-4">
-              <p className="text-sm font-medium mb-2" style={{ color: '#333' }}>{t.capType}: <span style={{ color: '#888' }}>{selCap}</span></p>
+              <p className="text-sm font-medium mb-2" style={{ color: 'var(--tb-text)' }}>{t.capType}: <span style={{ color: '#888' }}>{selCap}</span></p>
               <div className="flex gap-2 flex-wrap">
-                {wigCaps.map(c => <button key={c} onClick={() => setSelCap(c)} className="px-3 py-2 text-xs border transition-all" style={{ borderColor: selCap === c ? '#d4a5a5' : '#ddd', backgroundColor: selCap === c ? '#faf0ec' : '#fff', color: selCap === c ? '#8a6b5d' : '#333', fontWeight: selCap === c ? 500 : 400 }}>{c}</button>)}
+                {wigCaps.map(c => <button key={c} onClick={() => setSelCap(c)} className="px-3 py-2 text-xs border transition-all" style={{ borderColor: selCap === c ? '#d4a5a5' : 'var(--tb-border)', backgroundColor: selCap === c ? 'var(--tb-tint)' : 'var(--tb-card)', color: selCap === c ? 'var(--tb-tint-text)' : 'var(--tb-text)', fontWeight: selCap === c ? 500 : 400 }}>{c}</button>)}
               </div>
             </div>
             <div className="mb-5">
-              <p className="text-sm font-medium mb-2" style={{ color: '#333' }}>{t.wigSize}: <span style={{ color: '#888' }}>{selSize}</span></p>
+              <p className="text-sm font-medium mb-2" style={{ color: 'var(--tb-text)' }}>{t.wigSize}: <span style={{ color: '#888' }}>{selSize}</span></p>
               <div className="flex gap-2 flex-wrap">
-                {wigSizes.map(s => <button key={s} onClick={() => setSelSize(s)} className="px-4 py-2 text-sm border transition-all" style={{ borderColor: selSize === s ? '#d4a5a5' : '#ddd', backgroundColor: selSize === s ? '#faf0ec' : '#fff', color: selSize === s ? '#8a6b5d' : '#333', fontWeight: selSize === s ? 500 : 400 }}>{s}</button>)}
+                {wigSizes.map(s => <button key={s} onClick={() => setSelSize(s)} className="px-4 py-2 text-sm border transition-all" style={{ borderColor: selSize === s ? '#d4a5a5' : 'var(--tb-border)', backgroundColor: selSize === s ? 'var(--tb-tint)' : 'var(--tb-card)', color: selSize === s ? 'var(--tb-tint-text)' : 'var(--tb-text)', fontWeight: selSize === s ? 500 : 400 }}>{s}</button>)}
               </div>
             </div>
 
             {/* Quantity + Actions */}
             <div className="flex items-center gap-4 mb-5">
               <div className="flex items-center gap-2">
-                <button onClick={() => setQty(Math.max(1, qty - 1))} className="w-8 h-8 flex items-center justify-center border rounded" style={{ borderColor: '#ddd' }}><Minus size={14} /></button>
+                <button onClick={() => setQty(Math.max(1, qty - 1))} className="w-8 h-8 flex items-center justify-center border rounded" style={{ borderColor: 'var(--tb-border)' }}><Minus size={14} /></button>
                 <span className="w-8 text-center text-sm font-medium">{qty}</span>
-                <button onClick={() => setQty(qty + 1)} className="w-8 h-8 flex items-center justify-center border rounded" style={{ borderColor: '#ddd' }}><Plus size={14} /></button>
+                <button onClick={() => setQty(qty + 1)} className="w-8 h-8 flex items-center justify-center border rounded" style={{ borderColor: 'var(--tb-border)' }}><Plus size={14} /></button>
               </div>
               <span className="text-xs" style={{ color: '#888' }}>{selectedProduct.stock} {t.stock}</span>
             </div>
             <div className="flex gap-3 mb-6">
-              <button onClick={handleAdd} className="flex-1 py-3 rounded-lg text-sm font-medium transition-all" style={{ backgroundColor: added ? '#4a9b5e' : '#d4a5a5', color: '#fff', border: 'none', cursor: 'pointer' }}>
+              <button onClick={handleAdd} className="flex-1 py-3 rounded-lg text-sm font-medium transition-all" style={{ backgroundColor: added ? '#4a9b5e' : '#d4a5a5', color: 'var(--tb-card)', border: 'none', cursor: 'pointer' }}>
                 {added ? <span className="flex items-center justify-center gap-2"><Check size={16} /> {lang === 'fr' ? 'Ajout\u00e9 !' : '\u062a\u0645 \u0627\u0644\u0625\u0636\u0627\u0641\u0629!'}</span> : t.addCart}
               </button>
-              <button className="px-4 py-3 rounded-lg border text-sm font-medium transition-all hover:bg-[#faf0ec]" style={{ borderColor: '#d4a5a5', color: '#8a6b5d' }}>{t.buyNow}</button>
-              <button className="w-10 h-10 flex items-center justify-center rounded-lg border transition-all hover:bg-[#faf0ec]" style={{ borderColor: '#ddd' }}><Heart size={18} color="#d4a5a5" /></button>
+              <button className="px-4 py-3 rounded-lg border text-sm font-medium transition-all hover:bg-[var(--tb-tint)]" style={{ borderColor: '#d4a5a5', color: 'var(--tb-tint-text)' }}>{t.buyNow}</button>
+              <button className="w-10 h-10 flex items-center justify-center rounded-lg border transition-all hover:bg-[var(--tb-tint)]" style={{ borderColor: 'var(--tb-border)' }}><Heart size={18} color="#d4a5a5" /></button>
             </div>
 
             {/* Trust badges */}
@@ -590,8 +641,8 @@ export default function PerruquesMiLong() {
                 { icon: <Package size={18} color="#d4a5a5" />, text: lang === 'fr' ? 'Livr\u00e9e en 2-5 jours' : '\u062a\u0648\u0635\u064a\u0644 \u0641\u064a 2-5 \u0623\u064a\u0627\u0645' },
                 { icon: <Sparkles size={18} color="#d4a5a5" />, text: lang === 'fr' ? 'Qualit\u00e9 Premium' : '\u062c\u0648\u062f\u0629 \u0628\u0631\u064a\u0645\u064a\u0648\u0645' },
               ].map((badge, i) => (
-                <div key={i} className="flex items-center gap-2 p-3 rounded-lg" style={{ backgroundColor: '#faf6f4' }}>
-                  {badge.icon}<span className="text-xs font-medium" style={{ color: '#666' }}>{badge.text}</span>
+                <div key={i} className="flex items-center gap-2 p-3 rounded-lg" style={{ backgroundColor: 'var(--tb-bg)' }}>
+                  {badge.icon}<span className="text-xs font-medium" style={{ color: 'var(--tb-text-secondary)' }}>{badge.text}</span>
                 </div>
               ))}
             </div>
@@ -604,12 +655,12 @@ export default function PerruquesMiLong() {
 
             {/* Product Info */}
             <div className="mb-6">
-              <h3 className="text-sm font-semibold mb-3" style={{ color: '#333' }}>{t.info}</h3>
+              <h3 className="text-sm font-semibold mb-3" style={{ color: 'var(--tb-text)' }}>{t.info}</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
                 {specs.map((s, i) => (
-                  <div key={i} className="flex justify-between py-1.5" style={{ borderBottom: '1px solid #f0e8e4' }}>
+                  <div key={i} className="flex justify-between py-1.5" style={{ borderBottom: '1px solid var(--tb-surface)' }}>
                     <span className="text-xs" style={{ color: '#888' }}>{s.label}</span>
-                    <span className="text-xs font-medium" style={{ color: '#333' }}>{s.value}</span>
+                    <span className="text-xs font-medium" style={{ color: 'var(--tb-text)' }}>{s.value}</span>
                   </div>
                 ))}
               </div>
@@ -617,20 +668,20 @@ export default function PerruquesMiLong() {
 
             {/* Description */}
             <div className="mb-6">
-              <h3 className="text-sm font-semibold mb-3" style={{ color: '#333' }}>{t.descTitle}</h3>
+              <h3 className="text-sm font-semibold mb-3" style={{ color: 'var(--tb-text)' }}>{t.descTitle}</h3>
               <div className="space-y-2">
-                {descBlocks.map((block, i) => <p key={i} className="text-sm leading-relaxed" style={{ color: '#666' }}>{block}</p>)}
+                {descBlocks.map((block, i) => <p key={i} className="text-sm leading-relaxed" style={{ color: 'var(--tb-text-secondary)' }}>{block}</p>)}
               </div>
             </div>
 
             {/* AI Summary */}
-            <div className="p-4 rounded-xl" style={{ backgroundColor: '#faf6f4', border: '1px solid #f0e8e4' }}>
-              <h3 className="text-sm font-semibold mb-3 flex items-center gap-2" style={{ color: '#333' }}>
+            <div className="p-4 rounded-xl" style={{ backgroundColor: 'var(--tb-bg)', border: '1px solid var(--tb-surface)' }}>
+              <h3 className="text-sm font-semibold mb-3 flex items-center gap-2" style={{ color: 'var(--tb-text)' }}>
                 <Sparkles size={16} color="#d4a5a5" /> {t.aiTitle}
               </h3>
               <ul className="space-y-2">
                 {aiItems.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm" style={{ color: '#666' }}>
+                  <li key={i} className="flex items-start gap-2 text-sm" style={{ color: 'var(--tb-text-secondary)' }}>
                     <Check size={14} color="#4a9b5e" style={{ flexShrink: 0, marginTop: '3px' }} />
                     {item}
                   </li>

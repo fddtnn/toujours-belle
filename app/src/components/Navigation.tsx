@@ -52,7 +52,7 @@ const cheveuxSubmenu: CheveuxItem[] = [
       { fr: 'Carré Long', ar: 'كاريه طويل', href: '/perruques' },
       { fr: 'Mi-Long', ar: 'متوسط الطول', href: '/perruques-mi-long' },
       { fr: 'Long', ar: 'طويل', href: '/perruques-long' },
-      { fr: 'Extra Long', ar: 'طويل جداً', href: '/perruques' },
+      { fr: 'Extra Long', ar: 'طويل جداً', href: '/perruques-extra-long' },
     ],
   },
   {

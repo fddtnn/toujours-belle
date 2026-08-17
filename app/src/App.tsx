@@ -13,6 +13,7 @@ import TrustBar from './components/TrustBar';
 import Navigation from './components/Navigation';
 import CartDrawer from './components/CartDrawer';
 import WhatsAppButton from './components/WhatsAppButton';
+import PageControls from './components/PageControls';
 import BackToTop from './components/BackToTop';
 import Hero from './sections/Hero';
 import FeaturedProducts from './components/FeaturedProducts';
@@ -38,6 +39,7 @@ import EGiftCards from './pages/EGiftCards';
 import Perruques from './pages/Perruques';
 import PerruquesMiLong from './pages/PerruquesMiLong';
 import PerruquesLong from './pages/PerruquesLong';
+import PerruquesExtraLong from './pages/PerruquesExtraLong';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -114,9 +116,11 @@ export default function App() {
         <Route path="/perruques" element={<Perruques />} />
         <Route path="/perruques-mi-long" element={<PerruquesMiLong />} />
         <Route path="/perruques-long" element={<PerruquesLong />} />
+        <Route path="/perruques-extra-long" element={<PerruquesExtraLong />} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <PageControls />
       <WhatsAppButton />
     </LanguageProvider>
     </ThemeProvider>

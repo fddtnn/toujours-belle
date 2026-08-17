@@ -245,17 +245,17 @@ export default function Perruques() {
   /* ───── GRID VIEW ───── */
   if (!selectedProduct) {
     return (
-      <div style={{ backgroundColor: '#faf6f4', fontFamily: "'Inter', sans-serif", minHeight: '100vh' }}>
+      <div style={{ backgroundColor: 'var(--tb-bg)', fontFamily: "'Inter', sans-serif", minHeight: '100vh' }}>
         {/* Header */}
         <div className="max-w-7xl mx-auto px-3 sm:px-6 pt-24 sm:pt-28 pb-3 sm:pb-4">
-          <div className="flex items-center gap-2 text-xs mb-2 sm:mb-4" style={{ color: '#8a8a8a' }}>
+          <div className="flex items-center gap-2 text-xs mb-2 sm:mb-4" style={{ color: 'var(--tb-text-muted)' }}>
             <button onClick={() => navigate('/')} className="hover:text-[#d4a5a5] transition-colors">Home</button>
             <ChevronRight size={12} />
             <span>Cheveux</span>
             <ChevronRight size={12} />
             <span>Perruques</span>
             <ChevronRight size={12} />
-            <span style={{ color: '#333' }}>Long</span>
+            <span style={{ color: 'var(--tb-text)' }}>Long</span>
           </div>
           <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#d4a5a5', marginBottom: '8px' }}>
             {lang === 'fr' ? 'COLLECTION PERRUQUES LONGUES \u2014 124 MOD\u00c8LES' : '\u0645جموعة الباروكات الطويلة \u2014 124 موديل'}
@@ -287,19 +287,19 @@ export default function Perruques() {
                       <div
                         key={q.id}
                         className="group cursor-pointer rounded-xl overflow-hidden"
-                        style={{ backgroundColor: '#ffffff', transition: 'all 0.4s ease' }}
+                        style={{ backgroundColor: 'var(--tb-card)', transition: 'all 0.4s ease' }}
                         onClick={() => openProduct(q.id)}
                         onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.08)'; }}
                         onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
                       >
-                        <div className="relative overflow-hidden flex items-center justify-center" style={{ aspectRatio: '1/1.15', backgroundColor: '#f5ece8' }}>
-                          <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md text-xs font-semibold z-10" style={{ backgroundColor: 'rgba(255,255,255,0.85)', color: '#555', fontSize: '10px', letterSpacing: '0.05em' }}>
+                        <div className="relative overflow-hidden flex items-center justify-center" style={{ aspectRatio: '1/1.15', backgroundColor: 'var(--tb-surface)' }}>
+                          <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md text-xs font-semibold z-10" style={{ backgroundColor: 'rgba(255,255,255,0.85)', color: 'var(--tb-text-secondary)', fontSize: '10px', letterSpacing: '0.05em' }}>
                             {String(products.indexOf(q) + 1).padStart(2, '0')}
                           </span>
                           <img src={q.image} alt={lang === 'fr' ? q.nameFr : q.nameAr} className="w-full h-full object-cover sm:object-contain transition-transform duration-500 group-hover:scale-105" loading="lazy" />
                         </div>
                         <div className="p-2 sm:p-4">
-                          <h3 className="text-xs sm:text-sm font-medium leading-snug mb-1 sm:mb-2" style={{ fontFamily: "'Inter', sans-serif", color: '#1a1a1a', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', lineHeight: 1.4 }}>
+                          <h3 className="text-xs sm:text-sm font-medium leading-snug mb-1 sm:mb-2" style={{ fontFamily: "'Inter', sans-serif", color: 'var(--tb-text)', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', lineHeight: 1.4 }}>
                             {lang === 'fr' ? q.nameFr : q.nameAr}
                           </h3>
                           <div className="flex items-center justify-between mb-1 sm:mb-2">
@@ -308,7 +308,7 @@ export default function Perruques() {
                               <span className="hidden sm:inline">{lang === 'fr' ? `\u00c0 partir de ${q.basePrice} TND` : `\u0627\u0628\u062a\u062f\u0627\u0621\u064b \u0645\u0646 ${q.basePrice} \u062f.\u062a`}</span>
                             </span>
                           </div>
-                          <button className="w-full py-1.5 sm:py-2.5 rounded-lg transition-colors duration-300" style={{ backgroundColor: '#3a1a2a', color: '#ffffff', fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '10px', letterSpacing: '0.04em', border: 'none', cursor: 'pointer' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#d4a5a5'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#3a1a2a'; }}>
+                          <button className="w-full py-1.5 sm:py-2.5 rounded-lg transition-colors duration-300" style={{ backgroundColor: '#3a1a2a', color: 'var(--tb-card)', fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '10px', letterSpacing: '0.04em', border: 'none', cursor: 'pointer' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#d4a5a5'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#3a1a2a'; }}>
                             <span className="sm:hidden">{lang === 'fr' ? 'Voir +' : '\u0639\u0631\u0636 \u0627\u0644\u0645\u0632\u064a\u062f'}</span>
                             <span className="hidden sm:inline">{lang === 'fr' ? 'Voir le Produit' : '\u0639\u0631\u0636 \u0627\u0644\u0645\u0646\u062a\u062c'}</span>
                           </button>
@@ -399,17 +399,17 @@ export default function Perruques() {
   const tags = ['Premium Quality', lang === 'fr' ? `Couleur ${catLabel}` : `\u0644\u0648\u0646 ${catLabel}`, 'Best Seller'];
 
   return (
-    <div style={{ backgroundColor: '#ffffff', fontFamily: "'Inter', sans-serif", minHeight: '100vh' }}>
+    <div style={{ backgroundColor: 'var(--tb-card)', fontFamily: "'Inter', sans-serif", minHeight: '100vh' }}>
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-28 pb-2">
-        <div className="flex items-center gap-2 text-xs flex-wrap" style={{ color: '#8a8a8a' }}>
+        <div className="flex items-center gap-2 text-xs flex-wrap" style={{ color: 'var(--tb-text-muted)' }}>
           <button onClick={() => navigate('/')} className="hover:text-[#d4a5a5] transition-colors">Home</button>
           <ChevronRight size={12} />
           <span>Cheveux</span>
           <ChevronRight size={12} />
           <button onClick={backToGrid} className="hover:text-[#d4a5a5] transition-colors">Perruques</button>
           <ChevronRight size={12} />
-          <span style={{ color: '#333' }}>{name}</span>
+          <span style={{ color: 'var(--tb-text)' }}>{name}</span>
         </div>
       </div>
 
@@ -425,9 +425,9 @@ export default function Perruques() {
                 </button>
               ))}
             </div>
-            <div ref={imgRef} className="relative flex-1 overflow-hidden bg-gray-50 cursor-crosshair" style={{ minHeight: '400px', maxHeight: '600px' }} onMouseEnter={() => setZoom(true)} onMouseLeave={() => setZoom(false)} onMouseMove={handleMouseMove}>
+            <div ref={imgRef} className="relative flex-1 overflow-hidden cursor-crosshair" style={{ minHeight: '400px', maxHeight: '600px' }} onMouseEnter={() => setZoom(true)} onMouseLeave={() => setZoom(false)} onMouseMove={handleMouseMove}>
               <img src={images[mainIdx].src} alt={images[mainIdx].alt} className="w-full h-full object-contain transition-transform duration-300" style={{ transform: zoom ? `scale(2)` : 'scale(1)', transformOrigin: `${zoomPos.x * 100}% ${zoomPos.y * 100}%` }} />
-              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(0,0,0,0.6)', color: '#fff' }}>
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(0,0,0,0.6)', color: 'var(--tb-card)' }}>
                 {mainIdx + 1} / {images.length}
               </div>
             </div>
@@ -438,8 +438,8 @@ export default function Perruques() {
             <button onClick={backToGrid} className="flex items-center gap-1 text-xs mb-4 hover:text-[#d4a5a5] transition-colors" style={{ color: '#888' }}>
               <ArrowLeft size={14} /> {t.back}
             </button>
-            <h1 className="text-xl sm:text-2xl font-semibold leading-snug mb-2" style={{ color: '#1a1a1a', fontWeight: 600 }}>{name}</h1>
-            <p className="text-sm leading-relaxed mb-3" style={{ color: '#666' }}>
+            <h1 className="text-xl sm:text-2xl font-semibold leading-snug mb-2" style={{ color: 'var(--tb-text)', fontWeight: 600 }}>{name}</h1>
+            <p className="text-sm leading-relaxed mb-3" style={{ color: 'var(--tb-text-secondary)' }}>
               {lang === 'fr'
                 ? `Perruque Lace Front de couleur ${catLabel.toLowerCase()} aux longueurs ondul\u00e9es volumineuses. Cheveux humains Remy premium pour un r\u00e9sultat naturel, doux et brillant.`
                 : `\u0628\u0627\u0631\u0648\u0643\u0629 \u0644\u064a\u0633 \u0641\u0631\u0648\u0646\u062a \u0628\u0627\u0644\u0644\u0648\u0646 ${catLabel} \u0628\u0623\u0637\u0648\u0627\u0644 \u0645\u0645\u0648\u062c\u0629 \u0643\u062b\u064a\u0641\u0629. \u0634\u0639\u0631 \u0628\u0634\u0631\u064a \u0631\u064a\u0645\u064a \u0628\u0631\u064a\u0645\u064a\u0648\u0645 \u0644\u0646\u062a\u064a\u062c\u0629 \u0637\u0628\u064a\u0639\u064a\u0629 \u0648\u0646\u0627\u0639\u0645\u0629 \u0648\u0644\u0627\u0645\u0639\u0629.`}
@@ -447,19 +447,19 @@ export default function Perruques() {
             <div className="flex items-center gap-3 mb-3 flex-wrap">
               <div className="flex items-center gap-1">
                 {[1,2,3,4,5].map(s => <Star key={s} size={16} fill={s <= Math.floor(selectedProduct.rating) ? "#f4c430" : "none"} color="#f4c430" />)}
-                <span className="text-sm font-semibold ml-1" style={{ color: '#333' }}>{selectedProduct.rating}</span>
+                <span className="text-sm font-semibold ml-1" style={{ color: 'var(--tb-text)' }}>{selectedProduct.rating}</span>
               </div>
               <span className="text-sm" style={{ color: '#888' }}>{selectedProduct.reviews} {lang === 'fr' ? 'Avis' : '\u062a\u0642\u064a\u064a\u0645'}</span>
               <span className="text-sm" style={{ color: '#888' }}>|</span>
               <span className="text-sm font-medium" style={{ color: '#c44' }}>{selectedProduct.sold} {lang === 'fr' ? 'vendus' : '\u0645\u0628\u0627\u0639'}</span>
             </div>
             <div className="flex gap-2 mb-4 flex-wrap">
-              {tags.map(tag => <span key={tag} className="px-3 py-1 rounded-full text-xs font-medium" style={{ backgroundColor: '#f0e8e4', color: '#8a6b5d' }}>{tag}</span>)}
+              {tags.map(tag => <span key={tag} className="px-3 py-1 rounded-full text-xs font-medium" style={{ backgroundColor: 'var(--tb-surface)', color: 'var(--tb-tint-text)' }}>{tag}</span>)}
             </div>
             <div className="flex items-end gap-3 mb-4 flex-wrap">
               <span className="text-3xl font-bold" style={{ color: '#c44' }}>TND {price.toFixed(2)}</span>
               <span className="text-lg line-through" style={{ color: '#aaa' }}>TND {original.toFixed(2)}</span>
-              <span className="px-2 py-0.5 rounded text-xs font-bold" style={{ backgroundColor: '#c44', color: '#fff' }}>-{discount}%</span>
+              <span className="px-2 py-0.5 rounded text-xs font-bold" style={{ backgroundColor: '#c44', color: 'var(--tb-card)' }}>-{discount}%</span>
             </div>
             <div className="flex items-center gap-2 p-3 rounded-lg mb-5" style={{ backgroundColor: '#fff0f0', border: '1px solid #ffd0d0' }}>
               <Zap size={16} color="#c44" />
@@ -468,49 +468,49 @@ export default function Perruques() {
 
             {/* Variant Selectors */}
             <div className="mb-4">
-              <p className="text-sm font-medium mb-2" style={{ color: '#333' }}>{t.length}: <span style={{ color: '#888' }}>{selLength}</span></p>
+              <p className="text-sm font-medium mb-2" style={{ color: 'var(--tb-text)' }}>{t.length}: <span style={{ color: '#888' }}>{selLength}</span></p>
               <div className="flex gap-2 flex-wrap">
-                {lengths.map(l => <button key={l} onClick={() => setSelLength(l)} className="px-3 py-2 text-xs border transition-all" style={{ borderColor: selLength === l ? '#d4a5a5' : '#ddd', backgroundColor: selLength === l ? '#faf0ec' : '#fff', color: selLength === l ? '#8a6b5d' : '#333', fontWeight: selLength === l ? 500 : 400 }}>{l}</button>)}
+                {lengths.map(l => <button key={l} onClick={() => setSelLength(l)} className="px-3 py-2 text-xs border transition-all" style={{ borderColor: selLength === l ? '#d4a5a5' : 'var(--tb-border)', backgroundColor: selLength === l ? 'var(--tb-tint)' : 'var(--tb-card)', color: selLength === l ? 'var(--tb-tint-text)' : 'var(--tb-text)', fontWeight: selLength === l ? 500 : 400 }}>{l}</button>)}
               </div>
             </div>
             <div className="mb-4">
-              <p className="text-sm font-medium mb-2" style={{ color: '#333' }}>{t.density}: <span style={{ color: '#888' }}>{selDensity}</span></p>
+              <p className="text-sm font-medium mb-2" style={{ color: 'var(--tb-text)' }}>{t.density}: <span style={{ color: '#888' }}>{selDensity}</span></p>
               <div className="flex gap-2 flex-wrap">
-                {densities.map(d => <button key={d} onClick={() => setSelDensity(d)} className="px-3 py-2 text-xs border transition-all" style={{ borderColor: selDensity === d ? '#d4a5a5' : '#ddd', backgroundColor: selDensity === d ? '#faf0ec' : '#fff', color: selDensity === d ? '#8a6b5d' : '#333', fontWeight: selDensity === d ? 500 : 400 }}>{d}</button>)}
+                {densities.map(d => <button key={d} onClick={() => setSelDensity(d)} className="px-3 py-2 text-xs border transition-all" style={{ borderColor: selDensity === d ? '#d4a5a5' : 'var(--tb-border)', backgroundColor: selDensity === d ? 'var(--tb-tint)' : 'var(--tb-card)', color: selDensity === d ? 'var(--tb-tint-text)' : 'var(--tb-text)', fontWeight: selDensity === d ? 500 : 400 }}>{d}</button>)}
               </div>
             </div>
             <div className="mb-4">
-              <p className="text-sm font-medium mb-2" style={{ color: '#333' }}>{t.hairType}: <span style={{ color: '#888' }}>{selHairType}</span></p>
+              <p className="text-sm font-medium mb-2" style={{ color: 'var(--tb-text)' }}>{t.hairType}: <span style={{ color: '#888' }}>{selHairType}</span></p>
               <div className="flex gap-2 flex-wrap">
-                {hairTypes.map(h => <button key={h} onClick={() => setSelHairType(h)} className="px-4 py-2 text-sm border transition-all" style={{ borderColor: selHairType === h ? '#d4a5a5' : '#ddd', backgroundColor: selHairType === h ? '#faf0ec' : '#fff', color: selHairType === h ? '#8a6b5d' : '#333', fontWeight: selHairType === h ? 500 : 400 }}>{h}</button>)}
+                {hairTypes.map(h => <button key={h} onClick={() => setSelHairType(h)} className="px-4 py-2 text-sm border transition-all" style={{ borderColor: selHairType === h ? '#d4a5a5' : 'var(--tb-border)', backgroundColor: selHairType === h ? 'var(--tb-tint)' : 'var(--tb-card)', color: selHairType === h ? 'var(--tb-tint-text)' : 'var(--tb-text)', fontWeight: selHairType === h ? 500 : 400 }}>{h}</button>)}
               </div>
             </div>
             <div className="mb-4">
-              <p className="text-sm font-medium mb-2" style={{ color: '#333' }}>{t.capType}: <span style={{ color: '#888' }}>{selCap}</span></p>
+              <p className="text-sm font-medium mb-2" style={{ color: 'var(--tb-text)' }}>{t.capType}: <span style={{ color: '#888' }}>{selCap}</span></p>
               <div className="flex gap-2 flex-wrap">
-                {wigCaps.map(c => <button key={c} onClick={() => setSelCap(c)} className="px-3 py-2 text-xs border transition-all" style={{ borderColor: selCap === c ? '#d4a5a5' : '#ddd', backgroundColor: selCap === c ? '#faf0ec' : '#fff', color: selCap === c ? '#8a6b5d' : '#333', fontWeight: selCap === c ? 500 : 400 }}>{c}</button>)}
+                {wigCaps.map(c => <button key={c} onClick={() => setSelCap(c)} className="px-3 py-2 text-xs border transition-all" style={{ borderColor: selCap === c ? '#d4a5a5' : 'var(--tb-border)', backgroundColor: selCap === c ? 'var(--tb-tint)' : 'var(--tb-card)', color: selCap === c ? 'var(--tb-tint-text)' : 'var(--tb-text)', fontWeight: selCap === c ? 500 : 400 }}>{c}</button>)}
               </div>
             </div>
             <div className="mb-5">
-              <p className="text-sm font-medium mb-2" style={{ color: '#333' }}>{t.wigSize}: <span style={{ color: '#888' }}>{selSize}</span></p>
+              <p className="text-sm font-medium mb-2" style={{ color: 'var(--tb-text)' }}>{t.wigSize}: <span style={{ color: '#888' }}>{selSize}</span></p>
               <div className="flex gap-2 flex-wrap">
-                {wigSizes.map(s => <button key={s} onClick={() => setSelSize(s)} className="px-4 py-2 text-sm border transition-all" style={{ borderColor: selSize === s ? '#d4a5a5' : '#ddd', backgroundColor: selSize === s ? '#faf0ec' : '#fff', color: selSize === s ? '#8a6b5d' : '#333', fontWeight: selSize === s ? 500 : 400 }}>{s}</button>)}
+                {wigSizes.map(s => <button key={s} onClick={() => setSelSize(s)} className="px-4 py-2 text-sm border transition-all" style={{ borderColor: selSize === s ? '#d4a5a5' : 'var(--tb-border)', backgroundColor: selSize === s ? 'var(--tb-tint)' : 'var(--tb-card)', color: selSize === s ? 'var(--tb-tint-text)' : 'var(--tb-text)', fontWeight: selSize === s ? 500 : 400 }}>{s}</button>)}
               </div>
             </div>
 
             {/* Quantity + Actions */}
             <div className="flex flex-col sm:flex-row gap-3 mb-6">
-              <div className="flex items-center border" style={{ borderColor: '#ddd' }}>
-                <button onClick={() => setQty(Math.max(1, qty - 1))} className="px-3 py-3 hover:bg-gray-50" style={{ color: '#333' }}><Minus size={16} /></button>
-                <span className="px-4 py-3 text-sm font-medium min-w-[48px] text-center" style={{ borderLeft: '1px solid #ddd', borderRight: '1px solid #ddd' }}>{qty}</span>
-                <button onClick={() => setQty(qty + 1)} className="px-3 py-3 hover:bg-gray-50" style={{ color: '#333' }}><Plus size={16} /></button>
+              <div className="flex items-center border" style={{ borderColor: 'var(--tb-border)' }}>
+                <button onClick={() => setQty(Math.max(1, qty - 1))} className="px-3 py-3 hover:" style={{ color: 'var(--tb-text)' }}><Minus size={16} /></button>
+                <span className="px-4 py-3 text-sm font-medium min-w-[48px] text-center" style={{ borderLeft: '1px solid var(--tb-border)', borderRight: '1px solid var(--tb-border)' }}>{qty}</span>
+                <button onClick={() => setQty(qty + 1)} className="px-3 py-3 hover:" style={{ color: 'var(--tb-text)' }}><Plus size={16} /></button>
               </div>
-              <button onClick={handleAdd} className="flex-1 flex items-center justify-center gap-2 py-3 text-sm font-medium transition-all hover:opacity-90" style={{ backgroundColor: added ? '#4a7c59' : '#c44', color: '#fff' }}>
+              <button onClick={handleAdd} className="flex-1 flex items-center justify-center gap-2 py-3 text-sm font-medium transition-all hover:opacity-90" style={{ backgroundColor: added ? '#4a7c59' : '#c44', color: 'var(--tb-card)' }}>
                 <ShoppingCart size={18} />
                 {added ? (lang === 'fr' ? 'Ajout\u00e9 !' : '\u062a\u0645\u062a \u0627\u0644\u0625\u0636\u0627\u0641\u0629!') : t.addCart}
               </button>
-              <button className="flex-1 flex items-center justify-center gap-2 py-3 text-sm font-medium border transition-all hover:bg-gray-50" style={{ borderColor: '#c44', color: '#c44' }}>{t.buyNow}</button>
-              <button className="p-3 border transition-all hover:bg-gray-50" style={{ borderColor: '#ddd', color: '#888' }}><Heart size={20} /></button>
+              <button className="flex-1 flex items-center justify-center gap-2 py-3 text-sm font-medium border transition-all hover:" style={{ borderColor: '#c44', color: '#c44' }}>{t.buyNow}</button>
+              <button className="p-3 border transition-all hover:" style={{ borderColor: 'var(--tb-border)', color: '#888' }}><Heart size={20} /></button>
             </div>
 
             {/* Trust */}
@@ -520,7 +520,7 @@ export default function Perruques() {
                 { icon: <Shield size={18} color="#d4a5a5" />, text: t.guarantee },
                 { icon: <Package size={18} color="#d4a5a5" />, text: `${selectedProduct.stock} ${t.stock}` },
               ].map((item, i) => (
-                <div key={i} className="flex flex-col items-center text-center gap-1.5 p-3 rounded-lg" style={{ backgroundColor: '#faf6f4' }}>
+                <div key={i} className="flex flex-col items-center text-center gap-1.5 p-3 rounded-lg" style={{ backgroundColor: 'var(--tb-bg)' }}>
                   {item.icon}
                   <span className="text-xs" style={{ color: '#5a5a5a' }}>{item.text}</span>
                 </div>
@@ -529,10 +529,10 @@ export default function Perruques() {
 
             {/* Description */}
             <div className="mb-6">
-              <h3 className="text-base font-semibold mb-3" style={{ color: '#1a1a1a' }}>{t.descTitle}</h3>
-              <div className="p-4 rounded-lg" style={{ backgroundColor: '#faf6f4', border: '1px solid #f0e8e8' }}>
+              <h3 className="text-base font-semibold mb-3" style={{ color: 'var(--tb-text)' }}>{t.descTitle}</h3>
+              <div className="p-4 rounded-lg" style={{ backgroundColor: 'var(--tb-bg)', border: '1px solid #f0e8e8' }}>
                 {descBlocks.map((block, i) => (
-                  <p key={i} className="text-sm leading-relaxed mb-3" style={{ color: '#555' }}>
+                  <p key={i} className="text-sm leading-relaxed mb-3" style={{ color: 'var(--tb-text-secondary)' }}>
                     {i === 0 ? <strong>{block}</strong> : block}
                   </p>
                 ))}
@@ -549,12 +549,12 @@ export default function Perruques() {
 
             {/* Product Specs */}
             <div className="mb-5">
-              <h3 className="text-base font-semibold mb-3" style={{ color: '#1a1a1a' }}>{t.info}</h3>
+              <h3 className="text-base font-semibold mb-3" style={{ color: 'var(--tb-text)' }}>{t.info}</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {specs.map((s, i) => (
                   <div key={i} className="flex gap-2 text-sm py-1">
                     <span style={{ color: '#888' }}>{s.label}:</span>
-                    <span style={{ color: '#333', fontWeight: 500 }}>{s.value}</span>
+                    <span style={{ color: 'var(--tb-text)', fontWeight: 500 }}>{s.value}</span>
                   </div>
                 ))}
               </div>
@@ -564,7 +564,7 @@ export default function Perruques() {
             <div className="p-4 rounded-lg mb-6" style={{ backgroundColor: '#f8f4f0', border: '1px solid #e8e0e0' }}>
               <div className="flex items-center gap-2 mb-3">
                 <Sparkles size={16} color="#d4a5a5" />
-                <h3 className="text-sm font-semibold" style={{ color: '#1a1a1a' }}>{t.aiTitle}</h3>
+                <h3 className="text-sm font-semibold" style={{ color: 'var(--tb-text)' }}>{t.aiTitle}</h3>
               </div>
               <ul className="space-y-2">
                 {aiItems.map((item, i) => (
@@ -586,16 +586,16 @@ export default function Perruques() {
       </div>
 
       {/* Sticky Mobile Add to Cart */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 p-3 flex gap-2" style={{ backgroundColor: '#fff', borderTop: '1px solid #eee', zIndex: 50 }}>
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 p-3 flex gap-2" style={{ backgroundColor: 'var(--tb-card)', borderTop: '1px solid #eee', zIndex: 50 }}>
         <button className="flex-1 py-3 border text-sm font-medium" style={{ borderColor: '#c44', color: '#c44' }}>{t.buyNow}</button>
-        <button onClick={handleAdd} className="flex-1 py-3 text-sm font-medium transition-all" style={{ backgroundColor: added ? '#4a7c59' : '#c44', color: '#fff' }}>
+        <button onClick={handleAdd} className="flex-1 py-3 text-sm font-medium transition-all" style={{ backgroundColor: added ? '#4a7c59' : '#c44', color: 'var(--tb-card)' }}>
           {added ? '\u2713' : t.addCart}
         </button>
       </div>
 
       {/* Back link */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-24 lg:pb-8">
-        <button onClick={backToGrid} className="text-sm hover:text-[#d4a5a5] transition-colors" style={{ color: '#8a8a8a', textDecoration: 'underline' }}>
+        <button onClick={backToGrid} className="text-sm hover:text-[#d4a5a5] transition-colors" style={{ color: 'var(--tb-text-muted)', textDecoration: 'underline' }}>
           &larr; {t.back}
         </button>
       </div>

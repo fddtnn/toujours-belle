@@ -10,14 +10,14 @@ export default function Privacy() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <div style={{ backgroundColor: '#ffffff', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: 'var(--tb-card)', minHeight: '100vh' }}>
       {/* Header */}
-      <div style={{ backgroundColor: '#faf6f4', padding: '120px 24px 60px' }}>
+      <div style={{ backgroundColor: 'var(--tb-bg)', padding: '120px 24px 60px' }}>
         <div className="max-w-4xl mx-auto text-center">
-          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 500, color: '#1a1a1a', marginBottom: '12px' }}>
+          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
             {lang === 'fr' ? 'Politique de Confidentialité' : 'سياسة الخصوصية'}
           </h1>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '14px', color: '#8a8a8a' }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '14px', color: 'var(--tb-text-muted)' }}>
             www.toujours-belle.com
           </p>
         </div>
@@ -27,7 +27,7 @@ export default function Privacy() {
       <div className="max-w-4xl mx-auto px-6 py-16" style={{ fontFamily: "'Inter', sans-serif", fontSize: '15px', lineHeight: 1.8, color: '#4a4a4a' }}>
         <div className="space-y-8">
           <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: '#1a1a1a', marginBottom: '12px' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
               Why you should read this policy
             </h2>
             <p>
@@ -39,7 +39,7 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: '#1a1a1a', marginBottom: '12px' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
               How to contact us
             </h2>
             <p>
@@ -52,10 +52,10 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: '#1a1a1a', marginBottom: '12px' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
               Personal data we may collect about you
             </h2>
-            <h3 style={{ fontWeight: 600, color: '#1a1a1a', marginBottom: '8px', marginTop: '16px' }}>Information that you provide</h3>
+            <h3 style={{ fontWeight: 600, color: 'var(--tb-text)', marginBottom: '8px', marginTop: '16px' }}>Information that you provide</h3>
             <p>
               Personal information about you (such as your name, email address, phone number, address) will be obtained, whenever you complete forms on the Website – in particular, when you complete an order.
             </p>
@@ -63,12 +63,12 @@ export default function Privacy() {
               We will also obtain personal information you provide when you send feedback, post material, contact us for any reason and by any medium, sign up to a service, make purchases through the website, share information via the Website's social media functions, enter a competition, complete a survey or report a problem with the Website.
             </p>
 
-            <h3 style={{ fontWeight: 600, color: '#1a1a1a', marginBottom: '8px', marginTop: '16px' }}>Personal Information about other individuals</h3>
+            <h3 style={{ fontWeight: 600, color: 'var(--tb-text)', marginBottom: '8px', marginTop: '16px' }}>Personal Information about other individuals</h3>
             <p>
               If you give us information on behalf of someone else, you confirm that the other person has appointed you to act on his/her behalf and has agreed that you can give consent on his/her behalf to the processing of his/her data.
             </p>
 
-            <h3 style={{ fontWeight: 600, color: '#1a1a1a', marginBottom: '8px', marginTop: '16px' }}>Information that will be collected automatically</h3>
+            <h3 style={{ fontWeight: 600, color: 'var(--tb-text)', marginBottom: '8px', marginTop: '16px' }}>Information that will be collected automatically</h3>
             <p>
               <strong>Cookies:</strong> We may monitor your use of the Website through the use of cookies and similar tracking devices. For example, we may monitor how many times you use the Website, which pages you go to and traffic data. This information helps to build a profile of users to the Website. Some of this data will be aggregated or statistical, which means that we will not be able to identify you individually.
             </p>
@@ -81,7 +81,7 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: '#1a1a1a', marginBottom: '12px' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
               How your personal data will be used
             </h2>
             <p>We will use your personal data for the following purposes:</p>
@@ -100,7 +100,7 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: '#1a1a1a', marginBottom: '12px' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
               Marketing and opting out
             </h2>
             <p>
@@ -112,7 +112,7 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: '#1a1a1a', marginBottom: '12px' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
               Disclosure of your personal data
             </h2>
             <p>We may disclose your personal data to:</p>
@@ -125,7 +125,7 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: '#1a1a1a', marginBottom: '12px' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
               Keeping your data secure
             </h2>
             <p>
@@ -142,7 +142,7 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: '#1a1a1a', marginBottom: '12px' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
               Your Consent and Rights of Access
             </h2>
             <p>
@@ -157,7 +157,7 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: '#1a1a1a', marginBottom: '12px' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
               How long we will store your data
             </h2>
             <p>
@@ -171,7 +171,7 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: '#1a1a1a', marginBottom: '12px' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
               Children
             </h2>
             <p>
@@ -180,7 +180,7 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: '#1a1a1a', marginBottom: '12px' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
               Use of cookies
             </h2>
             <p>
@@ -197,7 +197,7 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: '#1a1a1a', marginBottom: '12px' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
               Changes to this privacy policy
             </h2>
             <p>
@@ -206,7 +206,7 @@ export default function Privacy() {
           </section>
 
           <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: '#1a1a1a', marginBottom: '12px' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
               Data Protection Supervisory Authority
             </h2>
             <p>
@@ -216,11 +216,11 @@ export default function Privacy() {
         </div>
 
         {/* Back link */}
-        <div className="mt-12 pt-6" style={{ borderTop: '1px solid #f0e0e0' }}>
+        <div className="mt-12 pt-6" style={{ borderTop: '1px solid var(--tb-border)' }}>
           <button
             onClick={() => navigate('/')}
             className="text-sm hover:text-[#d4a5a5] transition-colors duration-300"
-            style={{ fontFamily: "'Inter', sans-serif", color: '#8a8a8a', textDecoration: 'underline' }}
+            style={{ fontFamily: "'Inter', sans-serif", color: 'var(--tb-text-muted)', textDecoration: 'underline' }}
           >
             {lang === 'fr' ? "← Retour à l'accueil" : 'العودة إلى الرئيسية →'}
           </button>
