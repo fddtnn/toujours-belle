@@ -316,16 +316,24 @@ export default function VirtualHairTryOn() {
     landmarksAtRef.current = 0;
   }, []);
 
-  /* ─── Start render loop when mode changes ─── */
+  /* ─── Own the render loop ───
+     This effect is the single owner of the animation frame. Its cleanup runs on
+     every re-render (renderLoop's identity changes with mode/isStreaming), so
+     it has to restart the loop for *both* modes — previously it only restarted
+     for uploads, which meant the loop startCamera kicked off was cancelled by
+     the next render and never came back, and the overlay never drew. */
   useEffect(() => {
-    if (mode === 'upload' && hasUpload) {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(renderLoop);
-    }
+    const active =
+      (mode === 'camera' && isStreaming) || (mode === 'upload' && hasUpload);
+    if (!active) return;
+
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(renderLoop);
+
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [mode, hasUpload, renderLoop]);
+  }, [mode, hasUpload, isStreaming, renderLoop]);
 
   /* ─── Photo Upload ─── */
   const handleUpload = useCallback(async (file: File) => {
