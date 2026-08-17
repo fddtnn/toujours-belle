@@ -1,0 +1,28 @@
+# Render blueprint: one web service running the Hono server, which also serves
+# the built SPA. Secrets are NOT stored here - set them in the Render dashboard
+# (or `sync: false` prompts for them on first deploy).
+services:
+  - type: web
+    name: toujours-belle
+    runtime: node
+    plan: free
+    region: frankfurt
+    rootDir: app
+    buildCommand: npm ci && npm run build
+    startCommand: node dist/boot.js
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: APP_ID
+        sync: false
+      - key: APP_SECRET
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: KIMI_AUTH_URL
+        sync: false
+      - key: KIMI_OPEN_URL
+        sync: false
+      - key: OWNER_UNION_ID
+        sync: false
