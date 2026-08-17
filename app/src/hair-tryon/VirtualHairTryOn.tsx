@@ -201,8 +201,17 @@ export default function VirtualHairTryOn() {
     const drawX = cx - dw / 2;
     const drawY = foreheadY - faceH * 0.42 - dh * 0.06 + style.offsetY * dh;
 
-    // Full head tilt, measured in the same (already mirrored) space as we draw.
-    const tilt = Math.atan2(py(rightT) - py(leftT), px(rightT) - px(leftT));
+    // Head tilt, measured in the same (already mirrored) space as we draw.
+    // Mirroring swaps which temple appears on the left, so the vector has to be
+    // taken from the on-screen-left temple to the on-screen-right one. Using the
+    // raw order here pointed the vector backwards and atan2 returned ~180deg,
+    // which rotated the whole wig upside down.
+    const screenLeft = mirrored ? rightT : leftT;
+    const screenRight = mirrored ? leftT : rightT;
+    const tilt = Math.atan2(
+      py(screenRight) - py(screenLeft),
+      px(screenRight) - px(screenLeft),
+    );
 
     ctx.save();
     ctx.translate(cx, foreheadY);
