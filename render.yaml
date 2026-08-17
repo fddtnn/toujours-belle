@@ -14,11 +14,20 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      # required
+      - key: DATABASE_URL
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true
+      # email sign-in
+      - key: RESEND_API_KEY
+        sync: false
+      - key: MAIL_FROM
+        sync: false
+      # optional: set all four to re-enable "Sign in with Kimi"
       - key: APP_ID
         sync: false
       - key: APP_SECRET
-        sync: false
-      - key: DATABASE_URL
         sync: false
       - key: KIMI_AUTH_URL
         sync: false

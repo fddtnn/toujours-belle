@@ -31,20 +31,36 @@ needed. There is also an `app/Dockerfile` if you'd rather deploy a container
 
 ### Required secrets
 
-The server **refuses to boot in production** unless all of these are set
-(see `app/api/lib/env.ts`):
+Only two are required to boot (see `app/api/lib/env.ts`):
 
 | Variable | What it is | Where it comes from |
 |---|---|---|
-| `APP_ID` | Kimi application id | Kimi platform |
-| `APP_SECRET` | Kimi application secret, signs JWTs | Kimi platform |
-| `KIMI_AUTH_URL` | Kimi OAuth server URL | Kimi platform |
-| `KIMI_OPEN_URL` | Kimi Open Platform URL | Kimi platform |
 | `DATABASE_URL` | `mysql://user:pass@host:port/db` | your MySQL host |
-| `OWNER_UNION_ID` | optional — this user becomes `admin` on first login | Kimi profile |
+| `SESSION_SECRET` | long random string, signs session cookies | `openssl rand -base64 32` |
 
-The app id recorded in `app/.backend-features.json` is
-`19e4cfad-fe22-803e-8000-0000d7cf4697`.
+### Email sign-in
+
+Sign-in works by emailing a 6-digit code. Delivery goes through
+[Resend](https://resend.com):
+
+| Variable | Notes |
+|---|---|
+| `RESEND_API_KEY` | from <https://resend.com/api-keys>, starts with `re_` |
+| `MAIL_FROM` | e.g. `Toujours Belle <bonjour@toujours-belle.com>` |
+
+Without `RESEND_API_KEY` the server prints the code to its own console instead
+of emailing it, so local development needs no account.
+
+`MAIL_FROM` defaults to Resend's shared `onboarding@resend.dev`, which only
+delivers to the email address that owns the Resend account. To email real
+customers you must verify your own domain in Resend and send from it.
+
+### Kimi OAuth — optional
+
+`APP_ID`, `APP_SECRET`, `KIMI_AUTH_URL`, `KIMI_OPEN_URL` are all optional now.
+Leave them unset and the app runs with email sign-in only; set all four and the
+"Sign in with Kimi" path switches back on. The app id recorded in
+`app/.backend-features.json` is `19e4cfad-fe22-803e-8000-0000d7cf4697`.
 
 ### Database
 

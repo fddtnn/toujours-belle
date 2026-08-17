@@ -1,11 +1,20 @@
 import { z } from "zod";
+import { randomInt } from "node:crypto";
 import { createRouter, publicQuery } from "./middleware";
 import { getDb } from "./queries/connection";
 import { otpCodes, localUsers } from "@db/schema";
 import { eq, and, gt } from "drizzle-orm";
+import { sendOtpEmail } from "./lib/mailer";
+import {
+  createSessionToken,
+  setSessionCookie,
+  clearSessionCookie,
+  getSessionUserId,
+} from "./lib/session";
 
 function generateOtp(): string {
-  return Math.floor(100000 + Math.random() * 900000).toString();
+  // crypto RNG - Math.random() is predictable and this code grants account access
+  return randomInt(0, 1_000_000).toString().padStart(6, "0");
 }
 
 export const otpRouter = createRouter({
@@ -34,9 +43,7 @@ export const otpRouter = createRouter({
         expiresAt,
       });
 
-      // In production, send email here via nodemailer/sendgrid
-      // For demo, we log and return the code
-      console.log(`[OTP] Code for ${input.email}: ${code}`);
+      await sendOtpEmail(input.email, code);
 
       return { success: true, message: "OTP sent successfully" };
     }),
@@ -51,7 +58,7 @@ export const otpRouter = createRouter({
         emailNewsOffers: z.boolean().default(false),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
       const db = getDb();
       const now = new Date();
 
@@ -108,6 +115,11 @@ export const otpRouter = createRouter({
         userId = newUser.id;
       }
 
+      // Issue a signed, httpOnly session cookie. The client never handles the
+      // user id, so it cannot claim to be somebody else.
+      const token = await createSessionToken(userId);
+      setSessionCookie(ctx.resHeaders, ctx.req.headers, token);
+
       return {
         success: true,
         userId,
@@ -115,23 +127,29 @@ export const otpRouter = createRouter({
       };
     }),
 
-  // Get user by ID (for session)
-  me: publicQuery
-    .input(z.object({ userId: z.number() }))
-    .query(async ({ input }) => {
-      const db = getDb();
-      const [user] = await db
-        .select()
-        .from(localUsers)
-        .where(eq(localUsers.id, input.userId))
-        .limit(1);
+  // Current user, resolved from the session cookie only.
+  me: publicQuery.query(async ({ ctx }) => {
+    const userId = await getSessionUserId(ctx.req.headers);
+    if (!userId) return null;
 
-      if (!user) return null;
-      return {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        role: user.role,
-      };
-    }),
+    const db = getDb();
+    const [user] = await db
+      .select()
+      .from(localUsers)
+      .where(eq(localUsers.id, userId))
+      .limit(1);
+
+    if (!user) return null;
+    return {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+    };
+  }),
+
+  logout: publicQuery.mutation(({ ctx }) => {
+    clearSessionCookie(ctx.resHeaders, ctx.req.headers);
+    return { success: true };
+  }),
 });

@@ -1,49 +1,36 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
+import { trpc } from "@/providers/trpc";
 
-interface LocalUser {
-  id: number;
-  email: string;
-  name: string | null;
-  role: string;
-}
-
-// Demo mode: localStorage-based auth (works without backend)
-const STORAGE_KEY = "tb_local_user";
-const OTP_STORAGE_KEY = "tb_otp_demo";
-
-function generateOtp(): string {
-  return Math.floor(100000 + Math.random() * 900000).toString();
-}
-
+/* Email one-time-code sign-in, backed by the server.
+   The code is generated and checked server-side and the session lives in a
+   signed httpOnly cookie, so nothing here is trusted to the browser. */
 export function useLocalAuth() {
-  const [user, setUser] = useState<LocalUser | null>(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      return stored ? JSON.parse(stored) : null;
-    } catch {
-      return null;
-    }
-  });
+  const utils = trpc.useUtils();
   const [isLoading, setIsLoading] = useState(false);
-  const [lastOtp, setLastOtp] = useState<string>("");
 
-  const isAuthenticated = !!user;
+  const meQuery = trpc.otp.me.useQuery();
+  const user = meQuery.data ?? null;
+
+  const sendOtpMutation = trpc.otp.sendOtp.useMutation();
+  const verifyOtpMutation = trpc.otp.verifyOtp.useMutation();
+  const logoutMutation = trpc.otp.logout.useMutation();
 
   const sendOtp = useCallback(
-    async (email: string): Promise<{ success: boolean; message: string; otp?: string }> => {
+    async (email: string): Promise<{ success: boolean; message: string }> => {
       setIsLoading(true);
-      await new Promise((r) => setTimeout(r, 800)); // simulate network
-
-      const code = generateOtp();
-      setLastOtp(code);
-
-      // Store OTP in sessionStorage for verification
-      sessionStorage.setItem(OTP_STORAGE_KEY, JSON.stringify({ email, code, expires: Date.now() + 10 * 60 * 1000 }));
-
-      setIsLoading(false);
-      return { success: true, message: "OTP sent", otp: code };
+      try {
+        const res = await sendOtpMutation.mutateAsync({ email });
+        return { success: res.success, message: res.message };
+      } catch (err) {
+        return {
+          success: false,
+          message: err instanceof Error ? err.message : "Impossible d'envoyer le code",
+        };
+      } finally {
+        setIsLoading(false);
+      }
     },
-    []
+    [sendOtpMutation]
   );
 
   const verifyOtp = useCallback(
@@ -54,71 +41,49 @@ export function useLocalAuth() {
       emailNewsOffers?: boolean
     ): Promise<{ success: boolean; message: string }> => {
       setIsLoading(true);
-      await new Promise((r) => setTimeout(r, 600)); // simulate network
-
-      // Get stored OTP
-      const storedRaw = sessionStorage.getItem(OTP_STORAGE_KEY);
-      if (!storedRaw) {
-        setIsLoading(false);
-        return { success: false, message: "No OTP found. Please request a new code." };
-      }
-
-      const stored = JSON.parse(storedRaw);
-      if (stored.email !== email || stored.code !== code) {
-        setIsLoading(false);
-        return { success: false, message: "Invalid OTP code" };
-      }
-      if (Date.now() > stored.expires) {
-        setIsLoading(false);
-        return { success: false, message: "OTP expired" };
-      }
-
-      // Check if user exists
-      const usersRaw = localStorage.getItem("tb_users_list");
-      const users: Array<{ id: number; email: string; name: string | null }> = usersRaw ? JSON.parse(usersRaw) : [];
-      const existingUser = users.find((u) => u.email === email);
-
-      let userData: LocalUser;
-
-      if (existingUser) {
-        userData = { ...existingUser, role: "user" };
-      } else {
-        // Create new user
-        const newId = users.length > 0 ? Math.max(...users.map((u) => u.id)) + 1 : 1;
-        userData = {
-          id: newId,
+      try {
+        const res = await verifyOtpMutation.mutateAsync({
           email,
-          name: name || email.split("@")[0],
-          role: "user",
+          code,
+          name,
+          emailNewsOffers: emailNewsOffers ?? false,
+        });
+        if (!res.success) {
+          return {
+            success: false,
+            message:
+              ("message" in res ? res.message : undefined) ?? "Code invalide ou expiré",
+          };
+        }
+        await utils.otp.me.invalidate();
+        return { success: true, message: "Authenticated" };
+      } catch (err) {
+        return {
+          success: false,
+          message: err instanceof Error ? err.message : "Vérification impossible",
         };
-        users.push(userData);
-        localStorage.setItem("tb_users_list", JSON.stringify(users));
+      } finally {
+        setIsLoading(false);
       }
-
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(userData));
-      setUser(userData);
-      sessionStorage.removeItem(OTP_STORAGE_KEY);
-
-      setIsLoading(false);
-      return { success: true, message: "Authenticated" };
     },
-    []
+    [verifyOtpMutation, utils]
   );
 
-  const logout = useCallback(() => {
-    localStorage.removeItem(STORAGE_KEY);
-    setUser(null);
-  }, []);
+  const logout = useCallback(async () => {
+    await logoutMutation.mutateAsync();
+    await utils.otp.me.invalidate();
+  }, [logoutMutation, utils]);
 
   return {
     user,
-    isAuthenticated,
-    isLoading,
-    lastOtp,
+    isAuthenticated: !!user,
+    isLoading: isLoading || meQuery.isLoading,
+    // The code is only ever delivered by email now; nothing to surface here.
+    lastOtp: "",
     sendOtp,
     verifyOtp,
     logout,
-    sendOtpError: null,
-    verifyOtpError: null,
+    sendOtpError: sendOtpMutation.error,
+    verifyOtpError: verifyOtpMutation.error,
   };
 }
