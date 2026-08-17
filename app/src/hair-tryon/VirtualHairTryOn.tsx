@@ -34,6 +34,9 @@ export default function VirtualHairTryOn() {
   const rafRef = useRef<number>(0);
   const landmarksRef = useRef<any>(null);
   const faceMeshRef = useRef<any>(null);
+  const landmarksAtRef = useRef<number>(0);
+  const frameLoopRef = useRef<{ stopped: boolean }>({ stopped: true });
+  const sendWarnedRef = useRef(false);
 
   /* State */
   const [mode, setMode] = useState<'camera' | 'upload'>('camera');
@@ -101,8 +104,11 @@ export default function VirtualHairTryOn() {
       fm.onResults((results: any) => {
         if (results.multiFaceLandmarks?.length > 0) {
           landmarksRef.current = results.multiFaceLandmarks[0];
+          landmarksAtRef.current = performance.now();
           setNoFace(false);
-        } else {
+        } else if (performance.now() - landmarksAtRef.current > 700) {
+          // Hold the last good landmarks briefly: a single dropped detection
+          // shouldn't make the wig blink off or flash the "no face" warning.
           landmarksRef.current = null;
           setNoFace(true);
         }
@@ -211,6 +217,47 @@ export default function VirtualHairTryOn() {
     ctx.restore();
   };
 
+  /* ─── Feed frames to FaceMesh ───
+     Must never stop on its own. The previous version bailed out permanently the
+     first time the video reported `paused`, which happens routinely while a
+     mobile camera is starting up or after the tab is backgrounded — after that
+     no landmarks ever arrived again and the overlay simply never appeared. */
+  const startFrameLoop = useCallback((video: HTMLVideoElement) => {
+    frameLoopRef.current.stopped = true;          // retire any previous loop
+    const token = { stopped: false };
+    frameLoopRef.current = token;
+    sendWarnedRef.current = false;
+
+    const pump = async () => {
+      if (token.stopped) return;
+      const fm = faceMeshRef.current;
+
+      // A paused stream is recoverable - nudge it rather than giving up.
+      if (video.paused && !video.ended) video.play().catch(() => {});
+
+      // Sending a frame before the video has real dimensions yields a blank
+      // image, which reads as "no face".
+      const ready =
+        fm && video.readyState >= 2 && video.videoWidth > 0 && video.videoHeight > 0;
+
+      if (ready) {
+        try {
+          await fm.send({ image: video });
+        } catch (e) {
+          if (!sendWarnedRef.current) {
+            sendWarnedRef.current = true;
+            console.error('[try-on] FaceMesh send failed:', e);
+          }
+        }
+      }
+
+      if (token.stopped) return;
+      setTimeout(pump, 80); // ~12 fps is plenty for tracking
+    };
+
+    pump();
+  }, []);
+
   /* ─── Start camera (raw getUserMedia, not MediaPipe Camera) ─── */
   const startCamera = useCallback(async () => {
     setLoading(true);
@@ -241,15 +288,7 @@ export default function VirtualHairTryOn() {
       setLoadStep(lang === 'fr' ? 'Chargement IA...' : 'جاري تحميل الذكاء الاصطناعي...');
       await initFaceMesh();
 
-      // Start sending frames to FaceMesh
-      const sendFrames = async () => {
-        if (!faceMeshRef.current || !video || video.paused) return;
-        try {
-          await faceMeshRef.current.send({ image: video });
-        } catch (e) { /* silent */ }
-        setTimeout(sendFrames, 100); // ~10 FPS for detection is enough
-      };
-      sendFrames();
+      startFrameLoop(video);
 
     } catch (e: any) {
       console.error('Camera error:', e);
@@ -262,10 +301,11 @@ export default function VirtualHairTryOn() {
       setLoading(false);
       setLoadStep('');
     }
-  }, [lang, initFaceMesh, renderLoop]);
+  }, [lang, initFaceMesh, renderLoop, startFrameLoop]);
 
   /* ─── Stop camera ─── */
   const stopCamera = useCallback(() => {
+    frameLoopRef.current.stopped = true;
     if (streamRef.current) {
       streamRef.current.getTracks().forEach(t => t.stop());
       streamRef.current = null;
@@ -273,6 +313,7 @@ export default function VirtualHairTryOn() {
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
     setIsStreaming(false);
     landmarksRef.current = null;
+    landmarksAtRef.current = 0;
   }, []);
 
   /* ─── Start render loop when mode changes ─── */
