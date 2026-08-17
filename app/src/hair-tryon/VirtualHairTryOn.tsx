@@ -47,6 +47,14 @@ export default function VirtualHairTryOn() {
   const [activeCategory, setActiveCategory] = useState('long');
   const [hasUpload, setHasUpload] = useState(false);
 
+  /* The render loop runs from requestAnimationFrame and must not be recreated
+     on every selection change, so it reads the current style/colour through
+     refs rather than through its closure (which would go stale). */
+  const selectedHairRef = useRef(selectedHair);
+  const selectedColorRef = useRef(selectedColor);
+  useEffect(() => { selectedHairRef.current = selectedHair; }, [selectedHair]);
+  useEffect(() => { selectedColorRef.current = selectedColor; }, [selectedColor]);
+
   /* ─── Load hair image ─── */
   useEffect(() => {
     const img = new Image();
@@ -54,6 +62,21 @@ export default function VirtualHairTryOn() {
     img.onload = () => { hairImgRef.current = img; };
     img.src = selectedHair.image;
   }, [selectedHair]);
+
+  /* Match the canvas bitmap to the source's real pixel size.
+     MediaPipe returns landmarks normalised to the source frame, and both the
+     <video> and <canvas> are laid out with object-cover. If their aspect ratios
+     differ the browser crops them differently, so the overlay lands beside the
+     head instead of on it — the camera usually ignores the 640x480 hint and
+     hands back 1280x720. */
+  const syncCanvasToSource = useCallback((w: number, h: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas || !w || !h) return;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
+    }
+  }, []);
 
   /* ─── Init MediaPipe FaceMesh ─── */
   const initFaceMesh = useCallback(async () => {
@@ -101,67 +124,89 @@ export default function VirtualHairTryOn() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // Keep the canvas the same shape as whatever it is overlaying, so
+    // object-cover crops both identically and normalised landmarks map 1:1.
+    if (mode === 'camera' && video?.videoWidth) {
+      syncCanvasToSource(video.videoWidth, video.videoHeight);
+    } else if (mode === 'upload' && uploadedImgRef.current) {
+      const img = uploadedImgRef.current;
+      syncCanvasToSource(img.naturalWidth, img.naturalHeight);
+    }
+
     const cw = canvas.width;
     const ch = canvas.height;
 
     // Clear canvas (transparent — video/image shows through behind)
     ctx.clearRect(0, 0, cw, ch);
 
-    // In upload mode, draw the image as background
+    // In upload mode, draw the image as background. The canvas now matches the
+    // image's aspect exactly, so it fills without letterboxing.
     if (mode === 'upload' && uploadedImgRef.current) {
-      const img = uploadedImgRef.current;
-      const scale = Math.max(cw / img.width, ch / img.height);
-      const dx = (cw - img.width * scale) / 2;
-      const dy = (ch - img.height * scale) / 2;
-      ctx.drawImage(img, dx, dy, img.width * scale, img.height * scale);
+      ctx.drawImage(uploadedImgRef.current, 0, 0, cw, ch);
     }
 
-    // Mirror canvas drawing in camera mode to match CSS-mirrored video
-    ctx.save();
-    if (mode === 'camera') {
-      ctx.translate(cw, 0);
-      ctx.scale(-1, 1);
-    }
-
-    // Draw hair overlay
+    // Draw hair overlay. The camera preview is CSS-mirrored, so landmark x is
+    // mirrored in drawHair rather than by flipping the context — flipping would
+    // also invert the head-tilt rotation.
     const lm = landmarksRef.current;
     if (lm && hairImgRef.current?.complete) {
-      drawHair(ctx, lm, cw, ch);
+      drawHair(ctx, lm, cw, ch, mode === 'camera');
     }
-
-    ctx.restore();
 
     rafRef.current = requestAnimationFrame(renderLoop);
-  }, [mode, isStreaming]);
+  }, [mode, isStreaming, syncCanvasToSource]);
 
   /* ─── Draw hair on canvas ─── */
-  const drawHair = (ctx: CanvasRenderingContext2D, lm: any[], cw: number, ch: number) => {
+  const drawHair = (
+    ctx: CanvasRenderingContext2D,
+    lm: any[],
+    cw: number,
+    ch: number,
+    mirrored: boolean,
+  ) => {
     const hair = hairImgRef.current!;
-    const forehead = lm[10];
-    const leftT = lm[234];
-    const rightT = lm[454];
+    const style = selectedHairRef.current;
+    const color = selectedColorRef.current;
 
-    const cx = ((leftT.x + rightT.x) / 2) * cw;
-    const hw = Math.abs(rightT.x - leftT.x) * cw;
-    const scale = (hw * 2.5 * selectedHair.scale) / hair.width;
+    // Landmarks come from the un-mirrored frame; the preview is mirrored.
+    const px = (p: any) => (mirrored ? 1 - p.x : p.x) * cw;
+    const py = (p: any) => p.y * ch;
+
+    const forehead = lm[10];   // top-centre of the forehead
+    const chin = lm[152];      // bottom of the chin
+    const leftT = lm[234];     // left temple
+    const rightT = lm[454];    // right temple
+
+    const cx = (px(leftT) + px(rightT)) / 2;
+    const foreheadY = py(forehead);
+
+    // Temple width collapses when the head turns, which made the wig shrink.
+    // Face height is unaffected by yaw, so use it as a floor for the width.
+    const templeW = Math.hypot(px(rightT) - px(leftT), py(rightT) - py(leftT));
+    const faceH = Math.hypot(px(chin) - px(forehead), py(chin) - py(forehead));
+    const headW = Math.max(templeW, faceH * 0.72);
+
+    const scale = (headW * 2.5 * style.scale) / hair.width;
     const dw = hair.width * scale;
     const dh = hair.height * scale;
-    const tilt = Math.atan2((rightT.y - leftT.y) * ch, (rightT.x - leftT.x) * cw);
 
+    // Sit the wig on the skull: anchor to the forehead and lift by a fraction
+    // of the face height so the cap covers the hairline instead of floating.
     const drawX = cx - dw / 2;
-    const drawY = forehead.y * ch - dh * 0.35 + selectedHair.offsetY * dh;
+    const drawY = foreheadY - faceH * 0.42 - dh * 0.06 + style.offsetY * dh;
+
+    // Full head tilt, measured in the same (already mirrored) space as we draw.
+    const tilt = Math.atan2(py(rightT) - py(leftT), px(rightT) - px(leftT));
 
     ctx.save();
-    ctx.translate(cx, forehead.y * ch);
-    ctx.rotate(tilt * 0.3);
-    ctx.translate(-cx, -forehead.y * ch);
+    ctx.translate(cx, foreheadY);
+    ctx.rotate(tilt);
+    ctx.translate(-cx, -foreheadY);
 
-    if (selectedColor.hex !== '#0a0a0a') {
-      ctx.filter = getColorFilter(selectedColor.hex);
+    if (color.hex !== '#0a0a0a') {
+      ctx.filter = getColorFilter(color.hex);
     }
-    ctx.globalAlpha = 0.9;
     ctx.drawImage(hair, drawX, drawY, dw, dh);
-    ctx.globalAlpha = 1;
     ctx.filter = 'none';
     ctx.restore();
   };
