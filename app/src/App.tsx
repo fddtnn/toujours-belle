@@ -40,6 +40,7 @@ import Perruques from './pages/Perruques';
 import PerruquesMiLong from './pages/PerruquesMiLong';
 import PerruquesLong from './pages/PerruquesLong';
 import PerruquesExtraLong from './pages/PerruquesExtraLong';
+import PerruquesCarreLong from './pages/PerruquesCarreLong';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -117,6 +118,7 @@ export default function App() {
         <Route path="/perruques-mi-long" element={<PerruquesMiLong />} />
         <Route path="/perruques-long" element={<PerruquesLong />} />
         <Route path="/perruques-extra-long" element={<PerruquesExtraLong />} />
+        <Route path="/perruques-carre-long" element={<PerruquesCarreLong />} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
