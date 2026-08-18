@@ -20,6 +20,39 @@ function loadScript(src: string): Promise<void> {
   });
 }
 
+/* Alpha bounding box of a wig PNG, as ratios of the image. The files carry
+   very different transparent margins, so placing them by the image edge puts
+   each wig somewhere different on the head. */
+function measureContentBox(img: HTMLImageElement) {
+  const W = 200;
+  const H = Math.max(1, Math.round((img.naturalHeight / img.naturalWidth) * W));
+  const c = document.createElement('canvas');
+  c.width = W; c.height = H;
+  const ctx = c.getContext('2d', { willReadFrequently: true });
+  if (!ctx) return { left: 0, top: 0, w: 1, h: 1 };
+  ctx.drawImage(img, 0, 0, W, H);
+  let d: Uint8ClampedArray;
+  try { d = ctx.getImageData(0, 0, W, H).data; }
+  catch { return { left: 0, top: 0, w: 1, h: 1 }; }
+
+  let minX = W, maxX = -1, minY = H, maxY = -1;
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      if (d[(y * W + x) * 4 + 3] > 16) {
+        if (x < minX) minX = x; if (x > maxX) maxX = x;
+        if (y < minY) minY = y; if (y > maxY) maxY = y;
+      }
+    }
+  }
+  if (maxX < 0) return { left: 0, top: 0, w: 1, h: 1 };
+  return {
+    left: minX / W,
+    top: minY / H,
+    w: (maxX - minX + 1) / W,
+    h: (maxY - minY + 1) / H,
+  };
+}
+
 /* ─── COMPONENT ─── */
 export default function VirtualHairTryOn() {
   const { lang } = useLanguage();
@@ -37,6 +70,11 @@ export default function VirtualHairTryOn() {
   const landmarksAtRef = useRef<number>(0);
   const frameLoopRef = useRef<{ stopped: boolean }>({ stopped: true });
   const sendWarnedRef = useRef(false);
+  /* Where the actual hair sits inside its PNG, as ratios of the image.
+     The wig files have wildly different transparent margins (top padding runs
+     from 5% to 21%), so anchoring to the image edge makes each wig land in a
+     different place on the head. */
+  const hairBoxRef = useRef({ left: 0, top: 0, w: 1, h: 1 });
 
   /* State */
   const [mode, setMode] = useState<'camera' | 'upload'>('camera');
@@ -62,7 +100,10 @@ export default function VirtualHairTryOn() {
   useEffect(() => {
     const img = new Image();
     img.crossOrigin = 'anonymous';
-    img.onload = () => { hairImgRef.current = img; };
+    img.onload = () => {
+      hairImgRef.current = img;
+      hairBoxRef.current = measureContentBox(img);
+    };
     img.src = selectedHair.image;
   }, [selectedHair]);
 
@@ -192,17 +233,21 @@ export default function VirtualHairTryOn() {
     const faceH = Math.hypot(px(chin) - px(forehead), py(chin) - py(forehead));
     const headW = Math.max(templeW, faceH * 0.72);
 
-    const scale = (headW * 2.5 * style.scale) / hair.width;
+    // Size by the visible hair, not the padded image, so every wig lands the
+    // same way regardless of how much empty margin its PNG carries.
+    const box = hairBoxRef.current;
+    const scale = (headW * 2.15 * style.scale) / (hair.width * box.w);
     const dw = hair.width * scale;
     const dh = hair.height * scale;
 
     // Sit the wig on the skull: anchor to the forehead and lift by a fraction
     // of the face height so the cap covers the hairline instead of floating.
-    const drawX = cx - dw / 2;
-    // The wig images have no filled cap - they are two curtains meeting at the
-    // parting - so the parting has to land ON the hairline the way a real cap
-    // does. Lifting it further just exposes the wearer's forehead in the gap.
-    const drawY = foreheadY - faceH * 0.12 - dh * 0.06 + style.offsetY * dh;
+    const drawX = cx - (box.left + box.w / 2) * dw;
+    // Put the top of the visible hair just above the hairline, the way a real
+    // cap edge sits. Measured from the alpha box so a wig with a 21% top margin
+    // lands like one with 5%.
+    const capY = foreheadY - faceH * 0.30 + style.offsetY * faceH;
+    const drawY = capY - box.top * dh;
 
     // Head tilt, measured in the same (already mirrored) space as we draw.
     // Mirroring swaps which temple appears on the left, so the vector has to be
