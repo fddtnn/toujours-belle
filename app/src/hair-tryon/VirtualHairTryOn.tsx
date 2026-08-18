@@ -199,7 +199,10 @@ export default function VirtualHairTryOn() {
     // Sit the wig on the skull: anchor to the forehead and lift by a fraction
     // of the face height so the cap covers the hairline instead of floating.
     const drawX = cx - dw / 2;
-    const drawY = foreheadY - faceH * 0.42 - dh * 0.06 + style.offsetY * dh;
+    // The wig images have no filled cap - they are two curtains meeting at the
+    // parting - so the parting has to land ON the hairline the way a real cap
+    // does. Lifting it further just exposes the wearer's forehead in the gap.
+    const drawY = foreheadY - faceH * 0.12 - dh * 0.06 + style.offsetY * dh;
 
     // Head tilt, measured in the same (already mirrored) space as we draw.
     // Mirroring swaps which temple appears on the left, so the vector has to be
