@@ -19,6 +19,15 @@ export const categories: { id: string; labelFr: string; labelAr: string }[] = [
 
 export const hairstyles: Hairstyle[] = [
   {
+    id: 'carre-chocolat',
+    nameFr: 'Carré Châtain Foncé',
+    nameAr: 'كاريه كستنائي داكن',
+    category: 'medium',
+    image: '/images/hairstyles/carre-chocolat.png',
+    scale: 1.0,
+    offsetY: 0,
+  },
+  {
     id: 'short-black',
     nameFr: 'Pixie Court',
     nameAr: 'بيكسي قصير',
