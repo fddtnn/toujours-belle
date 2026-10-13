@@ -62,11 +62,11 @@ export default function Hero() {
         <img
           src="/images/hero-main.jpg"
           alt="Toujours Belle"
-          className="w-full h-full object-cover object-center md:object-[center_15%]"
+          className="tb-hero-img w-full h-full object-cover object-center md:object-[center_15%]"
         />
         {/* Gradient overlay - stronger on mobile */}
         <div
-          className="absolute inset-0"
+          className="tb-hero-wash absolute inset-0"
           style={{
             background: isRTL
               ? 'linear-gradient(to left, rgba(250,246,244,0.95) 0%, rgba(250,246,244,0.75) 35%, rgba(250,246,244,0.3) 65%, transparent 100%)'
@@ -84,7 +84,7 @@ export default function Hero() {
       </div>
 
       {/* Text Content */}
-      <div className="absolute inset-0 flex items-center" style={{ zIndex: 2 }}>
+      <div className="tb-hero-copy absolute inset-0 flex items-center" style={{ zIndex: 2 }}>
         <div
           className="tb-hero-glass flex flex-col justify-center"
           style={{

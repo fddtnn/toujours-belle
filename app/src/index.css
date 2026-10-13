@@ -360,8 +360,44 @@ body {
    tighter there, so the backdrop under the headline runs darker and its worst
    patches fell near 2.9:1. The plate stays, just trimmed so it does not crowd
    a narrow viewport. */
+/* The hero photo was effectively invisible on a phone: the cream wash is a
+   horizontal gradient sized for a wide frame, so on a narrow one the whole
+   width sits in its 95%-75% end, and `object-center` crops to the wall rather
+   than the model. Phone gets its own framing - model up top, copy underneath -
+   and the wash turns vertical so it only darkens where the copy sits. The
+   plate carries the text contrast now, so the photo can stay legible. */
+@media (max-width: 640px) {
+  /* Framed on the hair, not the face. Any crop between 70% and 90% puts the
+     plate across her nose; the right edge is pure cascade, which is the
+     product anyway. */
+  .tb-hero-img {
+    object-position: 100% 50%;
+  }
+
+  .tb-hero-wash {
+    background: linear-gradient(
+      to top,
+      rgba(250, 246, 244, 0.92) 0%,
+      rgba(250, 246, 244, 0.72) 26%,
+      rgba(250, 246, 244, 0.22) 52%,
+      rgba(250, 246, 244, 0.06) 72%,
+      transparent 100%
+    ) !important;
+  }
+
+  /* bottom-aligning clipped the CTA: the section is 100vh but starts below the
+     promo bar, so its last ~40px are already past the fold. Centred keeps the
+     plate fully on screen with the model framed in the band above it. */
+  .tb-hero-copy {
+    align-items: center;
+  }
+}
+
 @media (max-width: 640px) {
   .tb-hero-glass {
+    /* the phone plate now sits over hair rather than washed-out wall, which
+       cost it ~0.7 of contrast, so it carries more of its own opacity */
+    --hero-glass-bg: rgba(253, 251, 250, 0.96);
     border-radius: 22px;
     padding: 20px 18px;
     box-shadow: 0 10px 30px rgba(141, 94, 94, 0.14);
@@ -369,5 +405,11 @@ body {
        plate bleed off the narrow edge - !important because those are inline */
     margin-left: 5vw !important;
     margin-right: 5vw !important;
+  }
+
+  /* the opacity bump above lands on the element, so it would override the
+     dark theme's value too - restate it for dark mode */
+  .dark .tb-hero-glass {
+    --hero-glass-bg: rgba(14, 14, 14, 0.95);
   }
 }
