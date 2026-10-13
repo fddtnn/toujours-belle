@@ -8,7 +8,7 @@ import {
 import Footer from '../sections/Footer';
 
 /* ═══════════════════════════════════════════
-   PRODUCT DATA — 2 bun pieces
+   PRODUCT DATA — 4 bun pieces
    ═══════════════════════════════════════════ */
 
 interface WigProduct {
@@ -30,8 +30,10 @@ interface WigProduct {
 }
 
 const products: WigProduct[] = [
-  { id: 'cc001', nameFr: 'Chignon Volumineux Ondulé', nameAr: 'كعكة مموجة كثيفة', image: '/images/perruques/chignons/cc001.jpg', gallery: ["/images/perruques/chignons/cc001.jpg"], typeFr: 'Chignon — Toutes Teintes', typeAr: 'كعكات — جميع الألوان', basePrice: 140, rating: 4.8, reviews: 33, sold: 45, stock: 52, category: 'chignon', categoryFr: 'Chignons', categoryAr: 'كعكات' },
-  { id: 'cc002', nameFr: 'Chouchou Bouclé', nameAr: 'ربطة شعر مجعدة', image: '/images/perruques/chignons/cc002.jpg', gallery: ["/images/perruques/chignons/cc002.jpg","/images/perruques/chignons/cc002-b.jpg","/images/perruques/chignons/cc002-c.jpg"], typeFr: 'Chouchou — Toutes Teintes', typeAr: 'ربطات — جميع الألوان', basePrice: 95, rating: 4.9, reviews: 48, sold: 61, stock: 60, category: 'chouchou', categoryFr: 'Chouchous', categoryAr: 'ربطات' },
+  { id: 'cc001', nameFr: 'Chignon Volumineux Ondulé', nameAr: 'كعكة مموجة كثيفة', image: '/images/perruques/chignons/cc001.jpg', typeFr: 'Chignon — Toutes Teintes', typeAr: 'كعكات — جميع الألوان', basePrice: 140, rating: 4.8, reviews: 33, sold: 45, stock: 52, category: 'chignon', categoryFr: 'Chignons', categoryAr: 'كعكات' },
+  { id: 'cc002', nameFr: 'Chouchou Bouclé', nameAr: 'ربطة شعر مجعدة', image: '/images/perruques/chignons/cc002.jpg', typeFr: 'Chouchou — Toutes Teintes', typeAr: 'ربطات — جميع الألوان', basePrice: 95, rating: 4.9, reviews: 48, sold: 61, stock: 60, category: 'chouchou', categoryFr: 'Chouchous', categoryAr: 'ربطات' },
+  { id: 'cc003', nameFr: 'Chouchou Boucl\u00e9 \u2014 Teintes Claires', nameAr: '\u0631\u0628\u0637\u0629 \u0634\u0639\u0631 \u0645\u062c\u0639\u062f\u0629 \u2014 \u0623\u0644\u0648\u0627\u0646 \u0641\u0627\u062a\u062d\u0629', image: '/images/perruques/chignons/cc003.jpg', typeFr: 'Chouchou \u2014 Toutes Teintes', typeAr: '\u0631\u0628\u0637\u0627\u062a \u2014 \u062c\u0645\u064a\u0639 \u0627\u0644\u0623\u0644\u0648\u0627\u0646', basePrice: 95, rating: 4.8, reviews: 41, sold: 54, stock: 58, category: 'chouchou', categoryFr: 'Chouchous', categoryAr: '\u0631\u0628\u0637\u0627\u062a' },
+  { id: 'cc004', nameFr: 'Chouchou Boucl\u00e9 \u2014 Teintes Fonc\u00e9es', nameAr: '\u0631\u0628\u0637\u0629 \u0634\u0639\u0631 \u0645\u062c\u0639\u062f\u0629 \u2014 \u0623\u0644\u0648\u0627\u0646 \u062f\u0627\u0643\u0646\u0629', image: '/images/perruques/chignons/cc004.jpg', typeFr: 'Chouchou \u2014 Toutes Teintes', typeAr: '\u0631\u0628\u0637\u0627\u062a \u2014 \u062c\u0645\u064a\u0639 \u0627\u0644\u0623\u0644\u0648\u0627\u0646', basePrice: 95, rating: 4.9, reviews: 44, sold: 57, stock: 55, category: 'chouchou', categoryFr: 'Chouchous', categoryAr: '\u0631\u0628\u0637\u0627\u062a' },
 ];
 
 
@@ -125,7 +127,7 @@ export default function PerruquesChignons() {
             <span style={{ color: 'var(--tb-text)' }}>Chignons & Chouchous</span>
           </div>
           <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#d4a5a5', marginBottom: '8px' }}>
-            {lang === 'fr' ? 'CHIGNONS & CHOUCHOUS \u2014 2 MOD\u00c8LES' : '\u0643\u0639\u0643\u0627\u062a \u0648\u0631\u0628\u0637\u0627\u062a \u2014 \u0645\u0648\u062f\u064a\u0644\u0627\u0646'}
+            {lang === 'fr' ? 'CHIGNONS & CHOUCHOUS \u2014 4 MOD\u00c8LES' : '\u0643\u0639\u0643\u0627\u062a \u0648\u0631\u0628\u0637\u0627\u062a \u2014 4 \u0645\u0648\u062f\u064a\u0644\u0627\u062a'}
           </p>
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400, fontSize: 'clamp(2rem, 4vw, 3rem)', color: '#d4a5a5', lineHeight: 1.15, marginBottom: '8px' }}>
             {lang === 'fr' ? 'Chignons & Chouchous' : '\u0643\u0639\u0643\u0627\u062a \u0648\u0631\u0628\u0637\u0627\u062a'}
