@@ -7,7 +7,7 @@ import Footer from '../sections/Footer';
 /* Client transformations. Each photo the salon supplied is its own card -
    several are multi-shot collages and folding them together would lose the
    individual fittings. */
-const RESULTS = Array.from({ length: 20 }, (_, i) => {
+const RESULTS = Array.from({ length: 25 }, (_, i) => {
   const n = String(i + 1).padStart(2, '0');
   return { id: i + 1, thumb: `/images/resultats/thumb-${n}.jpg`, full: `/images/resultats/full-${n}.jpg` };
 });
