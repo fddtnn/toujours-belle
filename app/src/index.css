@@ -47,7 +47,7 @@
     --tb-tint-text: #8a6b5d;
     /* brand rose is 2.01:1 on the cream background - too low for text,
        so text uses a darkened rose while fills keep #d4a5a5 */
-    --tb-accent-text: #a06060;
+    --tb-accent-text: #995959;
   }
 
   .dark {
@@ -290,5 +290,84 @@ body {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     background-color: var(--tb-card);
+  }
+}
+
+/* ── Hero glass ──
+   The hero copy sits straight on a photograph, which is the one place a glass
+   surface helps rather than hurts: a frosted plate behind the text raises its
+   contrast against whatever the image happens to be doing underneath, instead
+   of washing it out the way a sheen would.
+
+   The "liquid" quality comes from a very slow drift across the plate - 22s, far
+   too gradual to read as animation, so it reads as light moving on glass. */
+.tb-hero-glass {
+  position: relative;
+  isolation: isolate;
+  border-radius: 28px;
+  padding: clamp(26px, 3.4vw, 46px) clamp(24px, 3vw, 44px);
+  background-color: var(--hero-glass-bg);
+  backdrop-filter: blur(26px) saturate(135%);
+  -webkit-backdrop-filter: blur(26px) saturate(135%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 16px 48px rgba(141, 94, 94, 0.16);
+  overflow: hidden;
+}
+
+.tb-hero-glass::before {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(42% 52% at 18% 24%, rgba(212, 165, 165, 0.17), transparent 68%),
+    radial-gradient(38% 48% at 84% 74%, rgba(240, 214, 194, 0.20), transparent 66%),
+    radial-gradient(40% 50% at 58% 14%, rgba(255, 255, 255, 0.55), transparent 64%);
+  animation: tb-hero-drift 22s ease-in-out infinite alternate;
+}
+
+/* Dark mode keeps the same plate, but the blobs have to invert: a white
+   highlight at 55% on a dark plate punched the backdrop back up to a 1.6:1
+   worst case under the rose headline. These stay dark and only tint. */
+.dark .tb-hero-glass::before {
+  background:
+    radial-gradient(42% 52% at 18% 24%, rgba(212, 165, 165, 0.13), transparent 68%),
+    radial-gradient(38% 48% at 84% 74%, rgba(160, 96, 96, 0.16), transparent 66%),
+    radial-gradient(40% 50% at 58% 14%, rgba(255, 255, 255, 0.07), transparent 64%);
+}
+
+@keyframes tb-hero-drift {
+  0%   { transform: translate3d(-4%, -3%, 0) rotate(0deg)   scale(1);    }
+  50%  { transform: translate3d( 3%,  4%, 0) rotate(5deg)   scale(1.08); }
+  100% { transform: translate3d(-2%,  5%, 0) rotate(-4deg)  scale(1.04); }
+}
+
+:root {
+  --hero-glass-bg: rgba(253, 251, 250, 0.82);
+}
+.dark {
+  --hero-glass-bg: rgba(14, 14, 14, 0.90);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tb-hero-glass::before {
+    animation: none;
+  }
+}
+
+/* The phone is where the copy actually needs the plate: the photo is cropped
+   tighter there, so the backdrop under the headline runs darker and its worst
+   patches fell near 2.9:1. The plate stays, just trimmed so it does not crowd
+   a narrow viewport. */
+@media (max-width: 640px) {
+  .tb-hero-glass {
+    border-radius: 22px;
+    padding: 20px 18px;
+    box-shadow: 0 10px 30px rgba(141, 94, 94, 0.14);
+    /* the component sets one side to 8vw and the other to auto, which let the
+       plate bleed off the narrow edge - !important because those are inline */
+    margin-left: 5vw !important;
+    margin-right: 5vw !important;
   }
 }

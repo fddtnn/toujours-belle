@@ -86,13 +86,12 @@ export default function Hero() {
       {/* Text Content */}
       <div className="absolute inset-0 flex items-center" style={{ zIndex: 2 }}>
         <div
-          className="flex flex-col justify-center"
+          className="tb-hero-glass flex flex-col justify-center"
           style={{
-            padding: isRTL ? '0 8vw 0 0' : '0 0 0 8vw',
             maxWidth: '600px',
             textAlign: isRTL ? 'right' : 'left',
-            marginLeft: isRTL ? 'auto' : '0',
-            marginRight: isRTL ? '0' : 'auto',
+            marginLeft: isRTL ? 'auto' : '8vw',
+            marginRight: isRTL ? '8vw' : 'auto',
           }}
         >
           <p
