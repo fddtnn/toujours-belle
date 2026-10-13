@@ -65,7 +65,7 @@ const cheveuxSubmenu: CheveuxItem[] = [
       { fr: 'Extra Full Volume', ar: 'حجم كامل إضافي', href: '#product' },
     ],
   },
-  { fr: 'Topper', ar: 'توبير', href: '#product' },
+  { fr: 'Topper', ar: 'توبير', href: '/topper' },
   { fr: 'TB Secret Volume', ar: 'TB سيكريت فوليوم', href: '#product' },
   { fr: 'Rajouts Frontaux', ar: 'إضافات أمامية', href: '#product' },
   { fr: 'Franges', ar: 'غرة', href: '#product' },
