@@ -394,20 +394,20 @@ body {
 }
 
 @media (max-width: 640px) {
+  /* Smoked glass, not frosted. A light plate has to hide the photograph to
+     hold its contrast - the arithmetic leaves no room, because the brand rose
+     only reaches 4.69:1 even on pure white. Dimming the backdrop instead and
+     flipping the copy to light costs the photo nothing: it stays sharp and
+     fully readable through the glass, just darker. Both themes use this. */
   .tb-hero-glass {
-    /* Actually glassy on the phone: the plate is mostly transparent and the
-       contrast comes from brightening the backdrop rather than hiding it, so
-       the hair still reads through it. */
-    --hero-glass-bg: rgba(253, 251, 250, 0.46);
-    /* contrast() before brightness() is what makes this work: flattening the
-       backdrop lifts the dark hair strands that were dragging the worst-case
-       ratio to 3.4, while the shape and colour still read through. */
-    backdrop-filter: blur(20px) saturate(150%) contrast(0.45) brightness(1.45);
-    -webkit-backdrop-filter: blur(20px) saturate(150%) contrast(0.45) brightness(1.45);
-    /* The brand rose only reaches 4.69:1 on pure white, so on a plate you can
-       see through it can never clear 4.5 - the hero's own rose goes a few
-       shades deeper on the phone. Nowhere else uses this. */
-    --tb-accent-text: #7a4343;
+    --hero-glass-bg: rgba(22, 16, 16, 0.14);
+    /* contrast() compresses the blonde highlights, which were the 5% of the
+       backdrop still bright enough to collapse the ratio to 2.5 */
+    backdrop-filter: blur(7px) saturate(118%) contrast(0.78) brightness(0.60);
+    -webkit-backdrop-filter: blur(7px) saturate(118%) contrast(0.78) brightness(0.60);
+    --tb-accent-text: #f2d8d8;
+    --tb-text-secondary: rgba(255, 255, 255, 0.90);
+    border: 1px solid rgba(255, 255, 255, 0.22);
     border-radius: 22px;
     padding: 20px 18px;
     box-shadow: 0 10px 30px rgba(141, 94, 94, 0.14);
@@ -417,22 +417,25 @@ body {
     margin-right: 5vw !important;
   }
 
-  /* the opacity above lands on the element, so it would override the dark
-     theme's value too - restate it for dark mode, darkening the backdrop
-     instead of brightening it */
-  .dark .tb-hero-glass {
-    --hero-glass-bg: rgba(14, 14, 14, 0.44);
-    /* the deeper rose set above would land here too and leave dark text on a
-       dark plate - dark mode keeps its own light rose */
-    --tb-accent-text: #e0b5b5;
-    backdrop-filter: blur(20px) saturate(120%) contrast(0.5) brightness(0.42);
-    -webkit-backdrop-filter: blur(20px) saturate(120%) contrast(0.5) brightness(0.42);
+  /* the light-theme blobs put a white 55% highlight right where the overline
+     sits - on a dark plate that was the 5% of backdrop holding the worst case
+     at 2.5 */
+  .tb-hero-glass::before {
+    background:
+      radial-gradient(42% 52% at 18% 24%, rgba(212, 165, 165, 0.14), transparent 68%),
+      radial-gradient(38% 48% at 84% 74%, rgba(160, 96, 96, 0.16), transparent 66%),
+      radial-gradient(40% 50% at 58% 14%, rgba(255, 255, 255, 0.06), transparent 64%);
   }
 
-  /* without backdrop-filter there is nothing holding the text up, so the
-     plate falls back to being opaque */
+  /* the CTA is a dark pill by default, which disappears into smoked glass */
+  .tb-hero-glass a {
+    background-color: #faf6f4 !important;
+    color: #1a1a1a !important;
+  }
+
+  /* without backdrop-filter nothing is dimming the photo, so the plate has to
+     supply the darkness itself */
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .tb-hero-glass { --hero-glass-bg: rgba(253, 251, 250, 0.95); }
-    .dark .tb-hero-glass { --hero-glass-bg: rgba(14, 14, 14, 0.94); }
+    .tb-hero-glass { --hero-glass-bg: rgba(22, 16, 16, 0.62); }
   }
 }
