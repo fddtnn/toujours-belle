@@ -473,11 +473,11 @@ export default function VirtualHairTryOn() {
       <div className="text-center px-4" style={{ padding: '10px 0 25px' }}>
         <div className="flex items-center justify-center gap-2 mb-2">
           <Sparkles size={18} color="#d4a5a5" />
-          <p style={{ fontFamily: "'Inter',sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--tb-accent-text)' }}>
+          <p style={{ fontFamily: "'Inter',sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#d4a5a5' }}>
             {lang === 'fr' ? 'ESSAYAGE VIRTUEL IA OFFERT' : 'تجربة افتراضية بالذكاء الاصطناعي'}
           </p>
         </div>
-        <h1 style={{ fontFamily: "'Playfair Display',serif", fontWeight: 400, fontSize: 'clamp(1.8rem,4vw,2.8rem)', lineHeight: 1.15, marginBottom: '8px' }}>
+        <h1 style={{ fontFamily: "'Playfair Display',serif", fontWeight: 400, fontSize: 'clamp(1.8rem,4vw,2.8rem)', lineHeight: 1.15, marginBottom: '8px', color: '#faf6f4' }}>
           {lang === 'fr' ? 'Essayage Virtuel de Cheveux' : 'تجربة الشعر الافتراضية'}
         </h1>
         <p style={{ fontFamily: "'Inter',sans-serif", fontSize: '14px', color: '#8a8a8a', maxWidth: '500px', margin: '0 auto' }}>
@@ -540,7 +540,7 @@ export default function VirtualHairTryOn() {
             {!isStreaming && !hasUpload && !loading && !error && (
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
                 <Camera size={36} color="#3a3a3a" />
-                <p style={{ fontFamily: "'Inter',sans-serif", fontSize: '13px', color: '#6b6b6b' }}>
+                <p style={{ fontFamily: "'Inter',sans-serif", fontSize: '13px', color: '#8a8a8a' }}>
                   {lang === 'fr' ? 'Activez la caméra ou uploadez une photo' : 'شغّلي الكاميرا أو ارفعي صورة'}
                 </p>
               </div>
@@ -575,7 +575,7 @@ export default function VirtualHairTryOn() {
               </button>
             )}
 
-            <button onClick={resetAll} className="flex items-center gap-2 px-4 py-2.5 rounded-full" style={{ backgroundColor: 'transparent', color: '#6b6b6b', fontFamily: "'Inter',sans-serif", fontWeight: 500, fontSize: '12px', border: '1px solid #2a2a2a', cursor: 'pointer' }}>
+            <button onClick={resetAll} className="flex items-center gap-2 px-4 py-2.5 rounded-full" style={{ backgroundColor: 'transparent', color: '#8a8a8a', fontFamily: "'Inter',sans-serif", fontWeight: 500, fontSize: '12px', border: '1px solid #2a2a2a', cursor: 'pointer' }}>
               <RotateCcw size={13} />
               {lang === 'fr' ? 'Réinitialiser' : 'إعادة'}
             </button>
@@ -586,7 +586,7 @@ export default function VirtualHairTryOn() {
         <div className="w-full lg:w-[45%] flex flex-col gap-4">
           {/* Category tabs */}
           <div>
-            <p className="mb-2" style={{ fontFamily: "'Inter',sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6b6b6b' }}>
+            <p className="mb-2" style={{ fontFamily: "'Inter',sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8a8a8a' }}>
               {lang === 'fr' ? 'COUPES' : 'القصات'}
             </p>
             <div className="flex gap-2 overflow-x-auto pb-1" style={{ scrollbarWidth: 'none' }}>
@@ -621,7 +621,7 @@ export default function VirtualHairTryOn() {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <Droplets size={13} color="#d4a5a5" />
-              <p style={{ fontFamily: "'Inter',sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6b6b6b' }}>
+              <p style={{ fontFamily: "'Inter',sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8a8a8a' }}>
                 {lang === 'fr' ? 'COULEUR' : 'اللون'}
               </p>
             </div>
@@ -629,7 +629,7 @@ export default function VirtualHairTryOn() {
               {hairColors.map(c => (
                 <button key={c.hex} onClick={() => setSelectedColor(c)} className="flex flex-col items-center gap-1" style={{ background: 'none', border: 'none', cursor: 'pointer', transform: selectedColor.hex === c.hex ? 'scale(1.12)' : 'scale(1)' }} title={lang === 'fr' ? c.nameFr : c.nameAr}>
                   <div className="rounded-full" style={{ width: '32px', height: '32px', backgroundColor: c.hex, boxShadow: selectedColor.hex === c.hex ? '0 0 0 3px #d4a5a5,0 0 0 5px #0f0f0f' : '0 2px 6px rgba(0,0,0,0.3)' }} />
-                  <span style={{ fontFamily: "'Inter',sans-serif", fontSize: '8px', color: selectedColor.hex === c.hex ? '#faf6f4' : '#6b6b6b' }}>{lang === 'fr' ? c.nameFr : c.nameAr}</span>
+                  <span style={{ fontFamily: "'Inter',sans-serif", fontSize: '8px', color: selectedColor.hex === c.hex ? '#faf6f4' : '#8a8a8a' }}>{lang === 'fr' ? c.nameFr : c.nameAr}</span>
                 </button>
               ))}
             </div>

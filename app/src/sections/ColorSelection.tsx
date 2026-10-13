@@ -527,7 +527,9 @@ export default function ColorSelection({ onShadeSelect }: ColorSelectionProps) {
                   style={{
                     height: '44px',
                     backgroundColor: '#d4a5a5',
-                    color: 'var(--tb-bg-secondary)',
+                    /* the rose pill is fixed, so the label cannot follow the
+                       theme: near-white on it measured 2.16:1 */
+                    color: '#1a1a1a',
                     borderRadius: '8px',
                     fontFamily: "'Inter', sans-serif",
                     fontWeight: 500,
