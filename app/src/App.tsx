@@ -49,6 +49,7 @@ import PerruquesChignons from './pages/PerruquesChignons';
 import PerruquesQueues from './pages/PerruquesQueues';
 import PerruquesExtensions from './pages/PerruquesExtensions';
 import PerruquesFrontaux from './pages/PerruquesFrontaux';
+import Resultats from './pages/Resultats';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -137,6 +138,7 @@ export default function App() {
         <Route path="/queues" element={<PerruquesQueues />} />
         <Route path="/extensions" element={<PerruquesExtensions />} />
         <Route path="/frontaux" element={<PerruquesFrontaux />} />
+        <Route path="/resultats" element={<Resultats />} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
