@@ -36,21 +36,34 @@ export default function SalonVideo() {
     setMuted(v.muted);
   }, []);
 
-  /* Stop playback once the frame leaves the viewport - no point decoding
-     frames nobody is looking at. */
+  /* Stop playback once the frame is mostly out of view - no point decoding
+     frames nobody is looking at.
+
+     Keyed off intersectionRatio rather than isIntersecting: the latter stays
+     true while even one pixel overlaps, so the video kept playing all the way
+     off the screen. Also pauses when the tab itself is hidden. */
   useEffect(() => {
     const frame = frameRef.current;
-    if (!frame || typeof IntersectionObserver === 'undefined') return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        const v = videoRef.current;
-        if (!v || v.paused) return;
-        if (!entry.isIntersecting) { v.pause(); setPlaying(false); }
-      },
-      { threshold: 0.25 }
-    );
-    io.observe(frame);
-    return () => io.disconnect();
+    const pause = () => {
+      const v = videoRef.current;
+      if (v && !v.paused) { v.pause(); setPlaying(false); }
+    };
+
+    let io: IntersectionObserver | undefined;
+    if (frame && typeof IntersectionObserver !== 'undefined') {
+      io = new IntersectionObserver(
+        ([entry]) => { if (entry.intersectionRatio < 0.25) pause(); },
+        { threshold: [0, 0.25, 0.5] }
+      );
+      io.observe(frame);
+    }
+
+    const onHide = () => { if (document.hidden) pause(); };
+    document.addEventListener('visibilitychange', onHide);
+    return () => {
+      io?.disconnect();
+      document.removeEventListener('visibilitychange', onHide);
+    };
   }, []);
 
   return (
