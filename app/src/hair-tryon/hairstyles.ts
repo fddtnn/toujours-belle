@@ -2,7 +2,7 @@ export interface Hairstyle {
   id: string;
   nameFr: string;
   nameAr: string;
-  category: 'short' | 'medium' | 'long' | 'curly' | 'straight' | 'updo';
+  category: 'short' | 'medium' | 'long' | 'curly' | 'straight' | 'updo' | 'topper';
   image: string;
   scale: number;    // default scale factor
   offsetY: number;  // vertical offset percentage (-1 = up, 1 = down)
@@ -15,9 +15,64 @@ export const categories: { id: string; labelFr: string; labelAr: string }[] = [
   { id: 'curly', labelFr: 'Bouclé', labelAr: 'مجعد' },
   { id: 'straight', labelFr: 'Lisse', labelAr: 'ناعم' },
   { id: 'updo', labelFr: 'Attaché', labelAr: 'مربوط' },
+  { id: 'topper', labelFr: 'Topper', labelAr: 'توبر' },
 ];
 
 export const hairstyles: Hairstyle[] = [
+  {
+    id: 'topper-1',
+    nameFr: 'Topper Noir Frange',
+    nameAr: 'توبر أسود بغرة',
+    category: 'topper',
+    image: '/images/hairstyles/topper-1.jpg',
+    scale: 1.0,
+    offsetY: 0,
+  },
+  {
+    id: 'topper-2',
+    nameFr: 'Topper Châtain Clair',
+    nameAr: 'توبر كستنائي فاتح',
+    category: 'topper',
+    image: '/images/hairstyles/topper-2.jpg',
+    scale: 1.0,
+    offsetY: 0,
+  },
+  {
+    id: 'topper-3',
+    nameFr: 'Topper Châtain Dégradé',
+    nameAr: 'توبر كستنائي متدرج',
+    category: 'topper',
+    image: '/images/hairstyles/topper-3.jpg',
+    scale: 1.0,
+    offsetY: 0,
+  },
+  {
+    id: 'topper-4',
+    nameFr: 'Topper Châtain Frange',
+    nameAr: 'توبر كستنائي بغرة',
+    category: 'topper',
+    image: '/images/hairstyles/topper-4.jpg',
+    scale: 1.0,
+    offsetY: 0,
+  },
+  {
+    id: 'topper-5',
+    nameFr: 'Topper Noir Frange Pleine',
+    nameAr: 'توبر أسود بغرة كاملة',
+    category: 'topper',
+    image: '/images/hairstyles/topper-5.jpg',
+    scale: 1.0,
+    offsetY: 0,
+  },
+  {
+    id: 'topper-6',
+    nameFr: 'Topper Noir Volume Léger',
+    nameAr: 'توبر أسود حجم خفيف',
+    category: 'topper',
+    image: '/images/hairstyles/topper-6.jpg',
+    scale: 1.0,
+    offsetY: 0,
+  },
   {
     id: 'carre-chocolat',
     nameFr: 'Carré Châtain Foncé',
