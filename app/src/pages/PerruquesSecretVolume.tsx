@@ -8,7 +8,7 @@ import {
 import Footer from '../sections/Footer';
 
 /* ═══════════════════════════════════════════
-   PRODUCT DATA — 2 TB Secret Volume pieces
+   PRODUCT DATA — 3 TB Secret Volume pieces
    ═══════════════════════════════════════════ */
 
 interface WigProduct {
@@ -30,8 +30,9 @@ interface WigProduct {
 }
 
 const products: WigProduct[] = [
-  { id: 'sv001', nameFr: 'TB Secret Volume — Brun Frange', nameAr: 'TB سيكريت فوليوم — بني بغرة', image: '/images/perruques/secret-volume/sv001.jpg', gallery: ['/images/perruques/secret-volume/sv001.jpg', '/images/perruques/secret-volume/sv-base.jpg'], typeFr: 'TB Secret Volume — Châtain Foncé', typeAr: 'TB سيكريت فوليوم — كستنائي داكن', basePrice: 420, rating: 4.9, reviews: 41, sold: 53, stock: 34, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
-  { id: 'sv002', nameFr: 'TB Secret Volume — Blond Balayage', nameAr: 'TB سيكريت فوليوم — أشقر بالياج', image: '/images/perruques/secret-volume/sv002.jpg', gallery: ['/images/perruques/secret-volume/sv002.jpg', '/images/perruques/secret-volume/sv-base.jpg'], typeFr: 'TB Secret Volume — Blond', typeAr: 'TB سيكريت فوليوم — أشقر', basePrice: 450, rating: 4.8, reviews: 37, sold: 48, stock: 31, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'sv001', nameFr: 'TB Secret Volume — Brun Frange', nameAr: 'TB سيكريت فوليوم — بني بغرة', image: '/images/perruques/secret-volume/sv001.jpg', typeFr: 'TB Secret Volume — Châtain Foncé', typeAr: 'TB سيكريت فوليوم — كستنائي داكن', basePrice: 420, rating: 4.9, reviews: 41, sold: 53, stock: 34, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
+  { id: 'sv002', nameFr: 'TB Secret Volume — Blond Balayage', nameAr: 'TB سيكريت فوليوم — أشقر بالياج', image: '/images/perruques/secret-volume/sv002.jpg', typeFr: 'TB Secret Volume — Blond', typeAr: 'TB سيكريت فوليوم — أشقر', basePrice: 450, rating: 4.8, reviews: 37, sold: 48, stock: 31, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'sv003', nameFr: 'TB Secret Volume \u2014 Base Lace & Clips', nameAr: 'TB \u0633\u064a\u0643\u0631\u064a\u062a \u0641\u0648\u0644\u064a\u0648\u0645 \u2014 \u0642\u0627\u0639\u062f\u0629 \u0644\u064a\u0633 \u0628\u0645\u0634\u0627\u0628\u0643', image: '/images/perruques/secret-volume/sv003.jpg', typeFr: 'TB Secret Volume \u2014 Blond', typeAr: 'TB \u0633\u064a\u0643\u0631\u064a\u062a \u0641\u0648\u0644\u064a\u0648\u0645 \u2014 \u0623\u0634\u0642\u0631', basePrice: 440, rating: 4.9, reviews: 35, sold: 46, stock: 29, category: 'blonde', categoryFr: 'Blond', categoryAr: '\u0623\u0634\u0642\u0631' },
 ];
 
 
@@ -127,7 +128,7 @@ export default function PerruquesSecretVolume() {
             <span style={{ color: 'var(--tb-text)' }}>TB Secret Volume</span>
           </div>
           <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#d4a5a5', marginBottom: '8px' }}>
-            {lang === 'fr' ? 'TB SECRET VOLUME \u2014 2 MOD\u00c8LES' : 'TB \u0633\u064a\u0643\u0631\u064a\u062a \u0641\u0648\u0644\u064a\u0648\u0645 \u2014 \u0645\u0648\u062f\u064a\u0644\u0627\u0646'}
+            {lang === 'fr' ? 'TB SECRET VOLUME \u2014 3 MOD\u00c8LES' : 'TB \u0633\u064a\u0643\u0631\u064a\u062a \u0641\u0648\u0644\u064a\u0648\u0645 \u2014 3 \u0645\u0648\u062f\u064a\u0644\u0627\u062a'}
           </p>
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400, fontSize: 'clamp(2rem, 4vw, 3rem)', color: '#d4a5a5', lineHeight: 1.15, marginBottom: '8px' }}>
             {lang === 'fr' ? 'TB Secret Volume' : 'TB \u0633\u064a\u0643\u0631\u064a\u062a \u0641\u0648\u0644\u064a\u0648\u0645'}
