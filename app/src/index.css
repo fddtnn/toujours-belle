@@ -141,3 +141,32 @@ body[data-active-menu="hamburger"] #wormBox {
 #wormBox {
   transition: opacity 250ms ease !important;
 }
+
+/* ── Reduced motion ──
+   The site leans on GSAP ScrollTrigger reveals and Lenis smooth scroll, which
+   are exactly the effects that trigger motion sickness. When the visitor has
+   asked their OS for less motion, collapse every animation to a near-instant
+   state change and make sure nothing is left stuck at opacity 0 by a reveal
+   that will now never run. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  html {
+    scroll-behavior: auto !important;
+  }
+  /* Tailwind reveal primitives used before GSAP takes over */
+  .opacity-0 {
+    opacity: 1 !important;
+  }
+  .translate-y-5,
+  .translate-y-8,
+  .translate-y-10 {
+    transform: none !important;
+  }
+}

@@ -21,6 +21,7 @@ import HairTypes from './sections/HairTypes';
 import PromoBanner from './components/PromoBanner';
 import ColorSelection from './sections/ColorSelection';
 import About from './sections/About';
+import SalonVideo from './sections/SalonVideo';
 import ProductSection from './sections/ProductSection';
 import TrustStrip from './components/TrustStrip';
 import Testimonials from './sections/Testimonials';
@@ -67,6 +68,8 @@ function HomePage() {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    // Smooth scroll is scroll-jacking: honour the OS "reduce motion" setting.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
     lenisRef.current = lenis;
     lenis.on('scroll', ScrollTrigger.update);
@@ -95,6 +98,7 @@ function HomePage() {
         <ColorSelection />
         <TrustStrip />
         <About />
+        <SalonVideo />
         <ProductSection onAddToCart={handleAddToCart} initialType={productType} />
         <Testimonials />
         <Haircare />

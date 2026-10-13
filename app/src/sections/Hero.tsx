@@ -11,6 +11,12 @@ export default function Hero() {
   const ctaRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
+    const els = [overlineRef, line1Ref, line2Ref, subtitleRef, ctaRef]
+      .map(r => r.current).filter(Boolean);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.set(els, { opacity: 1, y: 0 });
+      return;
+    }
     const tl = gsap.timeline({ delay: 0.3 });
 
     tl.to(overlineRef.current, {
