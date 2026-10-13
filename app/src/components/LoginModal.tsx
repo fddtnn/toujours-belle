@@ -106,8 +106,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
       {/* Modal */}
       <div
-        className="relative w-full max-w-[420px] mx-4 rounded-2xl overflow-hidden shadow-2xl"
-        style={{ backgroundColor: "#ffffff" }}
+        className="relative w-full max-w-[420px] mx-4 rounded-2xl overflow-hidden shadow-2xl tb-glass-panel"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button */}

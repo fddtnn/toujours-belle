@@ -189,9 +189,11 @@ export default function Navigation({ cartCount, onCartClick, onLoginClick, onMen
         style={{
           top: '76px',
           zIndex: 100,
-          backgroundColor: navBg,
-          backdropFilter: scrolled ? 'blur(12px)' : 'none',
-          borderBottom: navBorder,
+          backgroundColor: scrolled ? 'var(--glass-bg)' : navBg,
+          backdropFilter: scrolled ? 'blur(var(--glass-blur)) saturate(var(--glass-saturate))' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(var(--glass-blur)) saturate(var(--glass-saturate))' : 'none',
+          borderBottom: scrolled ? '1px solid var(--glass-border)' : navBorder,
+          boxShadow: scrolled ? 'var(--glass-shadow)' : 'none',
           transition: 'all 0.4s ease',
         }}
       >

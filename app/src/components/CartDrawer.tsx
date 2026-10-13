@@ -41,7 +41,7 @@ export default function CartDrawer({ isOpen, onClose, items, onRemove, onLoginCl
 
       {/* Drawer */}
       <div
-        className={`fixed top-0 ${isRTL ? 'left-0' : 'right-0'} h-full w-full max-w-md bg-white shadow-xl z-[201] transition-transform duration-300 ${
+        className={`fixed top-0 ${isRTL ? 'left-0' : 'right-0'} h-full w-full max-w-md tb-glass-panel shadow-xl z-[201] transition-transform duration-300 ${
           isOpen
             ? 'translate-x-0'
             : isRTL
