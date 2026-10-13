@@ -148,7 +148,7 @@ export default function Testimonials() {
         <div ref={quoteRef}>
           {/* Avatar */}
           <div className="mx-auto mb-6 rounded-full overflow-hidden" style={{ width: '80px', height: '80px', background: 'linear-gradient(135deg, #d4a5a5, #c49393)' }}>
-            <img src={t.image} alt="" className="w-full h-full object-cover" />
+            <img src={t.image} alt="" className="w-full h-full object-cover" loading="lazy" />
           </div>
 
           <blockquote

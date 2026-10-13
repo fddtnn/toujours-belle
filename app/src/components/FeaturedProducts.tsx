@@ -34,10 +34,10 @@ export default function FeaturedProducts() {
     <section ref={sectionRef} className="relative w-full" style={{ zIndex: 1, backgroundColor: 'var(--tb-bg-secondary)', padding: '80px 0' }}>
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
         <div className="text-center mb-10">
-          <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#d4a5a5', marginBottom: '10px' }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--tb-accent-text)', marginBottom: '10px' }}>
             {t({ fr: 'NOS BEST-SELLERS', ar: 'الأكثر مبيعًا' })}
           </p>
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400, fontSize: 'clamp(2rem, 4vw, 3rem)', color: '#d4a5a5', lineHeight: 1.15 }}>
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400, fontSize: 'clamp(2rem, 4vw, 3rem)', color: 'var(--tb-accent-text)', lineHeight: 1.15 }}>
             {t({ fr: 'Les Plus Demandés', ar: 'الأكثر طلبًا' })}
           </h2>
         </div>
@@ -51,11 +51,11 @@ export default function FeaturedProducts() {
                 <img src={p.image} alt={lang === 'fr' ? p.nameFr : p.nameAr} className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" loading="lazy" />
               </div>
               <div className="p-4">
-                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: '#d4a5a5', fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{lang === 'fr' ? p.typeFr : p.typeAr}</span>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'var(--tb-accent-text)', fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{lang === 'fr' ? p.typeFr : p.typeAr}</span>
                 <h3 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '14px', color: 'var(--tb-text)', marginTop: '4px', marginBottom: '6px' }}>{lang === 'fr' ? p.nameFr : p.nameAr}</h3>
                 <div className="flex items-center gap-1 mb-2">{[1,2,3,4,5].map(s => <Star key={s} size={12} fill="#d4a5a5" color="#d4a5a5" />)}</div>
                 <div className="flex items-center justify-between">
-                  <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: '15px', color: '#d4a5a5' }}>{t({ fr: `À partir de ${p.price} TND`, ar: `ابتداءً من ${p.price} د.ت` })}</span>
+                  <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: '15px', color: 'var(--tb-accent-text)' }}>{t({ fr: `À partir de ${p.price} TND`, ar: `ابتداءً من ${p.price} د.ت` })}</span>
                 </div>
                 <button className="w-full mt-3 py-2.5 rounded-lg transition-colors duration-300" style={{ backgroundColor: 'var(--tb-text)', color: 'var(--tb-bg)', fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '12px', letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer' }}
                   onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#d4a5a5'; e.currentTarget.style.color = 'var(--tb-text)'; }}

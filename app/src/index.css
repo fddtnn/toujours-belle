@@ -45,6 +45,9 @@
     --tb-surface: #f5ece8;
     --tb-tint: #faf0ec;
     --tb-tint-text: #8a6b5d;
+    /* brand rose is 2.01:1 on the cream background - too low for text,
+       so text uses a darkened rose while fills keep #d4a5a5 */
+    --tb-accent-text: #a06060;
   }
 
   .dark {
@@ -88,6 +91,8 @@
     --tb-surface: #241c1c;
     --tb-tint: #2a2020;
     --tb-tint-text: #d4a5a5;
+    /* on #121212 the original rose already clears 8.68:1 */
+    --tb-accent-text: #d4a5a5;
   }
 }
 
@@ -169,4 +174,14 @@ body[data-active-menu="hamburger"] #wormBox {
   .translate-y-10 {
     transform: none !important;
   }
+}
+
+/* ── Horizontal overshoot ──
+   Several GSAP reveals translate elements in from outside the viewport, which
+   briefly widened the document and flashed a horizontal scrollbar (779px of
+   scroll width at a 743px viewport). `clip` contains it without turning the
+   body into a scroll container, so position: sticky keeps working. */
+html,
+body {
+  overflow-x: clip;
 }

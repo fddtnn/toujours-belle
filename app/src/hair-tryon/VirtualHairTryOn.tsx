@@ -473,7 +473,7 @@ export default function VirtualHairTryOn() {
       <div className="text-center px-4" style={{ padding: '10px 0 25px' }}>
         <div className="flex items-center justify-center gap-2 mb-2">
           <Sparkles size={18} color="#d4a5a5" />
-          <p style={{ fontFamily: "'Inter',sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#d4a5a5' }}>
+          <p style={{ fontFamily: "'Inter',sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--tb-accent-text)' }}>
             {lang === 'fr' ? 'ESSAYAGE VIRTUEL IA OFFERT' : 'تجربة افتراضية بالذكاء الاصطناعي'}
           </p>
         </div>
@@ -638,7 +638,7 @@ export default function VirtualHairTryOn() {
           {/* Active selection */}
           <div className="rounded-xl p-3 flex items-center gap-3" style={{ backgroundColor: '#1a1a1a', border: '1px solid #2a2a2a' }}>
             <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0">
-              <img src={selectedHair.image} alt="" className="w-full h-full object-cover" style={{ filter: selectedColor.hex !== '#0a0a0a' ? getColorFilter(selectedColor.hex) : 'none' }} />
+              <img src={selectedHair.image} alt="" className="w-full h-full object-cover" style={{ filter: selectedColor.hex !== '#0a0a0a' ? getColorFilter(selectedColor.hex) : 'none' }} loading="lazy" />
             </div>
             <div>
               <p style={{ fontFamily: "'Inter',sans-serif", fontWeight: 500, fontSize: '13px', color: '#faf6f4' }}>{lang === 'fr' ? selectedHair.nameFr : selectedHair.nameAr}</p>

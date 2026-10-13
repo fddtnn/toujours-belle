@@ -112,7 +112,7 @@ export default function EGiftCards() {
                   borderRadius: '16px',
                   boxShadow: '0 12px 40px rgba(212,165,165,0.35)',
                 }}
-              />
+              loading="lazy" />
             </div>
           </div>
 
@@ -140,7 +140,7 @@ export default function EGiftCards() {
             </p>
 
             {/* Price */}
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '28px', color: '#d4a5a5', fontWeight: 600, marginBottom: '24px' }}>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '28px', color: 'var(--tb-accent-text)', fontWeight: 600, marginBottom: '24px' }}>
               {selectedAmount ? `${selectedAmount} ${t.currency}` : `25 ${t.currency}`}
             </p>
 

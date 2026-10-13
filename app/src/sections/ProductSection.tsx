@@ -90,14 +90,14 @@ export default function ProductSection({ onAddToCart, initialType }: ProductSect
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16" style={{ flexDirection: isRTL ? 'row-reverse' : undefined }}>
           <div ref={galleryRef} className="w-full lg:w-[55%]">
             <div className="relative rounded-xl overflow-hidden mb-4" style={{ aspectRatio: '1/1' }}>
-              <img src={galleryImages[galleryIndex]} alt="Product" className="w-full h-full object-cover" />
+              <img src={galleryImages[galleryIndex]} alt="Product" className="w-full h-full object-cover" loading="lazy" />
               <button onClick={prevGallery} className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 flex items-center justify-center hover:bg-white transition-colors" aria-label="Previous">{isRTL ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}</button>
               <button onClick={nextGallery} className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 flex items-center justify-center hover:bg-white transition-colors" aria-label="Next">{isRTL ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}</button>
             </div>
             <div className="flex gap-3">
               {galleryImages.map((img, idx) => (
-                <button key={idx} onClick={() => setGalleryIndex(idx)} className="rounded-lg overflow-hidden" style={{ width: '80px', height: '80px', border: galleryIndex === idx ? '2px solid var(--tb-text)' : '2px solid transparent', opacity: galleryIndex === idx ? 1 : 0.6, transition: 'all 0.3s ease' }}>
-                  <img src={img} alt="" className="w-full h-full object-cover" />
+                <button key={idx} onClick={() => setGalleryIndex(idx)} aria-label={`Voir la photo ${idx + 1}`} className="rounded-lg overflow-hidden" style={{ width: '80px', height: '80px', border: galleryIndex === idx ? '2px solid var(--tb-text)' : '2px solid transparent', opacity: galleryIndex === idx ? 1 : 0.6, transition: 'all 0.3s ease' }}>
+                  <img src={img} alt="" className="w-full h-full object-cover" loading="lazy" />
                 </button>
               ))}
             </div>
@@ -107,7 +107,7 @@ export default function ProductSection({ onAddToCart, initialType }: ProductSect
             <h1 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400, fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', color: 'var(--tb-text)', marginBottom: '12px' }}>
               {t({ fr: 'Cheveux', ar: 'شعر' })} {lang === 'fr' ? currentType.nameFr : currentType.nameAr} {t({ fr: 'Naturels', ar: 'الطبيعي' })}
             </h1>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '24px', color: '#d4a5a5', marginBottom: '8px' }}>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '24px', color: 'var(--tb-accent-text)', marginBottom: '8px' }}>
               {t({ fr: '\u00c0 partir de', ar: 'ابتداءً من' })} {price} TND
             </p>
             <div className="flex items-center gap-2 mb-6" style={{ flexDirection: isRTL ? 'row-reverse' : 'row' }}>

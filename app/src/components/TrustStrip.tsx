@@ -59,7 +59,7 @@ export default function TrustStrip() {
                   fontFamily: "'Playfair Display', serif",
                   fontWeight: 400,
                   fontSize: '40px',
-                  color: '#d4a5a5',
+                  color: 'var(--tb-accent-text)',
                   lineHeight: 1.2,
                 }}
               >

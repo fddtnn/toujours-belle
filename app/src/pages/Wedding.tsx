@@ -222,7 +222,7 @@ export default function Wedding() {
               alt="Bride wedding hair"
               className="absolute inset-0 w-full h-full object-cover"
               style={{ objectPosition: 'center 15%' }}
-            />
+            loading="lazy" />
             {/* Subtle gradient overlay on right edge for blend */}
             <div
               className="absolute top-0 right-0 bottom-0 hidden md:block"
@@ -450,14 +450,14 @@ export default function Wedding() {
                     {/* Product Grid */}
                     <div className="grid grid-cols-2 gap-2 mb-4">
                       <div style={{ borderRadius: '12px', overflow: 'hidden', aspectRatio: '1', backgroundColor: 'var(--tb-surface)' }}>
-                        <img src="/images/braid-1.jpg" alt="Product" className="w-full h-full object-cover" />
+                        <img src="/images/braid-1.jpg" alt="Product" className="w-full h-full object-cover" loading="lazy" />
                       </div>
                       <div className="flex flex-col gap-2">
                         <div style={{ borderRadius: '12px', overflow: 'hidden', aspectRatio: '1', backgroundColor: 'var(--tb-surface)' }}>
-                          <img src="/images/braid-2.jpg" alt="Product" className="w-full h-full object-cover" />
+                          <img src="/images/braid-2.jpg" alt="Product" className="w-full h-full object-cover" loading="lazy" />
                         </div>
                         <div style={{ borderRadius: '12px', overflow: 'hidden', aspectRatio: '1', backgroundColor: 'var(--tb-surface)' }}>
-                          <img src="/images/braid-3.jpg" alt="Product" className="w-full h-full object-cover" />
+                          <img src="/images/braid-3.jpg" alt="Product" className="w-full h-full object-cover" loading="lazy" />
                         </div>
                       </div>
                     </div>
@@ -465,7 +465,7 @@ export default function Wedding() {
                     {/* Shop Now Card */}
                     <div className="flex items-center gap-3 mb-6" style={{ backgroundColor: 'var(--tb-surface)', borderRadius: '12px', padding: '14px 16px' }}>
                       <div style={{ width: '48px', height: '48px', borderRadius: '8px', overflow: 'hidden', flexShrink: 0 }}>
-                        <img src="/images/braid-1.jpg" alt="Product" className="w-full h-full object-cover" />
+                        <img src="/images/braid-1.jpg" alt="Product" className="w-full h-full object-cover" loading="lazy" />
                       </div>
                       <div style={{ flex: 1 }}>
                         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: 'var(--tb-text)', fontWeight: 500 }}>{detail.productName}</p>
@@ -532,7 +532,7 @@ export default function Wedding() {
                   src={card.image}
                   alt={card.title}
                   className="absolute inset-0 w-full h-full object-cover"
-                />
+                loading="lazy" />
                 {/* Dark overlay for text readability */}
                 <div
                   className="absolute inset-0"

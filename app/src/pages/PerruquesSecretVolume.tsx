@@ -127,10 +127,10 @@ export default function PerruquesSecretVolume() {
             <ChevronRight size={12} />
             <span style={{ color: 'var(--tb-text)' }}>TB Secret Volume</span>
           </div>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#d4a5a5', marginBottom: '8px' }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--tb-accent-text)', marginBottom: '8px' }}>
             {lang === 'fr' ? 'TB SECRET VOLUME \u2014 3 MOD\u00c8LES' : 'TB \u0633\u064a\u0643\u0631\u064a\u062a \u0641\u0648\u0644\u064a\u0648\u0645 \u2014 3 \u0645\u0648\u062f\u064a\u0644\u0627\u062a'}
           </p>
-          <h1 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400, fontSize: 'clamp(2rem, 4vw, 3rem)', color: '#d4a5a5', lineHeight: 1.15, marginBottom: '8px' }}>
+          <h1 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400, fontSize: 'clamp(2rem, 4vw, 3rem)', color: 'var(--tb-accent-text)', lineHeight: 1.15, marginBottom: '8px' }}>
             {lang === 'fr' ? 'TB Secret Volume' : 'TB \u0633\u064a\u0643\u0631\u064a\u062a \u0641\u0648\u0644\u064a\u0648\u0645'}
           </h1>
         </div>
@@ -144,7 +144,7 @@ export default function PerruquesSecretVolume() {
               <div key={p.id}>
                 {showHeader && (
                   <div className="mt-6 sm:mt-10 mb-3 sm:mb-4">
-                    <h2 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400, fontSize: 'clamp(1.3rem, 2.5vw, 1.8rem)', color: '#d4a5a5' }}>
+                    <h2 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400, fontSize: 'clamp(1.3rem, 2.5vw, 1.8rem)', color: 'var(--tb-accent-text)' }}>
                       {lang === 'fr' ? p.categoryFr : p.categoryAr}
                     </h2>
                     <div style={{ width: '60px', height: '2px', backgroundColor: '#d4a5a5', marginTop: '6px' }} />
@@ -173,12 +173,12 @@ export default function PerruquesSecretVolume() {
                             {lang === 'fr' ? q.nameFr : q.nameAr}
                           </h3>
                           <div className="flex items-center justify-between mb-1 sm:mb-2">
-                            <span className="text-xs sm:text-base font-semibold" style={{ fontFamily: "'Inter', sans-serif", color: '#d4a5a5' }}>
+                            <span className="text-xs sm:text-base font-semibold" style={{ fontFamily: "'Inter', sans-serif", color: 'var(--tb-accent-text)' }}>
                               <span className="sm:hidden">{q.basePrice} TND</span>
                               <span className="hidden sm:inline">{lang === 'fr' ? `\u00c0 partir de ${q.basePrice} TND` : `\u0627\u0628\u062a\u062f\u0627\u0621\u064b \u0645\u0646 ${q.basePrice} \u062f.\u062a`}</span>
                             </span>
                           </div>
-                          <button className="w-full py-1.5 sm:py-2.5 rounded-lg transition-colors duration-300" style={{ backgroundColor: '#3a1a2a', color: 'var(--tb-card)', fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '10px', letterSpacing: '0.04em', border: 'none', cursor: 'pointer' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#d4a5a5'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#3a1a2a'; }}>
+                          <button className="w-full py-1.5 sm:py-2.5 min-h-[44px] rounded-lg transition-colors duration-300" style={{ backgroundColor: '#3a1a2a', color: 'var(--tb-card)', fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '10px', letterSpacing: '0.04em', border: 'none', cursor: 'pointer' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#d4a5a5'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#3a1a2a'; }}>
                             <span className="sm:hidden">{lang === 'fr' ? 'Voir +' : '\u0639\u0631\u0636 \u0627\u0644\u0645\u0632\u064a\u062f'}</span>
                             <span className="hidden sm:inline">{lang === 'fr' ? 'Voir le Produit' : '\u0639\u0631\u0636 \u0627\u0644\u0645\u0646\u062a\u062c'}</span>
                           </button>
@@ -290,12 +290,12 @@ export default function PerruquesSecretVolume() {
             <div className="flex flex-col gap-2 flex-shrink-0">
               {images.map((img, i) => (
                 <button key={i} onClick={() => setMainIdx(i)} className="w-16 h-16 overflow-hidden border-2 transition-all" style={{ borderColor: mainIdx === i ? '#d4a5a5' : '#eee', opacity: mainIdx === i ? 1 : 0.7 }}>
-                  <img src={img.src} alt={img.alt} className="w-full h-full object-cover" />
+                  <img src={img.src} alt={img.alt} className="w-full h-full object-cover" loading="lazy" />
                 </button>
               ))}
             </div>
             <div ref={imgRef} className="relative flex-1 overflow-hidden cursor-crosshair" style={{ minHeight: '400px', maxHeight: '600px' }} onMouseEnter={() => setZoom(true)} onMouseLeave={() => setZoom(false)} onMouseMove={handleMouseMove}>
-              <img src={images[mainIdx].src} alt={images[mainIdx].alt} className="w-full h-full object-contain transition-transform duration-300" style={{ transform: zoom ? `scale(2)` : 'scale(1)', transformOrigin: `${zoomPos.x * 100}% ${zoomPos.y * 100}%` }} />
+              <img src={images[mainIdx].src} alt={images[mainIdx].alt} className="w-full h-full object-contain transition-transform duration-300" style={{ transform: zoom ? `scale(2)` : 'scale(1)', transformOrigin: `${zoomPos.x * 100}% ${zoomPos.y * 100}%` }} loading="lazy" />
               <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs" style={{ backgroundColor: 'rgba(0,0,0,0.6)', color: 'var(--tb-card)' }}>
                 {mainIdx + 1} / {images.length}
               </div>

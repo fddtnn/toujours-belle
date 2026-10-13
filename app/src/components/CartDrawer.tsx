@@ -171,7 +171,7 @@ export default function CartDrawer({ isOpen, onClose, items, onRemove, onLoginCl
                             fontFamily: "'Inter', sans-serif",
                             fontWeight: 500,
                             fontSize: '14px',
-                            color: '#d4a5a5',
+                            color: 'var(--tb-accent-text)',
                           }}
                         >
                           {item.price} TND
@@ -217,7 +217,7 @@ export default function CartDrawer({ isOpen, onClose, items, onRemove, onLoginCl
                     fontFamily: "'Inter', sans-serif",
                     fontWeight: 500,
                     fontSize: '16px',
-                    color: '#d4a5a5',
+                    color: 'var(--tb-accent-text)',
                   }}
                 >
                   {total} TND

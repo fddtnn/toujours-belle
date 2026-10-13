@@ -82,7 +82,7 @@ export default function SalonVideo() {
             style={{
               fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '11px',
               letterSpacing: '0.15em', textTransform: 'uppercase',
-              color: '#d4a5a5', marginBottom: '14px',
+              color: 'var(--tb-accent-text)', marginBottom: '14px',
             }}
           >
             {t({ fr: 'DANS NOTRE SALON', ar: 'داخل صالوننا' })}

@@ -104,7 +104,7 @@ export default function Hero() {
               fontSize: '11px',
               letterSpacing: '0.15em',
               textTransform: 'uppercase',
-              color: '#d4a5a5',
+              color: 'var(--tb-accent-text)',
               marginBottom: '16px',
             }}
           >
@@ -117,7 +117,7 @@ export default function Hero() {
               fontWeight: 400,
               fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
               lineHeight: 1.1,
-              color: '#d4a5a5',
+              color: 'var(--tb-accent-text)',
             }}
           >
             <span ref={line1Ref} className="block opacity-0 translate-y-10">

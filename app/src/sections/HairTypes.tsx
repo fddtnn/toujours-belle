@@ -100,7 +100,7 @@ export default function HairTypes({ onSelectType }: HairTypesProps) {
             <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--tb-text-secondary)', marginBottom: '16px' }}>
               {t({ fr: 'NOTRE COLLECTION', ar: 'مجموعتنا' })}
             </p>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400, fontSize: 'clamp(2rem, 4vw, 3.5rem)', lineHeight: 1.15, color: '#d4a5a5', marginBottom: '20px' }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400, fontSize: 'clamp(2rem, 4vw, 3.5rem)', lineHeight: 1.15, color: 'var(--tb-accent-text)', marginBottom: '20px' }}>
               {t({ fr: 'Quatre Types de Cheveux', ar: 'أربعة أنواع الشعر' })}
             </h2>
             <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: '16px', lineHeight: 1.6, color: 'var(--tb-text-secondary)', marginBottom: '24px' }}>
@@ -129,7 +129,7 @@ export default function HairTypes({ onSelectType }: HairTypesProps) {
               <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: '14px', lineHeight: 1.5, color: 'var(--tb-text-secondary)', marginBottom: '12px' }}>
                 {lang === 'fr' ? hair.descFr : hair.descAr}
               </p>
-              <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '12px', letterSpacing: '0.08em', color: '#d4a5a5' }}>
+              <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '12px', letterSpacing: '0.08em', color: 'var(--tb-accent-text)' }}>
                 {isRTL ? '← ' : ''}{t({ fr: 'Voir plus', ar: 'المزيد' })}{!isRTL ? ' →' : ''}
               </span>
             </div>

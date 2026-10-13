@@ -321,7 +321,7 @@ export default function ColorSelection({ onShadeSelect }: ColorSelectionProps) {
               fontFamily: "'Playfair Display', serif",
               fontWeight: 400,
               fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-              color: '#d4a5a5',
+              color: 'var(--tb-accent-text)',
               lineHeight: 1.15,
               marginBottom: '12px',
             }}

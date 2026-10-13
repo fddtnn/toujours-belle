@@ -40,7 +40,7 @@ export default function Footer() {
         <h2 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400, fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', color: '#faf6f4', marginBottom: '12px' }}>
           {lang === 'fr' ? 'Rejoignez Notre Communauté' : 'انضمي إلى مجتمعنا'}
         </h2>
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '16px', color: '#d4a5a5', marginBottom: '8px' }}>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '16px', color: 'var(--tb-accent-text)', marginBottom: '8px' }}>
           {lang === 'fr' ? '10% de réduction sur votre première commande' : 'خصم 10٪ على طلبكِ الأول'}
         </p>
         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '14px', color: '#8a8a8a', maxWidth: '480px', margin: '0 auto 28px', lineHeight: 1.6 }}>
@@ -48,7 +48,7 @@ export default function Footer() {
         </p>
 
         {subscribed ? (
-          <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '14px', color: '#d4a5a5' }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '14px', color: 'var(--tb-accent-text)' }}>
             {lang === 'fr' ? 'Merci ! Vérifiez votre email ✓' : 'شكرًا! تحققي من بريدكِ ✓'}
           </p>
         ) : (
@@ -91,7 +91,7 @@ export default function Footer() {
             {/* Brand */}
             <div>
               <p className="flex items-center gap-2" style={{ marginBottom: '0px' }}>
-                <img src="/images/tb-logo-footer.png" alt="Toujours Belle" style={{ height: '180px', width: 'auto', objectFit: 'contain' }} />
+                <img src="/images/tb-logo-footer.png" alt="Toujours Belle" style={{ height: '180px', width: 'auto', objectFit: 'contain' }} loading="lazy" />
               </p>
 
               {/* Social Icons */}
@@ -209,7 +209,7 @@ export default function Footer() {
               alt="Payment methods"
               className="h-11 sm:h-14 object-contain rounded-md"
               style={{ display: 'block' }}
-            />
+            loading="lazy" />
             <div className="flex items-center gap-4" style={{ flexDirection: isRTL ? 'row-reverse' : 'row' }}>
               <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'var(--tb-text-muted)' }}>{lang === 'fr' ? 'Conditions' : 'الشروط'}</span>
               <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '12px', color: 'var(--tb-text-muted)' }}>{lang === 'fr' ? 'Confidentialité' : 'الخصوصية'}</span>

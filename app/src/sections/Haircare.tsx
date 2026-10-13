@@ -130,7 +130,7 @@ export default function Haircare() {
               fontSize: '11px',
               letterSpacing: '0.15em',
               textTransform: 'uppercase',
-              color: '#d4a5a5',
+              color: 'var(--tb-accent-text)',
               marginBottom: '10px',
             }}
           >
@@ -141,7 +141,7 @@ export default function Haircare() {
               fontFamily: "'Playfair Display', serif",
               fontWeight: 400,
               fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-              color: '#d4a5a5',
+              color: 'var(--tb-accent-text)',
               lineHeight: 1.15,
               marginBottom: '12px',
             }}
@@ -219,7 +219,7 @@ export default function Haircare() {
                   style={{
                     fontFamily: "'Inter', sans-serif",
                     fontSize: '10px',
-                    color: '#d4a5a5',
+                    color: 'var(--tb-accent-text)',
                     fontWeight: 500,
                     letterSpacing: '0.08em',
                     textTransform: 'uppercase',
@@ -256,7 +256,7 @@ export default function Haircare() {
                       fontFamily: "'Inter', sans-serif",
                       fontWeight: 600,
                       fontSize: '15px',
-                      color: '#d4a5a5',
+                      color: 'var(--tb-accent-text)',
                     }}
                   >
                     {p.price} TND

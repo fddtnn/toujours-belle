@@ -321,19 +321,19 @@ export default function Navigation({ cartCount, onCartClick, onLoginClick, onMen
 
         {/* Right Actions */}
         <div className="flex items-center gap-3" style={{ flexDirection: isRTL ? 'row-reverse' : 'row' }}>
-          <button onClick={() => setSearchOpen(!searchOpen)} className="p-2 hover:text-[#d4a5a5] transition-colors duration-300" style={{ color: textColor }} aria-label="Search">
+          <button onClick={() => setSearchOpen(!searchOpen)} className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center hover:text-[#d4a5a5] transition-colors duration-300" style={{ color: textColor }} aria-label="Search">
             <Search size={18} />
           </button>
-          <button onClick={toggleLang} className="text-xs uppercase tracking-widest hover:text-[#d4a5a5] transition-colors duration-300" style={{ fontWeight: 500, color: textColor }}>
+          <button onClick={toggleLang} aria-label="Changer de langue" className="text-xs uppercase tracking-widest min-w-[44px] min-h-[44px] flex items-center justify-center hover:text-[#d4a5a5] transition-colors duration-300" style={{ fontWeight: 500, color: textColor }}>
             {lang === 'fr' ? 'AR' : 'FR'}
           </button>
-          <button onClick={onLoginClick} className="p-2 hover:text-[#d4a5a5] transition-colors duration-300" style={{ color: textColor }} aria-label="Sign In">
+          <button onClick={onLoginClick} className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center hover:text-[#d4a5a5] transition-colors duration-300" style={{ color: textColor }} aria-label="Sign In">
             <User size={18} />
           </button>
-          <button onClick={toggleTheme} className="p-2 hover:text-[#d4a5a5] transition-colors duration-300" style={{ color: textColor }} aria-label="Toggle Dark Mode">
+          <button onClick={toggleTheme} className="p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center hover:text-[#d4a5a5] transition-colors duration-300" style={{ color: textColor }} aria-label="Toggle Dark Mode">
             {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
-          <button onClick={onCartClick} className="relative p-2 hover:text-[#d4a5a5] transition-colors duration-300" style={{ color: textColor }} aria-label="Cart">
+          <button onClick={onCartClick} className="relative p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center hover:text-[#d4a5a5] transition-colors duration-300" style={{ color: textColor }} aria-label="Cart">
             <ShoppingCart size={20} />
             {cartCount > 0 && (
               <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center text-white text-xs" style={{ backgroundColor: '#d4a5a5', fontSize: '10px', fontWeight: 600 }}>
@@ -341,7 +341,7 @@ export default function Navigation({ cartCount, onCartClick, onLoginClick, onMen
               </span>
             )}
           </button>
-          <button className="lg:hidden p-2" style={{ color: textColor }} onClick={() => { toggleMobileMenu(!mobileOpen); onMenuOpenChange?.(!mobileOpen); }} aria-label="Menu">
+          <button className="lg:hidden p-2.5 min-w-[44px] min-h-[44px] flex items-center justify-center" style={{ color: textColor }} onClick={() => { toggleMobileMenu(!mobileOpen); onMenuOpenChange?.(!mobileOpen); }} aria-label="Menu">
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -375,7 +375,7 @@ export default function Navigation({ cartCount, onCartClick, onLoginClick, onMen
       </div>
 
       {/* Mobile Menu Drawer */}
-      <div className={`fixed inset-0 z-[110] lg:hidden transition-opacity duration-300 ${mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+      <div className={`fixed inset-0 z-[110] lg:hidden overflow-hidden transition-opacity duration-300 ${mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <div className="absolute inset-0 bg-black/20" onClick={() => { toggleMobileMenu(false); onMenuOpenChange?.(false); }} />
         <div className={`absolute top-0 ${isRTL ? 'left-0' : 'right-0'} w-72 h-full shadow-xl transition-transform duration-300 ${mobileOpen ? 'translate-x-0' : isRTL ? '-translate-x-full' : 'translate-x-full'}`} style={{ paddingTop: '20px', backgroundColor: mobileBg }}>
           <div className="flex flex-col gap-6 px-8">

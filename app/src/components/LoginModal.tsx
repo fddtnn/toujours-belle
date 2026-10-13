@@ -122,7 +122,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
         {/* Header */}
         <div className="text-center pt-10 pb-6 px-8" style={{ backgroundColor: "#faf6f4" }}>
           <p className="flex items-center justify-center mb-3">
-            <img src="/images/tb-logo.png" alt="Toujours Belle" style={{ height: '130px', width: 'auto', objectFit: 'contain' }} />
+            <img src="/images/tb-logo.png" alt="Toujours Belle" style={{ height: '130px', width: 'auto', objectFit: 'contain' }} loading="lazy" />
           </p>
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '24px', fontWeight: 500, color: '#1a1a1a', lineHeight: 1.2 }}>
             {step === "otp" ? t.enterOtp : t.signIn}
@@ -247,7 +247,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
               {/* Name field for new accounts */}
               <div className="rounded-lg p-4" style={{ backgroundColor: '#faf6f4', border: '1px solid #f0e0e0' }}>
-                <p className="flex items-center gap-2 mb-3" style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', fontWeight: 600, color: '#d4a5a5' }}>
+                <p className="flex items-center gap-2 mb-3" style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', fontWeight: 600, color: 'var(--tb-accent-text)' }}>
                   <User size={14} />
                   {t.firstTime} {t.createAccount}
                 </p>

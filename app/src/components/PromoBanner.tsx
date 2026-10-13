@@ -27,10 +27,10 @@ export default function PromoBanner() {
           className="promo-content w-1/2 flex flex-col items-center justify-center text-center px-3 sm:px-4 md:px-8"
           style={{ backgroundColor: 'var(--tb-text)', padding: 'clamp(20px, 4vw, 60px) clamp(12px, 3vw, 40px)' }}
         >
-          <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: 'clamp(0.9rem, 3.5vw, 3.5rem)', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#d4a5a5', marginBottom: '12px' }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: 'clamp(0.9rem, 3.5vw, 3.5rem)', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--tb-accent-text)', marginBottom: '12px' }}>
             {t({ fr: 'OFFRE SPÉCIALE', ar: 'عرض خاص' })}
           </p>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(0.75rem, 1.3vw, 1.1rem)', color: '#d4a5a5', fontWeight: 300, marginBottom: '16px' }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(0.75rem, 1.3vw, 1.1rem)', color: 'var(--tb-accent-text)', fontWeight: 300, marginBottom: '16px' }}>
             <span style={{ fontSize: 'clamp(1.2rem, 2.2vw, 1.8rem)', fontWeight: 700 }}>-15%</span>{' '}
             {t({ fr: 'avec le code', ar: 'مع الكود' })} <strong style={{ fontWeight: 600 }}>BIENVENUE15</strong>
           </p>

@@ -45,7 +45,7 @@ export default function About() {
 
         {/* Text Content */}
         <div ref={textRef} className="w-full lg:w-1/2 flex flex-col justify-center transition-colors duration-500" style={{ padding: '80px 40px', paddingLeft: isRTL ? '40px' : '80px', paddingRight: isRTL ? '80px' : '40px', backgroundColor: 'var(--tb-bg)' }}>
-          <p className="animate-in" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#d4a5a5', marginBottom: '16px' }}>
+          <p className="animate-in" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--tb-accent-text)', marginBottom: '16px' }}>
             {t({ fr: 'À PROPOS', ar: 'من نحن' })}
           </p>
 

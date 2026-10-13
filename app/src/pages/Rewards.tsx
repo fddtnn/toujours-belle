@@ -466,7 +466,7 @@ export default function Rewards() {
                 alt="Refer a friend"
                 className="w-full max-w-md rounded-2xl"
                 style={{ objectFit: 'contain', maxHeight: '580px' }}
-              />
+              loading="lazy" />
             </div>
           </div>
         </div>
