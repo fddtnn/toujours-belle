@@ -395,9 +395,19 @@ body {
 
 @media (max-width: 640px) {
   .tb-hero-glass {
-    /* the phone plate now sits over hair rather than washed-out wall, which
-       cost it ~0.7 of contrast, so it carries more of its own opacity */
-    --hero-glass-bg: rgba(253, 251, 250, 0.96);
+    /* Actually glassy on the phone: the plate is mostly transparent and the
+       contrast comes from brightening the backdrop rather than hiding it, so
+       the hair still reads through it. */
+    --hero-glass-bg: rgba(253, 251, 250, 0.46);
+    /* contrast() before brightness() is what makes this work: flattening the
+       backdrop lifts the dark hair strands that were dragging the worst-case
+       ratio to 3.4, while the shape and colour still read through. */
+    backdrop-filter: blur(20px) saturate(150%) contrast(0.45) brightness(1.45);
+    -webkit-backdrop-filter: blur(20px) saturate(150%) contrast(0.45) brightness(1.45);
+    /* The brand rose only reaches 4.69:1 on pure white, so on a plate you can
+       see through it can never clear 4.5 - the hero's own rose goes a few
+       shades deeper on the phone. Nowhere else uses this. */
+    --tb-accent-text: #7a4343;
     border-radius: 22px;
     padding: 20px 18px;
     box-shadow: 0 10px 30px rgba(141, 94, 94, 0.14);
@@ -407,9 +417,22 @@ body {
     margin-right: 5vw !important;
   }
 
-  /* the opacity bump above lands on the element, so it would override the
-     dark theme's value too - restate it for dark mode */
+  /* the opacity above lands on the element, so it would override the dark
+     theme's value too - restate it for dark mode, darkening the backdrop
+     instead of brightening it */
   .dark .tb-hero-glass {
-    --hero-glass-bg: rgba(14, 14, 14, 0.95);
+    --hero-glass-bg: rgba(14, 14, 14, 0.44);
+    /* the deeper rose set above would land here too and leave dark text on a
+       dark plate - dark mode keeps its own light rose */
+    --tb-accent-text: #e0b5b5;
+    backdrop-filter: blur(20px) saturate(120%) contrast(0.5) brightness(0.42);
+    -webkit-backdrop-filter: blur(20px) saturate(120%) contrast(0.5) brightness(0.42);
+  }
+
+  /* without backdrop-filter there is nothing holding the text up, so the
+     plate falls back to being opaque */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .tb-hero-glass { --hero-glass-bg: rgba(253, 251, 250, 0.95); }
+    .dark .tb-hero-glass { --hero-glass-bg: rgba(14, 14, 14, 0.94); }
   }
 }
