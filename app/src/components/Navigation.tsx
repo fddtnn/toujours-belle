@@ -69,12 +69,12 @@ const cheveuxSubmenu: CheveuxItem[] = [
   { fr: 'TB Secret Volume', ar: 'TB سيكريت فوليوم', href: '/secret-volume' },
   { fr: 'Rajouts Frontaux', ar: 'إضافات أمامية', href: '#product' },
   { fr: 'Franges', ar: 'غرة', href: '/franges' },
-  { fr: 'Queues de Cheval', ar: 'ذيول الحصان', href: '#product' },
+  { fr: 'Queues de Cheval', ar: 'ذيول الحصان', href: '/queues' },
   { fr: 'Chignons & Chouchous', ar: 'كعكات وربطات', href: '/chignons' },
   { fr: 'Hair Care', ar: 'العناية بالشعر', href: '#product' },
   { fr: 'Accessoires', ar: 'إكسسوارات', href: '#product' },
   { fr: 'E-Gift Cards', ar: 'بطاقات الهدايا الإلكترونية', href: '/e-gift-cards' },
-  { fr: 'Extensions', ar: 'إضافات', href: '/extensions.html', external: true },
+  { fr: 'Extensions', ar: 'إضافات', href: '/extensions' },
 ];
 
 export default function Navigation({ cartCount, onCartClick, onLoginClick, onMenuOpenChange }: NavigationProps) {
