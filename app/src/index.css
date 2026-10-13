@@ -360,16 +360,20 @@ body {
    tighter there, so the backdrop under the headline runs darker and its worst
    patches fell near 2.9:1. The plate stays, just trimmed so it does not crowd
    a narrow viewport. */
-/* The hero photo was effectively invisible on a phone: the cream wash is a
-   horizontal gradient sized for a wide frame, so on a narrow one the whole
-   width sits in its 95%-75% end, and `object-center` crops to the wall rather
-   than the model. Phone gets its own framing - model up top, copy underneath -
-   and the wash turns vertical so it only darkens where the copy sits. The
-   plate carries the text contrast now, so the photo can stay legible. */
+/* Phone hero: no card at all.
+
+   Every version of a plate here traded the photograph for the text - the
+   brand rose only reaches 4.69:1 on pure white, so any transparency had to
+   be bought back by washing the picture out. So the plate goes away on the
+   phone and the copy sits straight on the photo, carried by a scrim that
+   darkens only the bottom of the frame. The top half of the picture is
+   untouched.
+
+   The cream wash also had to go: it is a horizontal gradient sized for a
+   wide frame, and on a narrow one the whole width sits inside its 95% end.
+   And `object-center` crops a 1358x720 frame to the wall beside her, so the
+   phone anchors to the right edge, where the hair is. */
 @media (max-width: 640px) {
-  /* Framed on the hair, not the face. Any crop between 70% and 90% puts the
-     plate across her nose; the right edge is pure cascade, which is the
-     product anyway. */
   .tb-hero-img {
     object-position: 100% 50%;
   }
@@ -377,65 +381,50 @@ body {
   .tb-hero-wash {
     background: linear-gradient(
       to top,
-      rgba(250, 246, 244, 0.92) 0%,
-      rgba(250, 246, 244, 0.72) 26%,
-      rgba(250, 246, 244, 0.22) 52%,
-      rgba(250, 246, 244, 0.06) 72%,
-      transparent 100%
+      rgba(24, 16, 16, 0.90) 0%,
+      rgba(24, 16, 16, 0.86) 20%,
+      rgba(24, 16, 16, 0.74) 38%,
+      rgba(24, 16, 16, 0.58) 56%,
+      rgba(24, 16, 16, 0.24) 74%,
+      transparent 94%
     ) !important;
   }
 
-  /* bottom-aligning clipped the CTA: the section is 100vh but starts below the
-     promo bar, so its last ~40px are already past the fold. Centred keeps the
-     plate fully on screen with the model framed in the band above it. */
+  /* the section is 100vh but starts below the promo bar, so its last ~40px
+     are already past the fold - the padding has to clear that or the CTA
+     gets clipped */
   .tb-hero-copy {
-    align-items: center;
+    align-items: flex-end;
+    padding-bottom: 19vh;
   }
-}
 
-@media (max-width: 640px) {
-  /* Smoked glass, not frosted. A light plate has to hide the photograph to
-     hold its contrast - the arithmetic leaves no room, because the brand rose
-     only reaches 4.69:1 even on pure white. Dimming the backdrop instead and
-     flipping the copy to light costs the photo nothing: it stays sharp and
-     fully readable through the glass, just darker. Both themes use this. */
   .tb-hero-glass {
-    --hero-glass-bg: rgba(22, 16, 16, 0.14);
-    /* contrast() compresses the blonde highlights, which were the 5% of the
-       backdrop still bright enough to collapse the ratio to 2.5 */
-    backdrop-filter: blur(7px) saturate(118%) contrast(0.78) brightness(0.60);
-    -webkit-backdrop-filter: blur(7px) saturate(118%) contrast(0.78) brightness(0.60);
-    --tb-accent-text: #f2d8d8;
-    --tb-text-secondary: rgba(255, 255, 255, 0.90);
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    border-radius: 22px;
-    padding: 20px 18px;
-    box-shadow: 0 10px 30px rgba(141, 94, 94, 0.14);
-    /* the component sets one side to 8vw and the other to auto, which let the
-       plate bleed off the narrow edge - !important because those are inline */
-    margin-left: 5vw !important;
-    margin-right: 5vw !important;
+    background-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-left: 7vw !important;
+    margin-right: 7vw !important;
+    --tb-accent-text: #f6dede;
+    --tb-text-secondary: rgba(255, 255, 255, 0.92);
   }
 
-  /* the light-theme blobs put a white 55% highlight right where the overline
-     sits - on a dark plate that was the 5% of backdrop holding the worst case
-     at 2.5 */
   .tb-hero-glass::before {
-    background:
-      radial-gradient(42% 52% at 18% 24%, rgba(212, 165, 165, 0.14), transparent 68%),
-      radial-gradient(38% 48% at 84% 74%, rgba(160, 96, 96, 0.16), transparent 66%),
-      radial-gradient(40% 50% at 58% 14%, rgba(255, 255, 255, 0.06), transparent 64%);
+    display: none;
   }
 
-  /* the CTA is a dark pill by default, which disappears into smoked glass */
+  /* the CTA is a near-black pill, which vanishes into the scrim */
   .tb-hero-glass a {
     background-color: #faf6f4 !important;
     color: #1a1a1a !important;
   }
+}
 
-  /* without backdrop-filter nothing is dimming the photo, so the plate has to
-     supply the darkness itself */
-  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .tb-hero-glass { --hero-glass-bg: rgba(22, 16, 16, 0.62); }
+@media (prefers-reduced-motion: reduce) {
+  .tb-hero-glass::before {
+    animation: none;
   }
 }
+
