@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router";
 import { useLocalAuth } from "@/hooks/useLocalAuth";
 import { useLanguage } from "@/context/LanguageContext";
-import { X, Mail, ArrowRight, User } from "lucide-react";
+import { X, Mail, ArrowRight, User, KeyRound } from "lucide-react";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -9,7 +10,8 @@ interface LoginModalProps {
 }
 
 export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
-  const { lang } = useLanguage();
+  const { lang, isRTL } = useLanguage();
+  const navigate = useNavigate();
   const { sendOtp, verifyOtp, isLoading, lastOtp } = useLocalAuth();
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
@@ -31,6 +33,16 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
     }
   }, [isOpen]);
 
+  /* Escape closes, and the page behind must not scroll while this is up. */
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") termsOpen ? setTermsOpen(false) : onClose(); };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { window.removeEventListener("keydown", onKey); document.body.style.overflow = prev; };
+  }, [isOpen, onClose, termsOpen]);
+
   if (!isOpen) return null;
 
   const handleSendOtp = async (e: React.FormEvent) => {
@@ -42,8 +54,6 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
     }
     try {
       await sendOtp(email);
-      // For demo: check if we need registration (no name field yet from server check)
-      // Show OTP step - the verify will handle both login and registration
       setStep("otp");
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Erreur";
@@ -71,182 +81,234 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
     }
   };
 
+  const goPrivacy = () => { onClose(); navigate("/privacy"); };
+
   const t = {
+    welcome: lang === "fr" ? "Bienvenue" : "أهلاً بكِ",
     signIn: lang === "fr" ? "Se connecter" : "تسجيل الدخول",
-    signInOrCreate: lang === "fr" ? "Se connecter ou créer un compte" : "تسجيل الدخول أو إنشاء حساب",
+    signInOrCreate: lang === "fr" ? "Connectez-vous pour suivre vos commandes" : "سجّلي الدخول لمتابعة طلباتكِ",
     continueWith: lang === "fr" ? "Continuer avec" : "المتابعة باستخدام",
-    or: lang === "fr" ? "ou" : "أو",
-    email: lang === "fr" ? "Email" : "البريد الإلكتروني",
-    emailPlaceholder: lang === "fr" ? "votre@email.com" : "بريدك@email.com",
+    or: lang === "fr" ? "OU" : "أو",
+    emailPlaceholder: lang === "fr" ? "Adresse email" : "البريد الإلكتروني",
     emailNewsOffers: lang === "fr" ? "M'envoyer des nouvelles et des offres" : "أرسلي لي الأخبار والعروض",
-    agreeTerms: lang === "fr" ? "En continuant, vous acceptez nos" : "بالمتابعة، فإنك توافق على",
+    agreeTerms: lang === "fr" ? "En continuant, vous acceptez nos" : "بالمتابعة، فإنكِ توافقين على",
     termsOfService: lang === "fr" ? "conditions de service" : "شروط الخدمة",
     privacyPolicy: lang === "fr" ? "Politique de confidentialité" : "سياسة الخصوصية",
     submit: lang === "fr" ? "Continuer" : "متابعة",
-    enterOtp: lang === "fr" ? "Entrez le code de vérification" : "أدخلي رمز التحقق",
-    otpSent: lang === "fr" ? "Un code a été envoyé à" : "تم إرسال رمز إلى",
-    newAccount: lang === "fr" ? "Nouveau compte" : "حساب جديد",
-    yourName: lang === "fr" ? "Votre prénom" : "اسمكِ",
-    namePlaceholder: lang === "fr" ? "Prénom" : "الاسم الأول",
-    welcomeBack: lang === "fr" ? "Content de vous revoir !" : "سعداء بعودتكِ!",
-    createAccount: lang === "fr" ? "Créez votre compte" : "أنشئي حسابكِ",
+    noPassword: lang === "fr"
+      ? "Pas de mot de passe : nous vous envoyons un code à 6 chiffres."
+      : "بدون كلمة مرور: نرسل لكِ رمزاً من 6 أرقام.",
+    enterOtp: lang === "fr" ? "Entrez le code" : "أدخلي الرمز",
+    otpSent: lang === "fr" ? "Code envoyé à" : "تم إرسال الرمز إلى",
     firstTime: lang === "fr" ? "Première visite ?" : "زيارة أولى؟",
+    namePlaceholder: lang === "fr" ? "Prénom" : "الاسم الأول",
+    createAccount: lang === "fr" ? "Créez votre compte" : "أنشئي حسابكِ",
     enterName: lang === "fr" ? "Entrez votre prénom pour créer votre compte" : "أدخلي اسمكِ لإنشاء حسابكِ",
     verify: lang === "fr" ? "Vérifier" : "تحقق",
     back: lang === "fr" ? "Retour" : "رجوع",
+    close: lang === "fr" ? "Fermer" : "إغلاق",
+  };
+
+  const fieldStyle: React.CSSProperties = {
+    width: "100%",
+    padding: "15px 46px",
+    borderRadius: "14px",
+    border: "1px solid var(--glass-border)",
+    backgroundColor: "var(--tb-field-bg)",
+    fontFamily: "'Inter', sans-serif",
+    fontSize: "14px",
+    color: "var(--tb-text)",
+    outline: "none",
   };
 
   return (
     <div
-      className="fixed inset-0 z-[200] flex items-center justify-center"
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4"
       onClick={onClose}
+      dir={isRTL ? "rtl" : "ltr"}
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
-
-      {/* Modal */}
       <div
-        className="relative w-full max-w-[420px] mx-4 rounded-2xl overflow-hidden shadow-2xl tb-glass-panel"
+        className="absolute inset-0"
+        style={{ backgroundColor: "rgba(20, 14, 14, 0.52)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}
+      />
+
+      {/* Card */}
+      <div
+        className="tb-login-card relative w-full max-w-[420px] max-h-[92vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-label={t.signIn}
       >
-        {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full hover:bg-[#f0e0e0] transition-colors"
-          aria-label="Close"
+          className="absolute top-4 flex items-center justify-center transition-colors"
+          style={{
+            [isRTL ? "left" : "right"]: "16px",
+            width: "44px", height: "44px", borderRadius: "50%",
+            background: "none", border: "none", cursor: "pointer", color: "var(--tb-text)",
+          }}
+          aria-label={t.close}
         >
-          <X size={18} color="#1a1a1a" />
+          <X size={18} />
         </button>
 
-        {/* Header */}
-        <div className="text-center pt-10 pb-6 px-8" style={{ backgroundColor: "#faf6f4" }}>
-          <p className="flex items-center justify-center mb-3">
-            <img src="/images/tb-logo.png" alt="Toujours Belle" style={{ height: '130px', width: 'auto', objectFit: 'contain' }} loading="lazy" />
-          </p>
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '24px', fontWeight: 500, color: '#1a1a1a', lineHeight: 1.2 }}>
-            {step === "otp" ? t.enterOtp : t.signIn}
-          </h2>
-          <p className="mt-2" style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#8a8a8a' }}>
-            {step === "otp" ? `${t.otpSent} ${email}` : t.signInOrCreate}
-          </p>
-        </div>
+        <div className="px-8 pt-10 pb-8">
+          {/* Mark + title */}
+          <div className="text-center">
+            <img
+              src="/images/tb-logo.png"
+              alt="Toujours Belle"
+              className="tb-logo-adapt"
+              style={{ height: "78px", width: "auto", objectFit: "contain", margin: "0 auto 14px" }}
+            />
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "32px", fontWeight: 500, color: "var(--tb-text)", lineHeight: 1.15 }}>
+              {step === "otp" ? t.enterOtp : t.welcome}
+            </h2>
+            <p className="mt-2" style={{ fontFamily: "'Inter', sans-serif", fontSize: "13.5px", color: "var(--tb-text-secondary)" }}>
+              {step === "otp" ? `${t.otpSent} ${email}` : t.signInOrCreate}
+            </p>
+          </div>
 
-        {/* Body */}
-        <div className="px-8 py-6">
           {step === "email" ? (
-            <form onSubmit={handleSendOtp} className="space-y-5">
-              {/* Continue with shop button (placeholder) */}
-              <button
-                type="button"
-                className="w-full flex items-center justify-center gap-2 transition-all duration-200 opacity-60 cursor-not-allowed"
-                style={{
-                  padding: "14px 24px",
-                  borderRadius: "8px",
-                  backgroundColor: "#d4a5a5",
-                  color: "#ffffff",
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "14px",
-                  fontWeight: 500,
-                  border: "none",
-                }}
-                disabled
-                title="Coming soon"
-              >
-                {t.continueWith} Toujours Belle
-              </button>
-
-              {/* Divider */}
-              <div className="flex items-center gap-4">
-                <div className="flex-1 h-px" style={{ backgroundColor: '#e0d0d0' }} />
-                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#8a8a8a' }}>{t.or}</span>
-                <div className="flex-1 h-px" style={{ backgroundColor: '#e0d0d0' }} />
-              </div>
-
-              {/* Email input */}
+            <form onSubmit={handleSendOtp} className="mt-7 space-y-4">
               <div className="relative">
-                <Mail size={16} color="#c8adad" className="absolute left-4 top-1/2 -translate-y-1/2" />
+                <Mail
+                  size={17}
+                  color="var(--tb-accent-text)"
+                  className="absolute top-1/2 -translate-y-1/2"
+                  style={{ [isRTL ? "right" : "left"]: "16px" }}
+                />
                 <input
                   ref={inputRef}
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={t.emailPlaceholder}
+                  aria-label={t.emailPlaceholder}
                   required
-                  className="w-full rounded-lg"
-                  style={{
-                    padding: "14px 48px 14px 44px",
-                    border: "1px solid #e0d0d0",
-                    backgroundColor: "#faf6f4",
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: "14px",
-                    color: "#1a1a1a",
-                    outline: "none",
-                  }}
+                  style={fieldStyle}
                 />
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-md hover:bg-[#d4a5a5] hover:text-white transition-all duration-200 disabled:opacity-50"
-                  style={{ color: '#1a1a1a' }}
-                >
-                  <ArrowRight size={18} />
-                </button>
               </div>
 
-              {/* Newsletter checkbox */}
-              <label className="flex items-start gap-3 cursor-pointer">
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full flex items-center justify-center gap-2 transition-opacity duration-200 hover:opacity-90 disabled:opacity-50"
+                style={{
+                  padding: "16px 24px", borderRadius: "100px",
+                  backgroundColor: "var(--tb-text)", color: "var(--tb-bg)",
+                  fontFamily: "'Inter', sans-serif", fontSize: "15px", fontWeight: 500,
+                  border: "none", cursor: "pointer",
+                }}
+              >
+                {isLoading ? (
+                  <span className="animate-spin w-5 h-5 border-2 rounded-full" style={{ borderColor: "var(--tb-bg)", borderTopColor: "transparent" }} />
+                ) : (
+                  <>
+                    {t.submit}
+                    <ArrowRight size={17} style={{ transform: isRTL ? "rotate(180deg)" : undefined }} />
+                  </>
+                )}
+              </button>
+
+              <div className="flex items-center gap-4 pt-1">
+                <div className="flex-1 h-px" style={{ backgroundColor: "var(--glass-border)" }} />
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "0.1em", color: "var(--tb-text-muted)" }}>{t.or}</span>
+                <div className="flex-1 h-px" style={{ backgroundColor: "var(--glass-border)" }} />
+              </div>
+
+              {/* The shop account provider is not wired up yet, so it stays
+                  visibly out of service rather than failing on click. */}
+              <button
+                type="button"
+                disabled
+                title={lang === "fr" ? "Bientôt disponible" : "قريباً"}
+                className="w-full flex items-center justify-center gap-2 cursor-not-allowed"
+                style={{
+                  padding: "14px 24px", borderRadius: "100px",
+                  backgroundColor: "transparent", color: "var(--tb-text-muted)",
+                  fontFamily: "'Inter', sans-serif", fontSize: "14px", fontWeight: 500,
+                  border: "1px solid var(--glass-border)", opacity: 0.75,
+                }}
+              >
+                {t.continueWith} Toujours Belle
+              </button>
+
+              <label className="flex items-start gap-3 cursor-pointer pt-1">
                 <input
                   type="checkbox"
                   checked={emailNewsOffers}
                   onChange={(e) => setEmailNewsOffers(e.target.checked)}
                   className="mt-0.5 accent-[#d4a5a5]"
+                  style={{ width: "16px", height: "16px" }}
                 />
-                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", color: "#6b6b6b", lineHeight: 1.5 }}>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", color: "var(--tb-text-secondary)", lineHeight: 1.5 }}>
                   {t.emailNewsOffers}
                 </span>
               </label>
 
-              {/* Terms */}
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "#8a8a8a", lineHeight: 1.6 }}>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11.5px", color: "var(--tb-text-muted)", lineHeight: 1.65 }}>
                 {t.agreeTerms}{" "}
                 <button
                   type="button"
                   onClick={() => setTermsOpen(true)}
                   className="underline hover:text-[#d4a5a5] transition-colors"
-                  style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: "'Inter', sans-serif", fontSize: '11px', color: 'inherit' }}
+                  style={{ background: "none", border: "none", padding: 0, cursor: "pointer", fontFamily: "'Inter', sans-serif", fontSize: "11.5px", color: "inherit" }}
                 >
                   {t.termsOfService}
                 </button>{" "}
                 &{" "}
-                <a href="/privacy" className="underline hover:text-[#d4a5a5] transition-colors">
+                <button
+                  type="button"
+                  onClick={goPrivacy}
+                  className="underline hover:text-[#d4a5a5] transition-colors"
+                  style={{ background: "none", border: "none", padding: 0, cursor: "pointer", fontFamily: "'Inter', sans-serif", fontSize: "11.5px", color: "inherit" }}
+                >
                   {t.privacyPolicy}
-                </a>
+                </button>
               </p>
 
-              {/* Error */}
               {error && (
-                <p className="text-center" style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", color: "#e74c3c" }}>
+                <p className="text-center" style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", color: "#e05252" }}>
                   {error}
                 </p>
               )}
+
+              <p className="text-center pt-1" style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", color: "var(--tb-text-muted)" }}>
+                <KeyRound size={12} className="inline-block align-[-1px] mr-1.5" />
+                {t.noPassword}
+              </p>
             </form>
           ) : (
-            <form onSubmit={handleVerifyOtp} className="space-y-5">
-              {/* OTP Code Display (demo mode) */}
+            <form onSubmit={handleVerifyOtp} className="mt-7 space-y-4">
               {lastOtp && (
-                <div className="rounded-lg p-4 text-center" style={{ backgroundColor: '#d4a5a5', border: '1px solid #c49393' }}>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: '#ffffff', marginBottom: '4px', opacity: 0.9 }}>
+                <div className="rounded-2xl p-4 text-center" style={{ backgroundColor: "var(--tb-surface)", border: "1px solid var(--glass-border)" }}>
+                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "var(--tb-text-secondary)", marginBottom: "4px" }}>
                     {lang === "fr" ? "Votre code (démo)" : "رمزكِ (تجريبي)"}
                   </p>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '28px', fontWeight: 700, color: '#ffffff', letterSpacing: '0.3em' }}>
+                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "28px", fontWeight: 700, color: "var(--tb-accent-text)", letterSpacing: "0.3em" }}>
                     {lastOtp}
                   </p>
                 </div>
               )}
 
-              {/* Name field for new accounts */}
-              <div className="rounded-lg p-4" style={{ backgroundColor: '#faf6f4', border: '1px solid #f0e0e0' }}>
-                <p className="flex items-center gap-2 mb-3" style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', fontWeight: 600, color: 'var(--tb-accent-text)' }}>
+              <input
+                type="text"
+                inputMode="numeric"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                placeholder="------"
+                aria-label={t.enterOtp}
+                maxLength={6}
+                required
+                className="w-full text-center tracking-[0.5em]"
+                style={{ ...fieldStyle, padding: "15px 16px", fontSize: "22px", fontWeight: 600 }}
+              />
+
+              <div className="rounded-2xl p-4" style={{ backgroundColor: "var(--tb-surface)", border: "1px solid var(--glass-border)" }}>
+                <p className="flex items-center gap-2 mb-3" style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", fontWeight: 600, color: "var(--tb-accent-text)" }}>
                   <User size={14} />
                   {t.firstTime} {t.createAccount}
                 </p>
@@ -255,176 +317,125 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder={t.namePlaceholder}
-                  className="w-full rounded-lg"
-                  style={{
-                    padding: "12px 16px",
-                    border: "1px solid #e0d0d0",
-                    backgroundColor: "#ffffff",
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: "14px",
-                    color: "#1a1a1a",
-                    outline: "none",
-                  }}
+                  aria-label={t.namePlaceholder}
+                  style={{ ...fieldStyle, padding: "12px 16px", borderRadius: "12px" }}
                 />
-                <p className="mt-2" style={{ fontFamily: "'Inter', sans-serif", fontSize: '11px', color: '#8a8a8a' }}>
+                <p className="mt-2" style={{ fontFamily: "'Inter', sans-serif", fontSize: "11.5px", color: "var(--tb-text-muted)" }}>
                   {t.enterName}
                 </p>
               </div>
 
-              {/* OTP input */}
-              <input
-                type="text"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                placeholder="123456"
-                maxLength={6}
-                required
-                className="w-full text-center rounded-lg tracking-[0.5em]"
-                style={{
-                  padding: "14px 16px",
-                  border: "1px solid #e0d0d0",
-                  backgroundColor: "#faf6f4",
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: "20px",
-                  fontWeight: 600,
-                  color: "#1a1a1a",
-                  outline: "none",
-                }}
-              />
-
-              {/* Error */}
               {error && (
-                <p className="text-center" style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", color: "#e74c3c" }}>
+                <p className="text-center" style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", color: "#e05252" }}>
                   {error}
                 </p>
               )}
 
-              {/* Buttons */}
-              <div className="flex gap-3">
-                <button
-                  type="button"
-                  onClick={() => setStep("email")}
-                  className="flex-1 transition-all duration-200 hover:opacity-80"
-                  style={{
-                    padding: "14px 24px",
-                    borderRadius: "8px",
-                    backgroundColor: "transparent",
-                    color: "#1a1a1a",
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: "14px",
-                    fontWeight: 500,
-                    border: "1px solid #e0d0d0",
-                    cursor: "pointer",
-                  }}
-                >
-                  {t.back}
-                </button>
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="flex-[2] flex items-center justify-center gap-2 transition-all duration-200 hover:opacity-90 disabled:opacity-50"
-                  style={{
-                    padding: "14px 24px",
-                    borderRadius: "8px",
-                    backgroundColor: "#1a1a1a",
-                    color: "#ffffff",
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: "14px",
-                    fontWeight: 500,
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                >
-                  {isLoading ? (
-                    <span className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
-                  ) : (
-                    <>
-                      {name ? `${t.verify} & ${t.createAccount}` : t.verify}
-                      <ArrowRight size={16} />
-                    </>
-                  )}
-                </button>
-              </div>
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full flex items-center justify-center gap-2 transition-opacity duration-200 hover:opacity-90 disabled:opacity-50"
+                style={{
+                  padding: "16px 24px", borderRadius: "100px",
+                  backgroundColor: "var(--tb-text)", color: "var(--tb-bg)",
+                  fontFamily: "'Inter', sans-serif", fontSize: "15px", fontWeight: 500,
+                  border: "none", cursor: "pointer",
+                }}
+              >
+                {isLoading ? (
+                  <span className="animate-spin w-5 h-5 border-2 rounded-full" style={{ borderColor: "var(--tb-bg)", borderTopColor: "transparent" }} />
+                ) : (
+                  <>
+                    {name ? `${t.verify} & ${t.createAccount}` : t.verify}
+                    <ArrowRight size={17} style={{ transform: isRTL ? "rotate(180deg)" : undefined }} />
+                  </>
+                )}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setStep("email")}
+                className="w-full transition-opacity hover:opacity-80"
+                style={{
+                  padding: "13px 24px", borderRadius: "100px",
+                  backgroundColor: "transparent", color: "var(--tb-text-secondary)",
+                  fontFamily: "'Inter', sans-serif", fontSize: "14px", fontWeight: 500,
+                  border: "1px solid var(--glass-border)", cursor: "pointer",
+                }}
+              >
+                {t.back}
+              </button>
             </form>
           )}
         </div>
 
-        {/* Footer */}
-        <div className="px-8 py-4 text-center" style={{ borderTop: "1px solid #f0e0e0" }}>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "#c8adad" }}>
+        <div className="px-8 py-4 text-center" style={{ borderTop: "1px solid var(--glass-border)" }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", color: "var(--tb-text-muted)" }}>
             www.toujours-belle.com
           </p>
         </div>
       </div>
 
-      {/* Terms of Service Popup Modal */}
+      {/* Terms of Service */}
       {termsOpen && (
         <div
           style={{
-            position: 'fixed', inset: 0, zIndex: 9999,
-            backgroundColor: 'rgba(0,0,0,0.6)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            padding: '16px',
+            position: "fixed", inset: 0, zIndex: 9999,
+            backgroundColor: "rgba(20,14,14,0.62)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            padding: "16px",
           }}
           onClick={() => setTermsOpen(false)}
         >
           <div
+            className="tb-login-card"
             style={{
-              position: 'relative',
-              maxWidth: '700px',
-              width: '100%',
-              maxHeight: '85vh',
-              backgroundColor: '#ffffff',
-              borderRadius: '16px',
-              overflow: 'hidden',
-              display: 'flex',
-              flexDirection: 'column',
+              position: "relative", maxWidth: "700px", width: "100%", maxHeight: "85vh",
+              overflow: "hidden", display: "flex", flexDirection: "column",
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: '1px solid #f0e0e0', flexShrink: 0 }}>
-              <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '18px', fontWeight: 500, color: '#1a1a1a' }}>
+            <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: "1px solid var(--glass-border)", flexShrink: 0 }}>
+              <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "18px", fontWeight: 500, color: "var(--tb-text)" }}>
                 CONDITIONS GÉNÉRALES DE VENTE – TOUJOURS BELLE
               </h3>
               <button
                 onClick={() => setTermsOpen(false)}
+                aria-label={t.close}
                 style={{
-                  width: '32px', height: '32px', borderRadius: '50%',
-                  backgroundColor: '#faf6f4', border: 'none', cursor: 'pointer',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  width: "44px", height: "44px", borderRadius: "50%",
+                  backgroundColor: "transparent", border: "none", cursor: "pointer",
+                  display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
                 }}
               >
-                <X size={16} color="#1a1a1a" />
+                <X size={18} color="var(--tb-text)" />
               </button>
             </div>
 
-            {/* Content */}
-            <div style={{ padding: '24px 28px', overflowY: 'auto', flex: 1 }}>
-              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#5a5a5a', lineHeight: 1.8 }}>
-                <p style={{ marginBottom: '12px' }}><strong style={{ color: '#1a1a1a' }}>Validation de la commande :</strong> Chaque cliente est tenue de vérifier attentivement tous les détails de sa commande avant validation.</p>
-                <p style={{ marginBottom: '12px' }}><strong style={{ color: '#1a1a1a' }}>Commandes personnalisées :</strong> Les commandes personnalisées ne peuvent être ni annulées, ni remboursées, ni échangées après confirmation.</p>
-                <p style={{ marginBottom: '12px' }}><strong style={{ color: '#1a1a1a' }}>Paiement échelonné :</strong> Tous les montants déjà versés sont définitivement acquis et non remboursables.</p>
-                <p style={{ marginBottom: '12px' }}><strong style={{ color: '#1a1a1a' }}>Couleurs et caractéristiques :</strong> De légères différences de couleur peuvent apparaître en raison de l'éclairage ou des paramètres d'affichage des écrans. Cela ne constitue pas un défaut du produit.</p>
-                <p style={{ marginBottom: '12px' }}><strong style={{ color: '#1a1a1a' }}>Retours et échanges :</strong> Aucun retour ou échange n'est accepté pour des raisons de préférence personnelle (couleur, longueur, densité ou apparence). Toute réclamation doit être effectuée dans un délai maximum de 24 heures après réception, avec photos justificatives.</p>
-                <p style={{ marginBottom: '12px' }}><strong style={{ color: '#1a1a1a' }}>Utilisation et entretien :</strong> Toujours Belle décline toute responsabilité en cas de mauvaise utilisation, mauvais entretien, utilisation de produits inadaptés, coloration ou traitements chimiques non appropriés.</p>
-                <p style={{ marginBottom: '12px' }}><strong style={{ color: '#1a1a1a' }}>Acompte :</strong> L'acompte ou le premier versement est définitif et non remboursable, quelle qu'en soit la raison.</p>
-                <p><strong style={{ color: '#1a1a1a' }}>Acceptation :</strong> Toute validation de commande, paiement d'acompte ou signature électronique vaut acceptation pleine et entière des présentes conditions générales de vente.</p>
+            <div style={{ padding: "24px 28px", overflowY: "auto", flex: 1 }}>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", color: "var(--tb-text-secondary)", lineHeight: 1.8 }}>
+                <p style={{ marginBottom: "12px" }}><strong style={{ color: "var(--tb-text)" }}>Validation de la commande :</strong> Chaque cliente est tenue de vérifier attentivement tous les détails de sa commande avant validation.</p>
+                <p style={{ marginBottom: "12px" }}><strong style={{ color: "var(--tb-text)" }}>Commandes personnalisées :</strong> Les commandes personnalisées ne peuvent être ni annulées, ni remboursées, ni échangées après confirmation.</p>
+                <p style={{ marginBottom: "12px" }}><strong style={{ color: "var(--tb-text)" }}>Paiement échelonné :</strong> Tous les montants déjà versés sont définitivement acquis et non remboursables.</p>
+                <p style={{ marginBottom: "12px" }}><strong style={{ color: "var(--tb-text)" }}>Couleurs et caractéristiques :</strong> De légères différences de couleur peuvent apparaître en raison de l'éclairage ou des paramètres d'affichage des écrans. Cela ne constitue pas un défaut du produit.</p>
+                <p style={{ marginBottom: "12px" }}><strong style={{ color: "var(--tb-text)" }}>Retours et échanges :</strong> Aucun retour ou échange n'est accepté pour des raisons de préférence personnelle (couleur, longueur, densité ou apparence). Toute réclamation doit être effectuée dans un délai maximum de 24 heures après réception, avec photos justificatives.</p>
+                <p style={{ marginBottom: "12px" }}><strong style={{ color: "var(--tb-text)" }}>Utilisation et entretien :</strong> Toujours Belle décline toute responsabilité en cas de mauvaise utilisation, mauvais entretien, utilisation de produits inadaptés, coloration ou traitements chimiques non appropriés.</p>
+                <p style={{ marginBottom: "12px" }}><strong style={{ color: "var(--tb-text)" }}>Acompte :</strong> L'acompte ou le premier versement est définitif et non remboursable, quelle qu'en soit la raison.</p>
+                <p><strong style={{ color: "var(--tb-text)" }}>Acceptation :</strong> Toute validation de commande, paiement d'acompte ou signature électronique vaut acceptation pleine et entière des présentes conditions générales de vente.</p>
               </div>
             </div>
 
-            {/* Footer */}
-            <div className="px-6 py-4 flex justify-end" style={{ borderTop: '1px solid #f0e0e0', flexShrink: 0 }}>
+            <div className="px-6 py-4 flex justify-end" style={{ borderTop: "1px solid var(--glass-border)", flexShrink: 0 }}>
               <button
                 onClick={() => setTermsOpen(false)}
                 style={{
-                  padding: '10px 28px', borderRadius: '8px',
-                  backgroundColor: '#1a1a1a', color: '#ffffff',
-                  fontFamily: "'Inter', sans-serif", fontSize: '13px', fontWeight: 500,
-                  border: 'none', cursor: 'pointer',
+                  padding: "12px 28px", borderRadius: "100px",
+                  backgroundColor: "var(--tb-text)", color: "var(--tb-bg)",
+                  fontFamily: "'Inter', sans-serif", fontSize: "13px", fontWeight: 500,
+                  border: "none", cursor: "pointer",
                 }}
               >
-                {lang === 'fr' ? 'Fermer' : 'إغلاق'}
+                {t.close}
               </button>
             </div>
           </div>
@@ -433,4 +444,3 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
     </div>
   );
 }
-        

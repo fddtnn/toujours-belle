@@ -1,230 +1,267 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useLanguage } from '../context/LanguageContext';
+import { ChevronRight } from 'lucide-react';
 import Footer from '../sections/Footer';
 
+/* The policy describes what this site actually does, not a generic template:
+   email-code sign-in, orders taken in the salon, an opt-in newsletter, and a
+   virtual try-on that never sends a frame anywhere. */
+const SECTIONS: { fr: string; ar: string; bodyFr: string[]; bodyAr: string[] }[] = [
+  {
+    fr: 'Qui nous sommes',
+    ar: 'من نحن',
+    bodyFr: [
+      'Toujours Belle est un salon et une boutique de cheveux naturels, perruques, toppers et extensions. Ce site est édité par Toujours Belle, Tunis, Tunisie.',
+      'Pour toute question sur vos données, écrivez-nous à contact@toujours-belle.com. Nous répondons dans un délai de 30 jours.',
+    ],
+    bodyAr: [
+      'توجور بيل صالون ومتجر للشعر الطبيعي والباروكات والتوبرز والإكستنشن. هذا الموقع تديره توجور بيل، تونس.',
+      'لأي سؤال عن بياناتكِ، راسلينا على contact@toujours-belle.com. نرد خلال 30 يوماً كحد أقصى.',
+    ],
+  },
+  {
+    fr: 'Les données que nous collectons',
+    ar: 'البيانات التي نجمعها',
+    bodyFr: [
+      'Votre adresse email, lorsque vous vous connectez. La connexion se fait sans mot de passe : nous vous envoyons un code à 6 chiffres par email, et c’est tout ce dont nous avons besoin.',
+      'Votre prénom, si vous le renseignez lors de la création de votre compte.',
+      'Les informations nécessaires à une commande : nom, téléphone, adresse de livraison, et le détail de ce que vous commandez.',
+      'Les messages que vous nous envoyez, par email ou via WhatsApp.',
+      'Votre accord explicite, si vous cochez « M’envoyer des nouvelles et des offres ». Cette case est décochée par défaut.',
+    ],
+    bodyAr: [
+      'بريدكِ الإلكتروني عند تسجيل الدخول. الدخول بدون كلمة مرور: نرسل لكِ رمزاً من 6 أرقام على بريدكِ، وهذا كل ما نحتاجه.',
+      'اسمكِ الأول، إذا أدخلتِه عند إنشاء الحساب.',
+      'المعلومات اللازمة للطلب: الاسم، الهاتف، عنوان التوصيل، وتفاصيل ما تطلبينه.',
+      'الرسائل التي ترسلينها لنا، بالبريد أو عبر واتساب.',
+      'موافقتكِ الصريحة، إذا فعّلتِ خيار «أرسلي لي الأخبار والعروض». هذا الخيار غير مفعّل افتراضياً.',
+    ],
+  },
+  {
+    fr: 'L’essayage virtuel ne quitte pas votre appareil',
+    ar: 'التجربة الافتراضية لا تغادر جهازكِ',
+    bodyFr: [
+      'La page « Essayage IA » utilise la caméra de votre appareil, ou une photo que vous choisissez, pour poser une perruque à l’image.',
+      'Tout le traitement se fait dans votre navigateur. Aucune image, aucune vidéo et aucune mesure de votre visage n’est envoyée à nos serveurs, ni enregistrée, ni partagée. Fermez la page et il n’en reste rien.',
+      'Votre navigateur vous demande l’autorisation avant d’activer la caméra, et vous pouvez la retirer à tout moment dans ses réglages.',
+    ],
+    bodyAr: [
+      'صفحة «التجربة الافتراضية» تستخدم كاميرا جهازكِ، أو صورة تختارينها، لتركيب الباروكة على الصورة.',
+      'كل المعالجة تتم داخل متصفحكِ. لا تُرسَل أي صورة أو فيديو أو قياسات لوجهكِ إلى خوادمنا، ولا تُحفَظ، ولا تُشارَك. بمجرد إغلاق الصفحة لا يبقى منها شيء.',
+      'متصفحكِ يطلب إذنكِ قبل تشغيل الكاميرا، ويمكنكِ سحب الإذن في أي وقت من إعداداته.',
+    ],
+  },
+  {
+    fr: 'Pourquoi nous utilisons ces données',
+    ar: 'لماذا نستخدم هذه البيانات',
+    bodyFr: [
+      'Pour vous identifier quand vous vous connectez et vous permettre de retrouver vos commandes.',
+      'Pour préparer, confirmer et livrer ce que vous commandez, et pour vous répondre quand vous nous écrivez.',
+      'Pour vous envoyer nos nouveautés et nos offres, uniquement si vous l’avez demandé. Chaque email contient un lien de désinscription.',
+      'Pour respecter nos obligations comptables et légales.',
+      'Nous ne vendons vos données à personne, et nous ne les utilisons pas pour de la publicité ciblée.',
+    ],
+    bodyAr: [
+      'للتعرّف عليكِ عند تسجيل الدخول وتمكينكِ من متابعة طلباتكِ.',
+      'لتحضير وتأكيد وتوصيل ما تطلبينه، وللرد عليكِ عندما تراسلينا.',
+      'لإرسال جديدنا وعروضنا، فقط إذا طلبتِ ذلك. كل رسالة تحتوي على رابط لإلغاء الاشتراك.',
+      'للالتزام بواجباتنا المحاسبية والقانونية.',
+      'لا نبيع بياناتكِ لأي جهة، ولا نستخدمها لإعلانات موجّهة.',
+    ],
+  },
+  {
+    fr: 'Cookies et stockage local',
+    ar: 'الكوكيز والتخزين المحلي',
+    bodyFr: [
+      'Un cookie de session est déposé après votre connexion, pour vous garder connectée. Il est strictement nécessaire au fonctionnement du compte et ne sert à rien d’autre.',
+      'Votre choix de thème (clair ou sombre) et de langue est enregistré dans votre navigateur, sur votre appareil uniquement. Ces informations ne nous parviennent jamais.',
+      'Vous pouvez effacer ces éléments à tout moment en vidant les données de site dans votre navigateur.',
+    ],
+    bodyAr: [
+      'يُحفَظ كوكي جلسة بعد تسجيل الدخول لإبقائكِ مسجّلة. هو ضروري لعمل الحساب فقط ولا يُستخدَم لغير ذلك.',
+      'اختياركِ للوضع (فاتح أو ليلي) وللغة يُحفَظ داخل متصفحكِ على جهازكِ فقط. هذه المعلومات لا تصلنا أبداً.',
+      'يمكنكِ مسح هذه العناصر في أي وقت بحذف بيانات الموقع من متصفحكِ.',
+    ],
+  },
+  {
+    fr: 'Avec qui elles sont partagées',
+    ar: 'مع من تُشارَك',
+    bodyFr: [
+      'Avec notre prestataire d’envoi d’emails, pour vous transmettre votre code de connexion et, le cas échéant, nos newsletters.',
+      'Avec le transporteur chargé de votre livraison, pour l’adresse et le contact nécessaires.',
+      'Avec les autorités compétentes, si la loi nous y oblige.',
+      'Ces prestataires n’ont accès qu’à ce qui leur est nécessaire, et n’ont pas le droit d’utiliser vos données pour leur propre compte.',
+    ],
+    bodyAr: [
+      'مع مزوّد خدمة البريد الإلكتروني، لإيصال رمز الدخول ونشراتنا البريدية عند الاقتضاء.',
+      'مع شركة التوصيل المكلّفة بطلبكِ، للعنوان ومعلومات التواصل اللازمة.',
+      'مع الجهات المختصة، إذا ألزمنا القانون بذلك.',
+      'هؤلاء المزوّدون لا يطّلعون إلا على ما يلزمهم، ولا يحق لهم استخدام بياناتكِ لحسابهم الخاص.',
+    ],
+  },
+  {
+    fr: 'Combien de temps nous les gardons',
+    ar: 'مدة الاحتفاظ',
+    bodyFr: [
+      'Les codes de connexion expirent au bout de quelques minutes et sont supprimés après usage.',
+      'Les données de votre compte sont conservées tant que le compte existe. Demandez-nous sa suppression et nous l’effaçons.',
+      'Les documents liés aux commandes sont conservés le temps imposé par la réglementation comptable.',
+      'Votre inscription à la newsletter est conservée jusqu’à votre désinscription.',
+    ],
+    bodyAr: [
+      'رموز الدخول تنتهي خلال دقائق وتُحذَف بعد استخدامها.',
+      'بيانات حسابكِ تبقى ما بقي الحساب. اطلبي حذفه ونحذفه.',
+      'مستندات الطلبات تُحفَظ للمدة التي تفرضها الأنظمة المحاسبية.',
+      'اشتراككِ في النشرة البريدية يبقى حتى تلغينه.',
+    ],
+  },
+  {
+    fr: 'Vos droits',
+    ar: 'حقوقكِ',
+    bodyFr: [
+      'Vous pouvez demander une copie des données que nous détenons sur vous, les faire corriger, ou en demander la suppression.',
+      'Vous pouvez retirer votre consentement à la newsletter à tout moment, sans que cela affecte vos commandes.',
+      'Vous pouvez vous opposer à un traitement ou en demander la limitation.',
+      'Une seule adresse pour tout cela : contact@toujours-belle.com.',
+    ],
+    bodyAr: [
+      'يمكنكِ طلب نسخة من بياناتكِ لدينا، أو تصحيحها، أو طلب حذفها.',
+      'يمكنكِ سحب موافقتكِ على النشرة البريدية في أي وقت، دون أن يؤثر ذلك على طلباتكِ.',
+      'يمكنكِ الاعتراض على معالجة معيّنة أو طلب تقييدها.',
+      'عنوان واحد لكل ذلك: contact@toujours-belle.com.',
+    ],
+  },
+  {
+    fr: 'Sécurité',
+    ar: 'الأمان',
+    bodyFr: [
+      'Le site est servi en HTTPS. Le cookie de session est signé et inaccessible au code JavaScript de la page.',
+      'Nous ne vous demanderons jamais votre mot de passe bancaire, ni le code de connexion par téléphone ou par message. Si quelqu’un vous le demande en notre nom, ce n’est pas nous.',
+    ],
+    bodyAr: [
+      'الموقع يعمل عبر HTTPS. وكوكي الجلسة موقّع ولا يمكن لأكواد الصفحة الوصول إليه.',
+      'لن نطلب منكِ أبداً كلمة مرور بنكية، ولا رمز الدخول عبر الهاتف أو الرسائل. إذا طلبه أحد باسمنا، فهو ليس نحن.',
+    ],
+  },
+  {
+    fr: 'Mineurs',
+    ar: 'القاصرات',
+    bodyFr: [
+      'Ce site n’est pas destiné aux personnes de moins de 16 ans et nous ne collectons pas sciemment leurs données. Si c’était le cas, écrivez-nous et nous les supprimerons.',
+    ],
+    bodyAr: [
+      'هذا الموقع غير موجّه لمن هنّ دون 16 سنة، ولا نجمع بياناتهنّ عن قصد. إذا حدث ذلك، راسلينا ونحذفها.',
+    ],
+  },
+  {
+    fr: 'Modifications de cette politique',
+    ar: 'تعديلات هذه السياسة',
+    bodyFr: [
+      'Si nous modifions cette politique, la date ci-dessous change. Les modifications importantes vous seront signalées sur le site.',
+    ],
+    bodyAr: [
+      'إذا عدّلنا هذه السياسة، يتغيّر التاريخ المذكور أدناه. وأي تعديل جوهري سننبّه إليه داخل الموقع.',
+    ],
+  },
+];
+
+const UPDATED_FR = 'Dernière mise à jour : 13 octobre 2026';
+const UPDATED_AR = 'آخر تحديث: 13 أكتوبر 2026';
+
 export default function Privacy() {
-  const { lang } = useLanguage();
+  const { lang, isRTL } = useLanguage();
   const navigate = useNavigate();
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <div style={{ backgroundColor: 'var(--tb-card)', minHeight: '100vh' }}>
-      {/* Header */}
-      <div style={{ backgroundColor: 'var(--tb-bg)', padding: '120px 24px 60px' }}>
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
-            {lang === 'fr' ? 'Politique de Confidentialité' : 'سياسة الخصوصية'}
-          </h1>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '14px', color: 'var(--tb-text-muted)' }}>
-            www.toujours-belle.com
-          </p>
+    <div dir={isRTL ? 'rtl' : 'ltr'} style={{ backgroundColor: 'var(--tb-bg)', minHeight: '100vh' }}>
+      <div className="max-w-4xl mx-auto px-6 pt-28 pb-2">
+        <div className="flex items-center gap-2 text-xs flex-wrap" style={{ color: 'var(--tb-text-muted)' }}>
+          <button onClick={() => navigate('/')} className="hover:text-[#d4a5a5] transition-colors">
+            {lang === 'fr' ? 'Home' : 'الرئيسية'}
+          </button>
+          <ChevronRight size={12} style={{ transform: isRTL ? 'rotate(180deg)' : undefined }} />
+          <span style={{ color: 'var(--tb-text)' }}>
+            {lang === 'fr' ? 'Confidentialité' : 'الخصوصية'}
+          </span>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="max-w-4xl mx-auto px-6 py-16" style={{ fontFamily: "'Inter', sans-serif", fontSize: '15px', lineHeight: 1.8, color: '#4a4a4a' }}>
-        <div className="space-y-8">
-          <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
-              Why you should read this policy
-            </h2>
-            <p>
-              We take the privacy of visitors to our Website (you) very seriously. Please read this privacy policy (Policy) carefully as it contains important information about how your personal data will be used.
-            </p>
-            <p className="mt-3">
-              For the purposes of the General Data Protection Regulation and all other relevant legislation, Toujours Belle ('we' or 'us') is the 'data controller' (i.e. the company who is responsible for, and controls the processing of, your personal data).
-            </p>
-          </section>
+      <div className="max-w-4xl mx-auto px-6 pt-8 pb-6">
+        <p
+          style={{
+            fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '11px',
+            letterSpacing: '0.15em', textTransform: 'uppercase',
+            color: 'var(--tb-accent-text)', marginBottom: '12px',
+          }}
+        >
+          {lang === 'fr' ? 'VOS DONNÉES' : 'بياناتكِ'}
+        </p>
+        <h1
+          style={{
+            fontFamily: "'Playfair Display', serif", fontSize: 'clamp(2rem, 4.2vw, 3.2rem)',
+            fontWeight: 400, color: 'var(--tb-text)', lineHeight: 1.15, marginBottom: '16px',
+          }}
+        >
+          {lang === 'fr' ? 'Politique de confidentialité' : 'سياسة الخصوصية'}
+        </h1>
+        <p
+          style={{
+            fontFamily: "'Inter', sans-serif", fontSize: '16px', lineHeight: 1.7,
+            color: 'var(--tb-text-secondary)', maxWidth: '62ch',
+          }}
+        >
+          {lang === 'fr'
+            ? 'Ce que nous collectons, pourquoi, et ce que nous ne faisons pas. Écrit en clair, sans formules creuses.'
+            : 'ما الذي نجمعه، ولماذا، وما الذي لا نفعله. مكتوبة بوضوح وبدون عبارات فارغة.'}
+        </p>
+      </div>
 
-          <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
-              How to contact us
-            </h2>
-            <p>
-              Any enquiries relating to our policy on data protection or indeed the contents of this policy are welcome and should be addressed to The Data Protection Officer using the following means:
-            </p>
-            <ul className="list-disc pl-6 mt-3 space-y-1">
-              <li>By email: contact@toujours-belle.com</li>
-              <li>By post: The Data Protection Officer, Toujours Belle, Tunis, Tunisia.</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
-              Personal data we may collect about you
-            </h2>
-            <h3 style={{ fontWeight: 600, color: 'var(--tb-text)', marginBottom: '8px', marginTop: '16px' }}>Information that you provide</h3>
-            <p>
-              Personal information about you (such as your name, email address, phone number, address) will be obtained, whenever you complete forms on the Website – in particular, when you complete an order.
-            </p>
-            <p className="mt-3">
-              We will also obtain personal information you provide when you send feedback, post material, contact us for any reason and by any medium, sign up to a service, make purchases through the website, share information via the Website's social media functions, enter a competition, complete a survey or report a problem with the Website.
-            </p>
-
-            <h3 style={{ fontWeight: 600, color: 'var(--tb-text)', marginBottom: '8px', marginTop: '16px' }}>Personal Information about other individuals</h3>
-            <p>
-              If you give us information on behalf of someone else, you confirm that the other person has appointed you to act on his/her behalf and has agreed that you can give consent on his/her behalf to the processing of his/her data.
-            </p>
-
-            <h3 style={{ fontWeight: 600, color: 'var(--tb-text)', marginBottom: '8px', marginTop: '16px' }}>Information that will be collected automatically</h3>
-            <p>
-              <strong>Cookies:</strong> We may monitor your use of the Website through the use of cookies and similar tracking devices. For example, we may monitor how many times you use the Website, which pages you go to and traffic data. This information helps to build a profile of users to the Website. Some of this data will be aggregated or statistical, which means that we will not be able to identify you individually.
-            </p>
-            <p className="mt-3">
-              <strong>Device information:</strong> We may also collect information about your device each time you use the Website. For example, we may collect information on the type of mobile device that you are using and its unique device identifier, the type of mobile browser that you are using, the mobile operating system that you are using, mobile network information and the time zone setting.
-            </p>
-            <p className="mt-3">
-              <strong>Location data:</strong> We may also collect information to determine your location using GPS technology or such other location tracking software we may use from time to time.
-            </p>
-          </section>
-
-          <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
-              How your personal data will be used
-            </h2>
-            <p>We will use your personal data for the following purposes:</p>
-            <ul className="list-disc pl-6 mt-3 space-y-1">
-              <li>To help identify you and any accounts you hold with Toujours Belle;</li>
-              <li>Billing and order fulfilment for purchases made through the Website;</li>
-              <li>Administration;</li>
-              <li>Research, statistical analysis and behavioural analysis;</li>
-              <li>Customer profiling and analysing your purchasing preferences;</li>
-              <li>Marketing—see 'Marketing and opting out', below;</li>
-              <li>Fraud prevention and detection;</li>
-              <li>Customising the Website and its content to your particular preferences;</li>
-              <li>To notify you of any changes to the Website or to our services or products that may affect you;</li>
-              <li>Improving our services and products.</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
-              Marketing and opting out
-            </h2>
-            <p>
-              If you have provided your consent to receive news, special offers or promotions from us, we may contact you by text message or email, about products, services, promotions, special offers and charitable causes that may be of interest to you.
-            </p>
-            <p className="mt-3">
-              The Website may contain links to other websites or apps which we or our partners own, or websites or apps of our partners or third parties. Please note that if you follow any of these links, the websites, apps and services provided through them will have their own privacy policies/terms of use. We do not accept any responsibility or liability for their respective privacy policies/terms of use or the collection and use of any personal data collected through these websites, apps or services.
-            </p>
-          </section>
-
-          <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
-              Disclosure of your personal data
-            </h2>
-            <p>We may disclose your personal data to:</p>
-            <ul className="list-disc pl-6 mt-3 space-y-1">
-              <li>Other companies that become part of a group with Toujours Belle;</li>
-              <li>A third party who acquires Toujours Belle or acquires substantially all of its assets, in which case the personal data shall be one of the acquired assets;</li>
-              <li>Our agents and service providers;</li>
-              <li>Law enforcement and regulatory agencies in connection with any investigation to help prevent unlawful activity or as otherwise required by applicable law;</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
-              Keeping your data secure
-            </h2>
-            <p>
-              We will use technical and organisational measures to safeguard your personal data, for example:
-            </p>
-            <ul className="list-disc pl-6 mt-3 space-y-1">
-              <li>Utilising an encryption and authentication process to protect our online services. This process ensures that information is scrambled before it is transmitted so that it remains private even if it is intercepted.</li>
-              <li>We may also store manual copies of your personal information in a secure facility where access is restricted.</li>
-              <li>Where we have given you (or where you have chosen) a password which enables you to access certain parts of our website, you are responsible for keeping this password confidential. We ask you not to share a password with anyone.</li>
-            </ul>
-            <p className="mt-3">
-              While we will use all reasonable efforts to safeguard your personal data, you acknowledge that the use of the internet is not entirely secure and for this reason we cannot guarantee the security or integrity of any personal data that are transferred from you or to you via the internet.
-            </p>
-          </section>
-
-          <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
-              Your Consent and Rights of Access
-            </h2>
-            <p>
-              We will collect and store information about you with your consent, as detailed above. You provide us with your consent by choosing to provide your personal details when you contact us, completing our forms on our website and when you use our service and by reading and agreeing to this Privacy Policy.
-            </p>
-            <p className="mt-3">You can change your mind or remove or add your consent at any time. You have the right of access to your personal records or other information that we hold about you. There is no administrative charge for this service.</p>
-            <p className="mt-3">You have the right to rectify any errors in the data we hold about you. If any data or information we hold about you is inaccurate, or out of date, please contact us and we will correct this immediately.</p>
-            <p className="mt-3">You have the right to have the data we hold about you erased.</p>
-            <p className="mt-3">You have the right to ask us to stop processing your personal data for direct marketing purposes.</p>
-            <p className="mt-3">You have the right to data portability. If you wish to obtain your data for your own purposes across different services, we will provide this information to you in a CSV file. There is no administrative charge for this service.</p>
-            <p className="mt-3">To revise your consent, access, amend or remove your records or assert any of your rights set out above, you should send your request in writing to us at contact@toujours-belle.com.</p>
-          </section>
-
-          <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
-              How long we will store your data
-            </h2>
-            <p>
-              We will store your data for as long as necessary for the purpose of processing. The data may be deleted in the following circumstances:
-            </p>
-            <ul className="list-disc pl-6 mt-3 space-y-1">
-              <li>You have withdrawn your consent to data processing</li>
-              <li>The original purpose for processing the data is no longer relevant or cannot be performed any more.</li>
-              <li>The data is no longer up to date or accurate.</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
-              Children
-            </h2>
-            <p>
-              Toujours Belle only offers services to individuals over the age of 18. In using our services, you confirm that you have read and consented to this Policy and verify that you are over the age of 18.
-            </p>
-          </section>
-
-          <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
-              Use of cookies
-            </h2>
-            <p>
-              A cookie is a small text file which is placed onto your mobile (or other electronic device) when you access the Website. We use cookies and other online tracking devices on the Website to:
-            </p>
-            <ul className="list-disc pl-6 mt-3 space-y-1">
-              <li>Keep track of the items stored in your shopping basket and take you through the checkout process;</li>
-              <li>Recognise you whenever you visit the Website (this speeds up your access to the Website as you do not have to log on each time);</li>
-              <li>Obtain information about your preferences, online movements and use of the internet;</li>
-              <li>Carry out research and statistical analysis to help improve the Website content, products and services and to help us better understand our visitor and customer requirements and interests;</li>
-              <li>Target our marketing and advertising campaigns and those of our partners more effectively by providing interest-based advertisements that are personalised to your interests; and</li>
-              <li>Make your online experience more efficient and enjoyable.</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
-              Changes to this privacy policy
-            </h2>
-            <p>
-              We may change this Policy from time to time. You should check this policy frequently to ensure you are aware of the most recent version that will apply each time you use the Website.
-            </p>
-          </section>
-
-          <section>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500, color: 'var(--tb-text)', marginBottom: '12px' }}>
-              Data Protection Supervisory Authority
-            </h2>
-            <p>
-              The Data Protection Supervisory Authority is the Information Commissioners Office. Should you have any complaints about the way we handle your data, you may direct them to the ICO. More information on the ICO can be found on their website here: <a href="https://toujours-belle.com" className="underline hover:text-[#d4a5a5]" style={{ color: '#c8adad' }}>toujours-belle.com</a>
-            </p>
-          </section>
+      <div
+        className="max-w-4xl mx-auto px-6 pb-20"
+        style={{ fontFamily: "'Inter', sans-serif", fontSize: '15px', lineHeight: 1.8 }}
+      >
+        <div className="space-y-10">
+          {SECTIONS.map((sec, i) => (
+            <section key={i}>
+              <h2
+                style={{
+                  fontFamily: "'Playfair Display', serif", fontSize: '22px', fontWeight: 500,
+                  color: 'var(--tb-text)', marginBottom: '12px',
+                }}
+              >
+                {lang === 'fr' ? sec.fr : sec.ar}
+              </h2>
+              <ul className="space-y-3">
+                {(lang === 'fr' ? sec.bodyFr : sec.bodyAr).map((line, j) => (
+                  <li key={j} className="flex gap-3">
+                    <span
+                      aria-hidden="true"
+                      className="shrink-0"
+                      style={{
+                        width: '5px', height: '5px', borderRadius: '50%',
+                        backgroundColor: 'var(--tb-accent-text)', marginTop: '11px',
+                      }}
+                    />
+                    <span style={{ color: 'var(--tb-text-secondary)' }}>{line}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
         </div>
 
-        {/* Back link */}
-        <div className="mt-12 pt-6" style={{ borderTop: '1px solid var(--tb-border)' }}>
-          <button
-            onClick={() => navigate('/')}
-            className="text-sm hover:text-[#d4a5a5] transition-colors duration-300"
-            style={{ fontFamily: "'Inter', sans-serif", color: 'var(--tb-text-muted)', textDecoration: 'underline' }}
-          >
-            {lang === 'fr' ? "← Retour à l'accueil" : 'العودة إلى الرئيسية →'}
-          </button>
-        </div>
+        <p
+          className="mt-14 pt-6"
+          style={{
+            borderTop: '1px solid var(--tb-border)',
+            fontSize: '13px', color: 'var(--tb-text-muted)',
+          }}
+        >
+          {lang === 'fr' ? UPDATED_FR : UPDATED_AR} · www.toujours-belle.com
+        </p>
       </div>
 
       <Footer />
