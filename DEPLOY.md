@@ -22,6 +22,48 @@ data need the `/toujours-belle/` prefix), copy `app/dist/public/` onto the
 > Build from PowerShell, not Git Bash — Git Bash rewrites `--base=/toujours-belle/`
 > into a Windows path and the assets come out pointing at `/Program Files/Git/...`.
 
+## Sign-in: what only you can do
+
+The site is static, so there is no server of ours to generate a code, send the
+email or hold a session. Supabase does all three from the browser, which is
+why sign-in is wired to it. The code is in place; these four steps are the
+part I cannot do for you, because they need accounts in your name.
+
+1. **Create the Supabase project** at supabase.com (free tier is enough).
+   Copy *Project Settings → API → Project URL* and *anon / public key* into
+   `app/.env.local`:
+
+   ```
+   VITE_SUPABASE_URL=https://xxxxxxxx.supabase.co
+   VITE_SUPABASE_ANON_KEY=eyJ...
+   ```
+
+2. **Make the email a code, not a link.** Supabase emails a magic link by
+   default, and this card asks for 6 digits. In
+   *Authentication → Emails → Magic Link*, put `{{ .Token }}` in the template
+   so the message carries the code.
+
+3. **Allow the site to come back.** In *Authentication → URL Configuration*,
+   set the Site URL to `https://fddtnn.github.io/toujours-belle/` and add the
+   same address under Redirect URLs. Without this, Google returns to nowhere.
+
+4. **Google** (optional, free): create an OAuth client at
+   console.cloud.google.com, paste its ID and secret into
+   *Authentication → Providers → Google* in Supabase, and give Google the
+   callback URL Supabase shows you on that same screen. Then set
+   `VITE_AUTH_GOOGLE=on` in `app/.env.local`. Until you do, the button stays
+   hidden rather than showing up broken.
+
+   Apple is the same shape but needs the Apple Developer Program at $99/year,
+   so it is left out for now.
+
+Then rebuild and redeploy — Vite bakes `VITE_*` values into the bundle, so a
+change to `.env.local` only takes effect on the next build.
+
+Supabase's free tier sends a limited number of emails per hour from its shared
+address. For real volume, point it at your own domain under
+*Authentication → Emails → SMTP*.
+
 ## 2. Render — full app with a working backend
 
 `render.yaml` at the repo root defines a single web service. The Hono server

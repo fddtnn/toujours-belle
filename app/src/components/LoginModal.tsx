@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useLocalAuth } from "@/hooks/useLocalAuth";
+import { isGoogleEnabled } from "@/lib/supabase";
 import { useLanguage } from "@/context/LanguageContext";
 import { X, Mail, ArrowRight, User, KeyRound } from "lucide-react";
 
@@ -9,10 +10,23 @@ interface LoginModalProps {
   onClose: () => void;
 }
 
+/* Google's own four-colour G. Inlined rather than hotlinked so the card does
+   not call out to a third party just to draw a button. */
+function GoogleMark() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+      <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+      <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+      <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+      <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+    </svg>
+  );
+}
+
 export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   const { lang, isRTL } = useLanguage();
   const navigate = useNavigate();
-  const { sendOtp, verifyOtp, isLoading, lastOtp } = useLocalAuth();
+  const { sendOtp, verifyOtp, isLoading, lastOtp, signInWithGoogle, isConfigured } = useLocalAuth();
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [name, setName] = useState("");
@@ -52,13 +66,9 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
       setError(lang === "fr" ? "Veuillez entrer un email valide" : "يرجى إدخال بريد إلكتروني صالح");
       return;
     }
-    try {
-      await sendOtp(email);
-      setStep("otp");
-    } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Erreur";
-      setError(message);
-    }
+    const res = await sendOtp(email);
+    if (!res.success) { setError(res.message); return; }
+    setStep("otp");
   };
 
   const handleVerifyOtp = async (e: React.FormEvent) => {
@@ -68,17 +78,9 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
       setError(lang === "fr" ? "Veuillez entrer le code à 6 chiffres" : "يرجى إدخال الرمز المكون من 6 أرقام");
       return;
     }
-    try {
-      const result = await verifyOtp(email, otp, name || undefined, emailNewsOffers);
-      if (result.success) {
-        onClose();
-      } else {
-        setError(lang === "fr" ? "Code invalide ou expiré" : "رمز غير صالح أو منتهي الصلاحية");
-      }
-    } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Erreur";
-      setError(message);
-    }
+    const result = await verifyOtp(email, otp, name || undefined, emailNewsOffers);
+    if (result.success) { onClose(); return; }
+    setError(result.message || (lang === "fr" ? "Code invalide ou expiré" : "رمز غير صالح أو منتهي الصلاحية"));
   };
 
   const goPrivacy = () => { onClose(); navigate("/privacy"); };
@@ -88,6 +90,9 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
     signIn: lang === "fr" ? "Se connecter" : "تسجيل الدخول",
     signInOrCreate: lang === "fr" ? "Connectez-vous pour suivre vos commandes" : "سجّلي الدخول لمتابعة طلباتكِ",
     continueWith: lang === "fr" ? "Continuer avec" : "المتابعة باستخدام",
+    notConfigured: lang === "fr"
+      ? "La connexion n'est pas encore activée sur ce site. Écrivez-nous sur WhatsApp en attendant."
+      : "تسجيل الدخول غير مفعّل بعد على الموقع. راسلينا على واتساب لين ما يجهز.",
     or: lang === "fr" ? "OU" : "أو",
     emailPlaceholder: lang === "fr" ? "Adresse email" : "البريد الإلكتروني",
     emailNewsOffers: lang === "fr" ? "M'envoyer des nouvelles et des offres" : "أرسلي لي الأخبار والعروض",
@@ -213,28 +218,48 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 )}
               </button>
 
-              <div className="flex items-center gap-4 pt-1">
-                <div className="flex-1 h-px" style={{ backgroundColor: "var(--glass-border)" }} />
-                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "0.1em", color: "var(--tb-text-muted)" }}>{t.or}</span>
-                <div className="flex-1 h-px" style={{ backgroundColor: "var(--glass-border)" }} />
-              </div>
+              {isGoogleEnabled && (
+                <>
+                  <div className="flex items-center gap-4 pt-1">
+                    <div className="flex-1 h-px" style={{ backgroundColor: "var(--glass-border)" }} />
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", letterSpacing: "0.1em", color: "var(--tb-text-muted)" }}>{t.or}</span>
+                    <div className="flex-1 h-px" style={{ backgroundColor: "var(--glass-border)" }} />
+                  </div>
 
-              {/* The shop account provider is not wired up yet, so it stays
-                  visibly out of service rather than failing on click. */}
-              <button
-                type="button"
-                disabled
-                title={lang === "fr" ? "Bientôt disponible" : "قريباً"}
-                className="w-full flex items-center justify-center gap-2 cursor-not-allowed"
-                style={{
-                  padding: "14px 24px", borderRadius: "100px",
-                  backgroundColor: "transparent", color: "var(--tb-text-muted)",
-                  fontFamily: "'Inter', sans-serif", fontSize: "14px", fontWeight: 500,
-                  border: "1px solid var(--glass-border)", opacity: 0.75,
-                }}
-              >
-                {t.continueWith} Toujours Belle
-              </button>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      setError("");
+                      const res = await signInWithGoogle();
+                      if (!res.success) setError(res.message);
+                    }}
+                    disabled={isLoading}
+                    className="w-full flex items-center justify-center gap-3 transition-opacity duration-200 hover:opacity-85 disabled:opacity-50"
+                    style={{
+                      padding: "14px 24px", borderRadius: "100px",
+                      backgroundColor: "var(--tb-field-bg)", color: "var(--tb-text)",
+                      fontFamily: "'Inter', sans-serif", fontSize: "14px", fontWeight: 500,
+                      border: "1px solid var(--glass-border)", cursor: "pointer",
+                    }}
+                  >
+                    <GoogleMark />
+                    {t.continueWith} Google
+                  </button>
+                </>
+              )}
+
+              {!isConfigured && (
+                <p
+                  className="text-center"
+                  style={{
+                    fontFamily: "'Inter', sans-serif", fontSize: "12.5px", lineHeight: 1.6,
+                    color: "var(--tb-accent-text)", backgroundColor: "var(--tb-surface)",
+                    border: "1px solid var(--glass-border)", borderRadius: "14px", padding: "12px 14px",
+                  }}
+                >
+                  {t.notConfigured}
+                </p>
+              )}
 
               <label className="flex items-start gap-3 cursor-pointer pt-1">
                 <input
