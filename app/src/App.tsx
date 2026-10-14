@@ -40,6 +40,7 @@ import EGiftCards from './pages/EGiftCards';
 import Perruques from './pages/Perruques';
 import PerruquesMiLong from './pages/PerruquesMiLong';
 import PerruquesGarcon from './pages/PerruquesGarcon';
+import Accessoires from './pages/Accessoires';
 import PerruquesLong from './pages/PerruquesLong';
 import PerruquesExtraLong from './pages/PerruquesExtraLong';
 import PerruquesCarreLong from './pages/PerruquesCarreLong';
@@ -141,6 +142,7 @@ export default function App() {
         <Route path="/extensions" element={<PerruquesExtensions />} />
         <Route path="/frontaux" element={<PerruquesFrontaux />} />
         <Route path="/resultats" element={<Resultats />} />
+        <Route path="/accessoires" element={<Accessoires />} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
