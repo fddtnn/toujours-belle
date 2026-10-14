@@ -47,7 +47,7 @@ const cheveuxSubmenu: CheveuxItem[] = [
     ar: 'باروكات',
     href: '/perruques',
     children: [
-      { fr: 'Garçon', ar: 'قصير جداً', href: '/perruques' },
+      { fr: 'Garçon', ar: 'قصير جداً', href: '/perruques-garcon' },
       { fr: 'Carré Court', ar: 'كاريه قصير', href: '/perruques' },
       { fr: 'Carré Long', ar: 'كاريه طويل', href: '/perruques-carre-long' },
       { fr: 'Mi-Long', ar: 'متوسط الطول', href: '/perruques-mi-long' },

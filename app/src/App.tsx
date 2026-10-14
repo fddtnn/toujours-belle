@@ -39,6 +39,7 @@ import Privacy from './pages/Privacy';
 import EGiftCards from './pages/EGiftCards';
 import Perruques from './pages/Perruques';
 import PerruquesMiLong from './pages/PerruquesMiLong';
+import PerruquesGarcon from './pages/PerruquesGarcon';
 import PerruquesLong from './pages/PerruquesLong';
 import PerruquesExtraLong from './pages/PerruquesExtraLong';
 import PerruquesCarreLong from './pages/PerruquesCarreLong';
@@ -127,6 +128,7 @@ export default function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/e-gift-cards" element={<EGiftCards />} />
         <Route path="/perruques" element={<Perruques />} />
+        <Route path="/perruques-garcon" element={<PerruquesGarcon />} />
         <Route path="/perruques-mi-long" element={<PerruquesMiLong />} />
         <Route path="/perruques-long" element={<PerruquesLong />} />
         <Route path="/perruques-extra-long" element={<PerruquesExtraLong />} />
