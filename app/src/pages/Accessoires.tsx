@@ -60,6 +60,182 @@ const ITEMS: Item[] = [
     descFr: 'Huile, solution douce ou formule rapide, selon l’adhésif utilisé et la sensibilité du cuir chevelu.',
     descAr: 'زيت، أو تركيبة لطيفة، أو سريعة المفعول، حسب نوع الغراء وحساسية فروة الرأس.',
   },
+  {
+    id: 'acc6',
+    image: '/images/accessoires/acc6.jpg',
+    nameFr: 'Tête à perruque & trépied',
+    nameAr: 'رأس عرض مع حامل ثلاثي',
+    descFr: 'Pour coiffer, poser et ranger sans déformer. Trépied réglable en hauteur, tête en toile qui accepte les épingles.',
+    descAr: 'لتصفيف الباروكة وتركيبها وحفظها دون أن تفقد شكلها. حامل قابل لضبط الارتفاع، ورأس من القماش يتحمّل الدبابيس.',
+  },
+  {
+    id: 'acc7',
+    image: '/images/accessoires/acc7.jpg',
+    nameFr: 'Brosses ventilées dorées',
+    nameAr: 'فرشاتان ذهبيتان مفرّغتان',
+    descFr: 'Structure ajourée qui laisse passer l’air : démêlage rapide, séchage plus court, moins de tension sur les attaches.',
+    descAr: 'هيكل مفرّغ يسمح بمرور الهواء: فك التشابك أسرع، والتجفيف أقصر، وشدّ أقل على أماكن التثبيت.',
+  },
+  {
+    id: 'acc8',
+    image: '/images/accessoires/acc8.jpg',
+    nameFr: 'Bandeaux antidérapants en velours',
+    nameAr: 'ربطات مخمل مانعة للانزلاق',
+    descFr: 'Cinq teintes de velours matelassé à glisser sous la perruque : elle tient sans colle et sans tirer sur les tempes.',
+    descAr: 'خمس درجات من المخمل المبطّن توضع تحت الباروكة: تثبت بدون غراء وبدون شدّ على الصدغين.',
+  },
+  {
+    id: 'acc9',
+    image: '/images/accessoires/acc9.jpg',
+    nameFr: 'Brosse lissante à poils denses',
+    nameAr: 'فرشاة تمليس بشعيرات كثيفة',
+    descFr: 'Poils serrés pour lisser la longueur et faire briller sans casser la fibre. Manche doré, prise en main confortable.',
+    descAr: 'شعيرات متقاربة لتمليس الأطوال وإظهار اللمعان دون كسر الخصلة. مقبض ذهبي ومريح في اليد.',
+  },
+  {
+    id: 'acc10',
+    image: '/images/accessoires/acc10.jpg',
+    nameFr: 'Bonnet en satin',
+    nameAr: 'بونيه ساتان',
+    descFr: 'À porter la nuit : le satin ne boit pas l’hydratation et ne crée pas de frisottis, contrairement au coton.',
+    descAr: 'للنوم: الساتان لا يمتصّ الترطيب ولا يسبّب التشعّث، على عكس القطن.',
+  },
+  {
+    id: 'acc11',
+    image: '/images/accessoires/acc11.jpg',
+    nameFr: 'Support & cintre à perruque',
+    nameAr: 'حامل وعلّاقة باروكة',
+    descFr: 'Le support garde la forme sur le plan de travail, le cintre libère l’espace dans l’armoire. Pliables tous les deux.',
+    descAr: 'الحامل يحافظ على الشكل على الطاولة، والعلّاقة توفّر مساحة في الخزانة. وكلاهما قابل للطي.',
+  },
+  {
+    id: 'acc12',
+    image: '/images/accessoires/acc12.jpg',
+    nameFr: 'Brosses — trois finitions',
+    nameAr: 'ثلاث فرش بثلاث تشطيبات',
+    descFr: 'Or rose, noir mat et argent. Même base ventilée, à choisir selon ce qui traîne déjà sur votre coiffeuse.',
+    descAr: 'ذهبي وردي، أسود مطفي، وفضي. نفس القاعدة المفرّغة، تختارين حسب ما يناسب تسريحتكِ.',
+  },
+  {
+    id: 'acc13',
+    image: '/images/accessoires/acc13.jpg',
+    nameFr: 'Chouchou en satin',
+    nameAr: 'سكرانشي ساتان',
+    descFr: 'Attache sans trace : le satin glisse sur la fibre au lieu de la marquer, même serré toute la journée.',
+    descAr: 'ربطة بدون أثر: الساتان ينزلق على الخصلة بدل ما يترك علامة، حتى لو بقيت مشدودة طول اليوم.',
+  },
+  {
+    id: 'acc14',
+    image: '/images/accessoires/acc14.jpg',
+    nameFr: 'Bonnets sous-perruque',
+    nameAr: 'شبكات تحت الباروكة',
+    descFr: 'Maille fine et teintes nude pour aplatir vos cheveux et disparaître sous la lace, sans surépaisseur au contour.',
+    descAr: 'شبكة ناعمة ودرجات قريبة من لون البشرة لتسطيح شعركِ والاختفاء تحت الليس، بدون سماكة عند الحدود.',
+  },
+  {
+    id: 'acc15',
+    image: '/images/accessoires/acc15.jpg',
+    nameFr: 'Housses de rangement',
+    nameAr: 'أكياس حفظ الباروكة',
+    descFr: 'Housse à fenêtre avec cintre intégré : vous voyez ce qu’il y a dedans sans ouvrir, et rien ne prend la poussière.',
+    descAr: 'كيس بنافذة مع علّاقة مدمجة: تشوفين وش بداخله بدون ما تفتحينه، ولا يدخله الغبار.',
+  },
+  {
+    id: 'acc16',
+    image: '/images/accessoires/acc16.jpg',
+    nameFr: 'Coffret soin complet',
+    nameAr: 'طقم العناية الكامل',
+    descFr: 'Shampoing, après-shampoing, masque et huile. La routine entière pour cheveux naturels et perruques.',
+    descAr: 'شامبو وبلسم وماسك وزيت. الروتين الكامل للشعر الطبيعي وللباروكات.',
+  },
+  {
+    id: 'acc17',
+    image: '/images/accessoires/acc17.jpg',
+    nameFr: 'Pinces crabe',
+    nameAr: 'مشابك كلاب',
+    descFr: 'Marbre, écaille, nacre et ivoire. Assez solides pour relever une longueur épaisse sans marquer la fibre.',
+    descAr: 'رخامي، سلحفاتي، صدفي، وعاجي. قوية بما يكفي لرفع الأطوال الكثيفة دون ترك علامة.',
+  },
+  {
+    id: 'acc18',
+    image: '/images/accessoires/acc18.jpg',
+    nameFr: 'Shampoing',
+    nameAr: 'شامبو',
+    descFr: 'Sans sulfates ni parabènes, formulé pour ne pas décaper la couleur ni assécher une fibre travaillée.',
+    descAr: 'بدون سلفات ولا بارابين، مركّب حتى لا يسحب اللون ولا يجفّف الخصلة المعالَجة.',
+  },
+  {
+    id: 'acc19',
+    image: '/images/accessoires/acc19.jpg',
+    nameFr: 'Bandes adhésives pré-découpées',
+    nameAr: 'لصقات مقصوصة مسبقاً',
+    descFr: 'Courbées à la forme du contour, prêtes à poser. Huit sachets, pour ne plus découper le ruban à la main.',
+    descAr: 'مقوّسة حسب شكل مقدمة الرأس وجاهزة للتركيب. ثمانية أكياس، فما تحتاجين تقصّين الشريط بيدكِ.',
+  },
+  {
+    id: 'acc20',
+    image: '/images/accessoires/acc20.jpg',
+    nameFr: 'Bandes de maintien silicone',
+    nameAr: 'ربطات تثبيت بنقاط سيليكون',
+    descFr: 'Picots en silicone à l’intérieur : la perruque reste en place toute la journée sans serrer le crâne.',
+    descAr: 'نقاط سيليكون من الداخل: الباروكة تبقى ثابتة طول اليوم بدون ضغط على الرأس.',
+  },
+  {
+    id: 'acc21',
+    image: '/images/accessoires/acc21.jpg',
+    nameFr: 'Shampoing colorant & shampoing violet',
+    nameAr: 'شامبو ملوّن وشامبو بنفسجي',
+    descFr: 'L’un ravive un brun qui a terni, l’autre annule les reflets jaunes d’un blond. À alterner avec votre shampoing habituel.',
+    descAr: 'واحد ينعش البني الباهت، والثاني يلغي الاصفرار من الأشقر. استعمليهما بالتناوب مع شامبوكِ المعتاد.',
+  },
+  {
+    id: 'acc22',
+    image: '/images/accessoires/acc22.jpg',
+    nameFr: 'Feuilles adhésives & toile de maintien',
+    nameAr: 'شرائح لاصقة وشبكة تثبيت',
+    descFr: 'Grandes feuilles à découper vous-même, pour les contours qui ne tombent pas sur un format standard.',
+    descAr: 'شرائح كبيرة تقصّينها بنفسكِ، للحدود اللي ما تناسبها المقاسات الجاهزة.',
+  },
+  {
+    id: 'acc23',
+    image: '/images/accessoires/acc23.jpg',
+    nameFr: 'Huile capillaire',
+    nameAr: 'زيت الشعر',
+    descFr: 'Argan, jojoba et vitamine E. Quelques gouttes sur les pointes : brillance et protection à la chaleur.',
+    descAr: 'أرغان وجوجوبا وفيتامين E. قطرات على الأطراف: لمعان وحماية من الحرارة.',
+  },
+  {
+    id: 'acc24',
+    image: '/images/accessoires/acc24.jpg',
+    nameFr: 'Masque capillaire',
+    nameAr: 'ماسك الشعر',
+    descFr: 'Réparation intensive pour une fibre sèche ou décolorée. À poser sur longueurs et pointes, pas sur les racines.',
+    descAr: 'إصلاح مكثّف للشعر الجاف أو المصبوغ. يوضع على الأطوال والأطراف، لا على الجذور.',
+  },
+  {
+    id: 'acc25',
+    image: '/images/accessoires/acc25.jpg',
+    nameFr: 'Barrettes perles & cristal',
+    nameAr: 'مشابك لؤلؤ وكريستال',
+    descFr: 'Pour un mariage ou une soirée : nœud en cristal et barrettes perlées, à poser sur un chignon ou un côté relevé.',
+    descAr: 'لعرس أو سهرة: فيونكة كريستال ومشابك لؤلؤية، توضع على كعكة أو جانب مرفوع.',
+  },
+  {
+    id: 'acc26',
+    image: '/images/accessoires/acc26.jpg',
+    nameFr: 'Pochettes en satin',
+    nameAr: 'أكياس ساتان',
+    descFr: 'Quatre pochettes pour séparer vos clips, vos barrettes et vos pièces courtes sans qu’elles s’emmêlent.',
+    descAr: 'أربعة أكياس لفصل المشابك والقطع القصيرة حتى لا تتشابك.',
+  },
+  {
+    id: 'acc27',
+    image: '/images/accessoires/acc27.jpg',
+    nameFr: 'Après-shampoing',
+    nameAr: 'بلسم',
+    descFr: 'Referme l’écaille après le shampoing : moins de nœuds, un coiffage plus facile, une longueur plus souple.',
+    descAr: 'يغلق قشرة الشعرة بعد الشامبو: عقد أقل، وتصفيف أسهل، وأطوال أطرى.',
+  },
 ];
 
 export default function Accessoires() {
@@ -69,11 +245,11 @@ export default function Accessoires() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
 
   const t = {
-    overline: lang === 'fr' ? 'POSE & ENTRETIEN' : 'التركيب والعناية',
+    overline: lang === 'fr' ? 'POSE, SOIN & RANGEMENT' : 'التركيب والعناية والحفظ',
     title: lang === 'fr' ? 'Accessoires' : 'إكسسوارات',
     intro: lang === 'fr'
-      ? 'Colles, rubans et dissolvants : tout ce qui tient une pose et tout ce qui la retire proprement. Dites-nous ce qu’il vous faut, nous vous indiquons le prix avec votre commande.'
-      : 'غراء وشرائط ومزيلات: كل ما يثبّت التركيبة وكل ما يفكّها بأمان. قولي لنا وش تحتاجين، ونعطيكِ السعر مع طلبكِ.',
+      ? 'Tout ce qui entoure la pièce : ce qui la fixe, ce qui la retire, ce qui la lave, ce qui la range. Dites-nous ce qu’il vous faut, nous vous indiquons le prix avec votre commande.'
+      : 'كل ما يحيط بالقطعة: ما يثبّتها، وما يفكّها، وما يغسلها، وما يحفظها. قولي لنا وش تحتاجين، ونعطيكِ السعر مع طلبكِ.',
     onRequest: lang === 'fr' ? 'Prix sur demande' : 'السعر عند الطلب',
     withOrder: lang === 'fr' ? 'Communiqué avec votre commande' : 'يُحدَّد مع طلبكِ',
     ask: lang === 'fr' ? 'Demander le prix' : 'اسألي عن السعر',
@@ -149,8 +325,6 @@ export default function Accessoires() {
                 <img
                   src={item.image}
                   alt={lang === 'fr' ? item.nameFr : item.nameAr}
-                  width={1312}
-                  height={1199}
                   loading={i === 0 ? 'eager' : 'lazy'}
                   decoding="async"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
