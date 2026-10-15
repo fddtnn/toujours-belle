@@ -304,8 +304,18 @@ body {
   z-index: 1;
 }
 
+/* Text on a textured ground needs more weight than text on flat cream: under
+   the darkest part of the leaf shadow the backdrop falls to L=0.615, where
+   the usual rose manages 3.9:1. This deeper one - the same tone the hero
+   already uses over its photograph - measures 4.9:1 there. Scoped to these
+   pages, so the rest of the site keeps the lighter rose. */
+.tb-textured {
+  --tb-accent-text: #7a4343;
+  --tb-text-muted: #5f5450;
+}
+
 :root {
-  --tb-texture: 0.38;
+  --tb-texture: 0.88;
 }
 /* light paper on a dark page reads as a stain, so it only whispers there */
 .dark {
