@@ -10,7 +10,7 @@ const products = [
   {
     nameFr: 'Shampoing Nourrissant',
     nameAr: 'شامبو مغذي',
-    image: '/images/hc-shampoo.jpg',
+    image: '/images/accessoires/acc18.jpg',
     price: 49,
     tagFr: 'Haircare',
     tagAr: 'العناية',
@@ -18,7 +18,7 @@ const products = [
   {
     nameFr: 'Après-Shampoing Hydratant',
     nameAr: 'بلسم مرطب',
-    image: '/images/hc-conditioner.jpg',
+    image: '/images/accessoires/acc27.jpg',
     price: 49,
     tagFr: 'Haircare',
     tagAr: 'العناية',
@@ -26,15 +26,15 @@ const products = [
   {
     nameFr: 'Sérum Elixir Argan',
     nameAr: 'سيروم أرجان',
-    image: '/images/hc-oil.jpg',
+    image: '/images/accessoires/acc23.jpg',
     price: 69,
     tagFr: 'Soin',
     tagAr: 'علاج',
   },
   {
-    nameFr: 'Brosse Poils de Sanglier',
+    nameFr: 'Brosse Lissante',
     nameAr: 'فرشاة شعر',
-    image: '/images/hc-brush.jpg',
+    image: '/images/accessoires/acc9.jpg',
     price: 39,
     tagFr: 'Accessoire',
     tagAr: 'إكسسوار',
@@ -42,15 +42,15 @@ const products = [
   {
     nameFr: 'Bonnet Satin',
     nameAr: 'بونيه ساتان',
-    image: '/images/hc-bonnet.jpg',
+    image: '/images/accessoires/acc10.jpg',
     price: 29,
     tagFr: 'Accessoire',
     tagAr: 'إكسسوار',
   },
   {
-    nameFr: 'Spray Protecteur Thermique',
-    nameAr: 'بخاخ حماية حرارية',
-    image: '/images/hc-spray.jpg',
+    nameFr: 'Hair Spray Nourrissant',
+    nameAr: 'بخاخ الشعر المغذي',
+    image: '/images/accessoires/acc29.jpg',
     price: 55,
     tagFr: 'Haircare',
     tagAr: 'العناية',
@@ -58,7 +58,7 @@ const products = [
   {
     nameFr: 'Barrettes Ornées',
     nameAr: 'مشابك ذهبية',
-    image: '/images/hc-clips.jpg',
+    image: '/images/accessoires/acc25.jpg',
     price: 35,
     tagFr: 'Accessoire',
     tagAr: 'إكسسوار',
@@ -66,7 +66,7 @@ const products = [
   {
     nameFr: 'Masque Réparateur',
     nameAr: 'ماسك إصلاحي',
-    image: '/images/hc-mask.jpg',
+    image: '/images/accessoires/acc24.jpg',
     price: 59,
     tagFr: 'Soin',
     tagAr: 'علاج',
@@ -74,7 +74,7 @@ const products = [
   {
     nameFr: 'Colle Perruque',
     nameAr: 'غراء الباروكة',
-    image: '/images/hc-wigglue.jpg',
+    image: '/images/accessoires/acc2.jpg',
     price: 45,
     tagFr: 'Accessoire',
     tagAr: 'إكسسوار',

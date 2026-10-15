@@ -236,6 +236,22 @@ const ITEMS: Item[] = [
     descFr: 'Referme l’écaille après le shampoing : moins de nœuds, un coiffage plus facile, une longueur plus souple.',
     descAr: 'يغلق قشرة الشعرة بعد الشامبو: عقد أقل، وتصفيف أسهل، وأطوال أطرى.',
   },
+  {
+    id: 'acc28',
+    image: '/images/accessoires/acc28.jpg',
+    nameFr: 'Fixing Spray — fixateur de maquillage',
+    nameAr: 'بخاخ تثبيت المكياج',
+    descFr: 'Fixe le maquillage et le rafraîchit en cours de journée. Acide hyaluronique, eau de rose et vitamine E, fini naturel. 100 ml.',
+    descAr: 'يثبّت المكياج وينعشه خلال اليوم. حمض الهيالورونيك وماء الورد وفيتامين E، بلمسة نهائية طبيعية. 100 مل.',
+  },
+  {
+    id: 'acc29',
+    image: '/images/accessoires/acc29.jpg',
+    nameFr: 'Hair Spray — soin sans rinçage',
+    nameAr: 'بخاخ الشعر — عناية بدون شطف',
+    descFr: 'Nourrit, protège et fait briller sans alourdir. Huile d’argan, kératine et vitamine E. À vaporiser sur longueurs sèches ou humides. 100 ml.',
+    descAr: 'يغذّي ويحمي ويمنح لمعاناً دون أن يثقّل. زيت أرغان وكيراتين وفيتامين E. يُرشّ على الأطوال الجافة أو الرطبة. 100 مل.',
+  },
 ];
 
 export default function Accessoires() {
