@@ -102,17 +102,20 @@ export default function EGiftCards() {
               </div>
 
               {/* Gift Card Image */}
+              {/* The card shown is the amount chosen: each has its own figure
+                  and its own code printed on it. 25 is what the panel beside
+                  it shows before a choice is made. */}
               <img
-                src="/images/egift-card.png"
-                alt="Toujours Belle E-Gift Card"
-                className="relative z-10"
+                src={`/images/egift/card-${selectedAmount ?? 25}.png`}
+                alt={`Toujours Belle E-Gift Card ${selectedAmount ?? 25} ${t.currency}`}
+                className="relative z-10 transition-opacity duration-300"
                 style={{
                   maxWidth: '380px',
                   width: '100%',
                   borderRadius: '16px',
                   boxShadow: '0 12px 40px rgba(212,165,165,0.35)',
                 }}
-              loading="lazy" />
+              />
             </div>
           </div>
 
@@ -227,6 +230,7 @@ export default function EGiftCards() {
             >
               <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                aria-label={lang === 'fr' ? 'Diminuer la quantité' : 'إنقاص الكمية'}
                 style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
               >
                 <Minus size={18} color="var(--tb-text-muted)" />
@@ -234,6 +238,7 @@ export default function EGiftCards() {
               <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '16px', color: 'var(--tb-text)', fontWeight: 500 }}>{quantity}</span>
               <button
                 onClick={() => setQuantity(quantity + 1)}
+                aria-label={lang === 'fr' ? 'Augmenter la quantité' : 'زيادة الكمية'}
                 style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
               >
                 <Plus size={18} color="var(--tb-text-muted)" />
@@ -244,6 +249,8 @@ export default function EGiftCards() {
             <div className="flex items-center gap-3 mb-6">
               <button
                 onClick={() => setIsGift(!isGift)}
+                aria-label={lang === 'fr' ? 'Offrir en cadeau' : 'إرسالها كهدية'}
+                aria-pressed={isGift}
                 style={{
                   width: '20px',
                   height: '20px',
@@ -268,8 +275,8 @@ export default function EGiftCards() {
               className="w-full transition-all duration-300"
               style={{
                 padding: '18px',
-                backgroundColor: addedToBag ? '#4a7c59' : '#d4a5a5',
-                color: 'var(--tb-card)',
+                backgroundColor: addedToBag ? '#2f5d3c' : '#d4a5a5',
+                color: addedToBag ? '#ffffff' : '#1a1a1a',
                 fontFamily: "'Inter', sans-serif",
                 fontSize: '15px',
                 fontWeight: 500,
