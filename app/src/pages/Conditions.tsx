@@ -54,7 +54,7 @@ const conditionsData: ConditionSection[] = [
       'Les consultations NE SONT PAS gratuites. Un tarif de consultation s\u2019applique et doit \u00eatre r\u00e9gl\u00e9 avant ou au d\u00e9but de la consultation.',
       'La consultation couvre : l\u2019analyse de votre type de cheveux, le choix de la texture, la s\u00e9lection de la couleur, la d\u00e9termination de la longueur id\u00e9ale, et les conseils d\u2019entretien.',
       'En cas d\u2019annulation du rendez-vous de consultation moins de 24 heures \u00e0 l\u2019avance, le montant de la consultation n\u2019est pas rembours\u00e9.',
-      'Le tarif de la consultation n\u2019est pas d\u00e9ductible du prix d\u2019achat de cheveux, sauf mention promotionnelle sp\u00e9cifique.',
+      'Le tarif de la consultation, soit 200 TND, est d\u00e9duit du prix de votre commande si vous achetez \u00e0 la suite de la consultation.',
     ],
     itemsAr: [
       'نقدم استشارات مخصصة عند الطلب لمرافقتكِ في اختيار شعركِ.',

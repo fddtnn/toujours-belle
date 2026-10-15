@@ -1,9 +1,13 @@
+import { MessageCircle } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+
+/* Same number the rest of the site uses. */
+const WHATSAPP = '33123456789';
 
 export default function About() {
   const { t, lang, isRTL } = useLanguage();
@@ -112,6 +116,63 @@ export default function About() {
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '14px', lineHeight: 1.6, color: 'var(--tb-text-secondary)' }}>
               {t({ fr: "Notre expérience nous permet d'offrir des solutions efficaces, naturelles et adaptées à différents profils. Aujourd'hui, nos clientes continuent de nous faire confiance, reviennent régulièrement et recommandent Toujours Belle autour d'elles.", ar: 'تتيح لنا خبرتنا تقديم حلول فعالة، وطبيعية، ومناسبة لمختلف الأنماط. اليوم، عملائنا يواصلون الثقة بنا، والعودة بانتظام، وتوصية Toujours Belle لمن حولهم.' })}
             </p>
+          </div>
+
+          {/* Booking. For the visitor who cannot choose - the fee and the fact
+              that it comes off a later purchase are the two things she needs
+              before she commits, so both are stated on the card itself. */}
+          <div
+            className="animate-in mb-6"
+            style={{
+              border: '1px solid var(--tb-border)',
+              borderRadius: '16px',
+              backgroundColor: 'var(--tb-surface)',
+              padding: '22px 24px',
+            }}
+          >
+            <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.15rem', color: 'var(--tb-text)', marginBottom: '8px' }}>
+              {t({ fr: 'Vous hésitez ? Réservez une consultation', ar: 'محتارة؟ احجزي استشارة' })}
+            </h3>
+
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '14px', lineHeight: 1.7, color: 'var(--tb-text-secondary)', marginBottom: '12px' }}>
+              {t({
+                fr: "Si vous ne savez pas quoi choisir, nous le choisissons avec vous : en salon ou en ligne, par appel vidéo. Laissez-nous votre numéro et nous vous rappelons pour fixer le rendez-vous.",
+                ar: 'إذا ما كنتِ عارفة وش تختارين، نختارها معكِ: في الصالون أو أونلاين بمكالمة فيديو. اتركي لنا رقمكِ ونتواصل معكِ لتحديد الموعد.',
+              })}
+            </p>
+
+            <div className="flex items-baseline gap-2 flex-wrap" style={{ marginBottom: '6px' }}>
+              <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', color: 'var(--tb-accent-text)' }}>
+                {t({ fr: 'Consultation 200 TND', ar: 'الاستشارة 200 دينار' })}
+              </span>
+            </div>
+
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13.5px', lineHeight: 1.65, color: 'var(--tb-text-secondary)', marginBottom: '16px' }}>
+              {t({
+                fr: "Et si vous commandez ensuite, les 200 TND sont déduits du prix de votre produit.",
+                ar: 'وإذا طلبتِ بعدها، تُخصم الـ200 دينار من سعر منتجكِ.',
+              })}
+            </p>
+
+            <a
+              href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
+                lang === 'fr'
+                  ? 'Bonjour, je voudrais réserver une consultation (200 TND).'
+                  : 'السلام عليكم، أبغى أحجز استشارة (200 دينار).'
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 transition-opacity duration-200 hover:opacity-90"
+              style={{
+                padding: '13px 28px', borderRadius: '100px',
+                backgroundColor: 'var(--tb-text)', color: 'var(--tb-bg)',
+                fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '13px',
+                letterSpacing: '0.06em', textTransform: 'uppercase', textDecoration: 'none',
+              }}
+            >
+              <MessageCircle size={16} />
+              {t({ fr: 'Réserver ma consultation', ar: 'احجزي استشارتي' })}
+            </a>
           </div>
 
           <a href="#product" onClick={(e) => { e.preventDefault(); document.querySelector('#product')?.scrollIntoView({ behavior: 'smooth' }); }} className="animate-in inline-block transition-all duration-300 hover:-translate-y-0.5" style={{ padding: '14px 36px', borderRadius: '100px', border: '1px solid var(--tb-text)', backgroundColor: 'transparent', color: 'var(--tb-text)', fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '13px', letterSpacing: '0.08em', textTransform: 'uppercase', textDecoration: 'none', width: 'fit-content' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--tb-text)'; e.currentTarget.style.color = 'var(--tb-bg)'; }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = 'var(--tb-text)'; }}>
