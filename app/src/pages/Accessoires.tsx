@@ -284,6 +284,7 @@ export default function Accessoires() {
 
   return (
     <div
+      className="tb-textured"
       dir={isRTL ? 'rtl' : 'ltr'}
       style={{ backgroundColor: 'var(--tb-bg)', fontFamily: "'Inter', sans-serif", minHeight: '100vh' }}
     >

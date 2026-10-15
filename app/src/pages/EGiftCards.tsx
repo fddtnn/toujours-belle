@@ -51,7 +51,7 @@ export default function EGiftCards() {
   };
 
   return (
-    <div ref={pageRef} style={{ backgroundColor: 'var(--tb-card)', fontFamily: "'Inter', sans-serif" }}>
+    <div ref={pageRef} className="tb-textured" style={{ backgroundColor: 'var(--tb-card)', fontFamily: "'Inter', sans-serif" }}>
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-6 pt-6 pb-2">
         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: 'var(--tb-text-muted)' }}>

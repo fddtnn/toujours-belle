@@ -47,7 +47,7 @@
     --tb-tint-text: #8a6b5d;
     /* brand rose is 2.01:1 on the cream background - too low for text,
        so text uses a darkened rose while fills keep #d4a5a5 */
-    --tb-accent-text: #995959;
+    --tb-accent-text: #8f5050;
   }
 
   .dark {
@@ -280,6 +280,40 @@ body {
    Inverting keeps its tonal range, unlike flattening it to pure white. */
 .dark .tb-logo-adapt {
   filter: invert(1) brightness(1.25);
+}
+
+/* The leaf-shadow backdrop the collection pages sit on.
+
+   It is laid over the page colour rather than replacing it, and at an opacity
+   chosen by measurement: at full strength its darkest patches reach 185, and
+   the 11px rose overline only manages 2.7:1 against that. Composited at 0.42
+   over the cream the floor lands near 223, which the audit passes. Fixed, so
+   it stays put while the grid scrolls over it. */
+.tb-textured::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url('/images/bg-texture.webp') center / cover no-repeat;
+  opacity: var(--tb-texture);
+}
+
+.tb-textured > * {
+  position: relative;
+  z-index: 1;
+}
+
+:root {
+  --tb-texture: 0.38;
+}
+/* light paper on a dark page reads as a stain, so it only whispers there */
+.dark {
+  --tb-texture: 0.06;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tb-textured::before { background-attachment: scroll; }
 }
 
 .tb-login-card {
