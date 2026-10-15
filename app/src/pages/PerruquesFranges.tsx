@@ -16,6 +16,7 @@ interface WigProduct {
   nameFr: string;
   nameAr: string;
   image: string;
+  gallery?: string[];
   typeFr: string;
   typeAr: string;
   basePrice: number;
@@ -33,6 +34,7 @@ const products: WigProduct[] = [
   { id: 'fr002', nameFr: 'Frange Noire Rideau', nameAr: 'غرة سوداء ستائرية', image: '/images/perruques/franges/fr002.jpg', typeFr: 'Frange — Noir Naturel', typeAr: 'غرة — أسود طبيعي', basePrice: 135, rating: 4.7, reviews: 27, sold: 39, stock: 46, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
   { id: 'fr003', nameFr: 'Frange Châtain Droite', nameAr: 'غرة كستنائية مستقيمة', image: '/images/perruques/franges/fr003.jpg', typeFr: 'Frange — Châtain', typeAr: 'غرة — كستنائي', basePrice: 125, rating: 4.8, reviews: 34, sold: 47, stock: 48, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
   { id: 'fr004', nameFr: 'Frange Châtain Dégradée', nameAr: 'غرة كستنائية متدرجة', image: '/images/perruques/franges/fr004.jpg', typeFr: 'Frange — Châtain', typeAr: 'غرة — كستنائي', basePrice: 140, rating: 4.7, reviews: 29, sold: 41, stock: 44, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'sv001', nameFr: 'Frange Brune Volume', nameAr: 'غرة بنية بحجم', image: '/images/perruques/secret-volume/sv001.jpg', typeFr: 'Frange — Châtain Foncé', typeAr: 'غرة — كستنائي داكن', basePrice: 140, rating: 4.9, reviews: 41, sold: 53, stock: 34, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
 ];
 
 
@@ -215,10 +217,15 @@ export default function PerruquesFranges() {
     back: lang === 'fr' ? 'Retour aux perruques' : '\u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0627\u0644\u0628\u0627\u0631\u0648\u0643\u0627\u062a',
   };
 
+  /* The photos this wig actually has: the main shot, then any others grouped
+     onto it. A product with one photo shows one, not the same one three
+     times. */
   const images = [
     { src: selectedProduct.image, alt: selectedProduct.nameFr },
-    { src: selectedProduct.image, alt: selectedProduct.nameFr + ' - vue 2' },
-    { src: selectedProduct.image, alt: selectedProduct.nameFr + ' - vue 3' },
+    ...(selectedProduct.gallery ?? []).map((src, i) => ({
+      src,
+      alt: `${selectedProduct.nameFr} - vue ${i + 2}`,
+    })),
   ];
 
   const catLabel = lang === 'fr' ? selectedProduct.categoryFr : selectedProduct.categoryAr;

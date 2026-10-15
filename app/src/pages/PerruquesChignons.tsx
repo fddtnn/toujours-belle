@@ -30,10 +30,7 @@ interface WigProduct {
 }
 
 const products: WigProduct[] = [
-  { id: 'cc001', nameFr: 'Chignon Volumineux Ondulé', nameAr: 'كعكة مموجة كثيفة', image: '/images/perruques/chignons/cc001.jpg', typeFr: 'Chignon — Toutes Teintes', typeAr: 'كعكات — جميع الألوان', basePrice: 140, rating: 4.8, reviews: 33, sold: 45, stock: 52, category: 'chignon', categoryFr: 'Chignons', categoryAr: 'كعكات' },
-  { id: 'cc002', nameFr: 'Chouchou Bouclé', nameAr: 'ربطة شعر مجعدة', image: '/images/perruques/chignons/cc002.jpg', typeFr: 'Chouchou — Toutes Teintes', typeAr: 'ربطات — جميع الألوان', basePrice: 95, rating: 4.9, reviews: 48, sold: 61, stock: 60, category: 'chouchou', categoryFr: 'Chouchous', categoryAr: 'ربطات' },
-  { id: 'cc003', nameFr: 'Chouchou Boucl\u00e9 \u2014 Teintes Claires', nameAr: '\u0631\u0628\u0637\u0629 \u0634\u0639\u0631 \u0645\u062c\u0639\u062f\u0629 \u2014 \u0623\u0644\u0648\u0627\u0646 \u0641\u0627\u062a\u062d\u0629', image: '/images/perruques/chignons/cc003.jpg', typeFr: 'Chouchou \u2014 Toutes Teintes', typeAr: '\u0631\u0628\u0637\u0627\u062a \u2014 \u062c\u0645\u064a\u0639 \u0627\u0644\u0623\u0644\u0648\u0627\u0646', basePrice: 95, rating: 4.8, reviews: 41, sold: 54, stock: 58, category: 'chouchou', categoryFr: 'Chouchous', categoryAr: '\u0631\u0628\u0637\u0627\u062a' },
-  { id: 'cc004', nameFr: 'Chouchou Boucl\u00e9 \u2014 Teintes Fonc\u00e9es', nameAr: '\u0631\u0628\u0637\u0629 \u0634\u0639\u0631 \u0645\u062c\u0639\u062f\u0629 \u2014 \u0623\u0644\u0648\u0627\u0646 \u062f\u0627\u0643\u0646\u0629', image: '/images/perruques/chignons/cc004.jpg', typeFr: 'Chouchou \u2014 Toutes Teintes', typeAr: '\u0631\u0628\u0637\u0627\u062a \u2014 \u062c\u0645\u064a\u0639 \u0627\u0644\u0623\u0644\u0648\u0627\u0646', basePrice: 95, rating: 4.9, reviews: 44, sold: 57, stock: 55, category: 'chouchou', categoryFr: 'Chouchous', categoryAr: '\u0631\u0628\u0637\u0627\u062a' },
+  { id: 'cc002', nameFr: 'Chouchou Bouclé', nameAr: 'ربطة شعر مجعدة', image: '/images/perruques/chignons/cc002.jpg', gallery: ['/images/perruques/chignons/cc003.jpg', '/images/perruques/chignons/cc004.jpg', '/images/perruques/chignons/cc001.jpg'], typeFr: 'Chouchou — Toutes Teintes', typeAr: 'ربطات — جميع الألوان', basePrice: 300, rating: 4.9, reviews: 48, sold: 61, stock: 60, category: 'chouchou', categoryFr: 'Chouchous', categoryAr: 'ربطات' },
 ];
 
 
@@ -214,10 +211,16 @@ export default function PerruquesChignons() {
     back: lang === 'fr' ? 'Retour aux perruques' : '\u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0627\u0644\u0628\u0627\u0631\u0648\u0643\u0627\u062a',
   };
 
-  const images = (selectedProduct.gallery ?? [selectedProduct.image]).map((src, i) => ({
-    src,
-    alt: selectedProduct.nameFr + (i === 0 ? '' : ' - vue ' + (i + 1)),
-  }));
+  /* The photos this product actually has: the main shot, then any others
+     grouped onto it. Same convention as every other collection page -
+     gallery holds the extras, not the main image. */
+  const images = [
+    { src: selectedProduct.image, alt: selectedProduct.nameFr },
+    ...(selectedProduct.gallery ?? []).map((src, i) => ({
+      src,
+      alt: `${selectedProduct.nameFr} - vue ${i + 2}`,
+    })),
+  ];
 
   const catLabel = lang === 'fr' ? selectedProduct.categoryFr : selectedProduct.categoryAr;
   const name = lang === 'fr' ? selectedProduct.nameFr : selectedProduct.nameAr;

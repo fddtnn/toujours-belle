@@ -16,6 +16,7 @@ interface WigProduct {
   nameFr: string;
   nameAr: string;
   image: string;
+  gallery?: string[];
   typeFr: string;
   typeAr: string;
   basePrice: number;
@@ -345,10 +346,15 @@ export default function Perruques() {
     back: lang === 'fr' ? 'Retour aux perruques' : '\u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0627\u0644\u0628\u0627\u0631\u0648\u0643\u0627\u062a',
   };
 
+  /* The photos this wig actually has: the main shot, then any others grouped
+     onto it. A product with one photo shows one, not the same one three
+     times. */
   const images = [
     { src: selectedProduct.image, alt: selectedProduct.nameFr },
-    { src: selectedProduct.image, alt: selectedProduct.nameFr + ' - vue 2' },
-    { src: selectedProduct.image, alt: selectedProduct.nameFr + ' - vue 3' },
+    ...(selectedProduct.gallery ?? []).map((src, i) => ({
+      src,
+      alt: `${selectedProduct.nameFr} - vue ${i + 2}`,
+    })),
   ];
 
   const catLabel = lang === 'fr' ? selectedProduct.categoryFr : selectedProduct.categoryAr;

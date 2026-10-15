@@ -443,17 +443,16 @@ export default function PerruquesCarreLong() {
     back: lang === 'fr' ? 'Retour aux perruques' : '\u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0627\u0644\u0628\u0627\u0631\u0648\u0643\u0627\u062a',
   };
 
-  /* The grouped photos of one wig. Products with no gallery fall back to the
-     single shot repeated, which is what every product did before. */
-  const gallery = selectedProduct.gallery ?? [];
-  const images = gallery.length
-    ? [{ src: selectedProduct.image, alt: selectedProduct.nameFr },
-       ...gallery.map((src, i) => ({ src, alt: `${selectedProduct.nameFr} - vue ${i + 2}` }))]
-    : [
-        { src: selectedProduct.image, alt: selectedProduct.nameFr },
-        { src: selectedProduct.image, alt: selectedProduct.nameFr + ' - vue 2' },
-        { src: selectedProduct.image, alt: selectedProduct.nameFr + ' - vue 3' },
-      ];
+  /* The photos this wig actually has: the main shot, then any others grouped
+     onto it. A product with one photo shows one, not the same one three
+     times. */
+  const images = [
+    { src: selectedProduct.image, alt: selectedProduct.nameFr },
+    ...(selectedProduct.gallery ?? []).map((src, i) => ({
+      src,
+      alt: `${selectedProduct.nameFr} - vue ${i + 2}`,
+    })),
+  ];
 
   const catLabel = lang === 'fr' ? selectedProduct.categoryFr : selectedProduct.categoryAr;
   const name = lang === 'fr' ? selectedProduct.nameFr : selectedProduct.nameAr;

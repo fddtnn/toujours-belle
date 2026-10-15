@@ -16,6 +16,7 @@ interface WigProduct {
   nameFr: string;
   nameAr: string;
   image: string;
+  gallery?: string[];
   typeFr: string;
   typeAr: string;
   basePrice: number;
@@ -29,11 +30,7 @@ interface WigProduct {
 }
 
 const products: WigProduct[] = [
-  { id: 'qc001', nameFr: 'Queue de Cheval Lisse Brune', nameAr: 'ذيل حصان ناعم بني', image: '/images/perruques/queues/qc001.jpg', typeFr: 'Queue de Cheval — Châtain Foncé', typeAr: 'ذيل حصان — كستنائي داكن', basePrice: 340, rating: 4.9, reviews: 42, sold: 55, stock: 36, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
-  { id: 'qc002', nameFr: 'Queue de Cheval Haute Élégance', nameAr: 'ذيل حصان عالٍ أنيق', image: '/images/perruques/queues/qc002.jpg', typeFr: 'Queue de Cheval — Châtain Foncé', typeAr: 'ذيل حصان — كستنائي داكن', basePrice: 350, rating: 4.8, reviews: 38, sold: 49, stock: 34, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
-  { id: 'qc003', nameFr: 'Queue de Cheval Brune Volume', nameAr: 'ذيل حصان بني كثيف', image: '/images/perruques/queues/qc003.jpg', typeFr: 'Queue de Cheval — Châtain Foncé', typeAr: 'ذيل حصان — كستنائي داكن', basePrice: 330, rating: 4.7, reviews: 31, sold: 42, stock: 40, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
-  { id: 'qc004', nameFr: 'Queue de Cheval — Trois Teintes', nameAr: 'ذيل حصان — ثلاثة ألوان', image: '/images/perruques/queues/qc004.jpg', typeFr: 'Queue de Cheval — Châtain Foncé', typeAr: 'ذيل حصان — كستنائي داكن', basePrice: 325, rating: 4.8, reviews: 35, sold: 46, stock: 44, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
-  { id: 'qc005', nameFr: 'Queue de Cheval Base Peigne', nameAr: 'ذيل حصان بقاعدة مشط', image: '/images/perruques/queues/qc005.jpg', typeFr: 'Queue de Cheval — Blond', typeAr: 'ذيل حصان — أشقر', basePrice: 345, rating: 4.9, reviews: 29, sold: 38, stock: 31, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'qc004', nameFr: 'Queue de Cheval — Trois Teintes', nameAr: 'ذيل حصان — ثلاثة ألوان', image: '/images/perruques/queues/qc004.jpg', gallery: ['/images/perruques/queues/qc001.jpg', '/images/perruques/queues/qc002.jpg', '/images/perruques/queues/qc003.jpg', '/images/perruques/queues/qc005.jpg'], typeFr: 'Queue de Cheval — Châtain Foncé', typeAr: 'ذيل حصان — كستنائي داكن', basePrice: 1200, rating: 4.8, reviews: 35, sold: 46, stock: 44, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
 ];
 
 
@@ -214,10 +211,15 @@ export default function PerruquesQueues() {
     back: lang === 'fr' ? 'Retour aux perruques' : '\u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0627\u0644\u0628\u0627\u0631\u0648\u0643\u0627\u062a',
   };
 
+  /* The photos this wig actually has: the main shot, then any others grouped
+     onto it. A product with one photo shows one, not the same one three
+     times. */
   const images = [
     { src: selectedProduct.image, alt: selectedProduct.nameFr },
-    { src: selectedProduct.image, alt: selectedProduct.nameFr + ' - vue 2' },
-    { src: selectedProduct.image, alt: selectedProduct.nameFr + ' - vue 3' },
+    ...(selectedProduct.gallery ?? []).map((src, i) => ({
+      src,
+      alt: `${selectedProduct.nameFr} - vue ${i + 2}`,
+    })),
   ];
 
   const catLabel = lang === 'fr' ? selectedProduct.categoryFr : selectedProduct.categoryAr;

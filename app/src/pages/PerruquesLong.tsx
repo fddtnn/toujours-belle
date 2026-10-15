@@ -16,6 +16,7 @@ interface WigProduct {
   nameFr: string;
   nameAr: string;
   image: string;
+  gallery?: string[];
   typeFr: string;
   typeAr: string;
   basePrice: number;
@@ -172,6 +173,8 @@ const products: WigProduct[] = [
   { id: 'ml229', nameFr: 'Ombré Blond Trio Signature', nameAr: 'أومبريه أشقر ثلاثي مميز', image: '/images/perruques/mi-long/ml229.jpg', typeFr: 'Perruque Longue — Highlight', typeAr: 'باروكة طويلة — هايلايت', basePrice: 510, rating: 4.7, reviews: 33, sold: 45, stock: 43, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
   { id: 'ml230', nameFr: 'Balayage Cendré Trio Élégance', nameAr: 'بالياج رمادي ثلاثي أنيق', image: '/images/perruques/mi-long/ml230.jpg', typeFr: 'Perruque Longue — Highlight', typeAr: 'باروكة طويلة — هايلايت', basePrice: 506, rating: 4.6, reviews: 29, sold: 41, stock: 46, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
   { id: 'ml231', nameFr: 'Balayage Doré Vague Prestige', nameAr: 'بالياج ذهبي مموج بريستيج', image: '/images/perruques/mi-long/ml231.jpg', typeFr: 'Perruque Longue — Highlight', typeAr: 'باروكة طويلة — هايلايت', basePrice: 518, rating: 4.8, reviews: 42, sold: 54, stock: 39, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'xl021', nameFr: 'Balayage Cendré Porté Prestige', nameAr: 'بالياج رمادي مطبق بريستيج', image: '/images/perruques/extra-long/xl021.jpg', typeFr: 'Perruque Longue — Highlight', typeAr: 'باروكة طويلة — هايلايت', basePrice: 670, rating: 4.8, reviews: 42, sold: 54, stock: 37, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
+  { id: 'xl022', nameFr: 'Balayage Cendré Porté Élégance', nameAr: 'بالياج رمادي مطبق أنيق', image: '/images/perruques/extra-long/xl022.jpg', typeFr: 'Perruque Longue — Highlight', typeAr: 'باروكة طويلة — هايلايت', basePrice: 665, rating: 4.7, reviews: 37, sold: 49, stock: 40, category: 'highlight', categoryFr: 'Highlight', categoryAr: 'هايلايت' },
   { id: 'ml001', nameFr: 'Blond Balayage Lumière', nameAr: 'شعر أشقر بالياج لامع', image: '/images/perruques/mi-long/ml001.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 501, rating: 4.1, reviews: 55, sold: 29, stock: 42, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
   { id: 'ml002', nameFr: 'Blond Miel Ondulé', nameAr: 'شعر عسلي مموج', image: '/images/perruques/mi-long/ml002.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 448, rating: 4.1, reviews: 14, sold: 55, stock: 58, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
   { id: 'ml003', nameFr: 'Blond Sable Glamour', nameAr: 'شعر رملي جلامور', image: '/images/perruques/mi-long/ml003.jpg', typeFr: 'Perruque Longue — Blond', typeAr: 'باروكة طويلة — أشقر', basePrice: 489, rating: 4.1, reviews: 35, sold: 14, stock: 35, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
@@ -463,10 +466,15 @@ export default function PerruquesLong() {
     back: lang === 'fr' ? 'Retour aux perruques' : '\u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0627\u0644\u0628\u0627\u0631\u0648\u0643\u0627\u062a',
   };
 
+  /* The photos this wig actually has: the main shot, then any others grouped
+     onto it. A product with one photo shows one, not the same one three
+     times. */
   const images = [
     { src: selectedProduct.image, alt: selectedProduct.nameFr },
-    { src: selectedProduct.image, alt: selectedProduct.nameFr + ' - vue 2' },
-    { src: selectedProduct.image, alt: selectedProduct.nameFr + ' - vue 3' },
+    ...(selectedProduct.gallery ?? []).map((src, i) => ({
+      src,
+      alt: `${selectedProduct.nameFr} - vue ${i + 2}`,
+    })),
   ];
 
   const catLabel = lang === 'fr' ? selectedProduct.categoryFr : selectedProduct.categoryAr;

@@ -30,9 +30,7 @@ interface WigProduct {
 }
 
 const products: WigProduct[] = [
-  { id: 'sv001', nameFr: 'TB Secret Volume — Brun Frange', nameAr: 'TB سيكريت فوليوم — بني بغرة', image: '/images/perruques/secret-volume/sv001.jpg', typeFr: 'TB Secret Volume — Châtain Foncé', typeAr: 'TB سيكريت فوليوم — كستنائي داكن', basePrice: 420, rating: 4.9, reviews: 41, sold: 53, stock: 34, category: 'dark-brown', categoryFr: 'Châtain Foncé', categoryAr: 'كستنائي داكن' },
-  { id: 'sv002', nameFr: 'TB Secret Volume — Blond Balayage', nameAr: 'TB سيكريت فوليوم — أشقر بالياج', image: '/images/perruques/secret-volume/sv002.jpg', typeFr: 'TB Secret Volume — Blond', typeAr: 'TB سيكريت فوليوم — أشقر', basePrice: 450, rating: 4.8, reviews: 37, sold: 48, stock: 31, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'sv003', nameFr: 'TB Secret Volume \u2014 Base Lace & Clips', nameAr: 'TB \u0633\u064a\u0643\u0631\u064a\u062a \u0641\u0648\u0644\u064a\u0648\u0645 \u2014 \u0642\u0627\u0639\u062f\u0629 \u0644\u064a\u0633 \u0628\u0645\u0634\u0627\u0628\u0643', image: '/images/perruques/secret-volume/sv003.jpg', typeFr: 'TB Secret Volume \u2014 Blond', typeAr: 'TB \u0633\u064a\u0643\u0631\u064a\u062a \u0641\u0648\u0644\u064a\u0648\u0645 \u2014 \u0623\u0634\u0642\u0631', basePrice: 440, rating: 4.9, reviews: 35, sold: 46, stock: 29, category: 'blonde', categoryFr: 'Blond', categoryAr: '\u0623\u0634\u0642\u0631' },
+  { id: 'sv002', nameFr: 'TB Secret Volume — Blond Balayage', nameAr: 'TB سيكريت فوليوم — أشقر بالياج', image: '/images/perruques/secret-volume/sv002.jpg', gallery: ['/images/perruques/secret-volume/sv003.jpg'], typeFr: 'TB Secret Volume — Blond', typeAr: 'TB سيكريت فوليوم — أشقر', basePrice: 1500, rating: 4.8, reviews: 37, sold: 48, stock: 31, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
 ];
 
 
@@ -215,10 +213,16 @@ export default function PerruquesSecretVolume() {
     back: lang === 'fr' ? 'Retour aux perruques' : '\u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0627\u0644\u0628\u0627\u0631\u0648\u0643\u0627\u062a',
   };
 
-  const images = (selectedProduct.gallery ?? [selectedProduct.image]).map((src, i) => ({
-    src,
-    alt: selectedProduct.nameFr + (i === 0 ? '' : ' - vue ' + (i + 1)),
-  }));
+  /* The photos this product actually has: the main shot, then any others
+     grouped onto it. Same convention as every other collection page -
+     gallery holds the extras, not the main image. */
+  const images = [
+    { src: selectedProduct.image, alt: selectedProduct.nameFr },
+    ...(selectedProduct.gallery ?? []).map((src, i) => ({
+      src,
+      alt: `${selectedProduct.nameFr} - vue ${i + 2}`,
+    })),
+  ];
 
   const catLabel = lang === 'fr' ? selectedProduct.categoryFr : selectedProduct.categoryAr;
   const name = lang === 'fr' ? selectedProduct.nameFr : selectedProduct.nameAr;

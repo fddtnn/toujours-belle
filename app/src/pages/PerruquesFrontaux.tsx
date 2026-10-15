@@ -16,6 +16,7 @@ interface WigProduct {
   nameFr: string;
   nameAr: string;
   image: string;
+  gallery?: string[];
   typeFr: string;
   typeAr: string;
   basePrice: number;
@@ -29,12 +30,9 @@ interface WigProduct {
 }
 
 const products: WigProduct[] = [
-  { id: 'rf001', nameFr: 'Rajout Frontal Noir Lisse', nameAr: 'إضافة أمامية سوداء ناعمة', image: '/images/perruques/frontaux/rf001.jpg', typeFr: 'Rajout Frontal — Noir Naturel', typeAr: 'إضافة أمامية — أسود طبيعي', basePrice: 380, rating: 4.9, reviews: 44, sold: 56, stock: 32, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
-  { id: 'rf002', nameFr: 'Rajout Frontal Noir Ligne Naturelle', nameAr: 'إضافة أمامية سوداء بخط طبيعي', image: '/images/perruques/frontaux/rf002.jpg', typeFr: 'Rajout Frontal — Noir Naturel', typeAr: 'إضافة أمامية — أسود طبيعي', basePrice: 370, rating: 4.8, reviews: 38, sold: 48, stock: 35, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
-  { id: 'rf003', nameFr: 'Rajout Frontal Noir Volume', nameAr: 'إضافة أمامية سوداء كثيفة', image: '/images/perruques/frontaux/rf003.jpg', typeFr: 'Rajout Frontal — Noir Naturel', typeAr: 'إضافة أمامية — أسود طبيعي', basePrice: 365, rating: 4.8, reviews: 35, sold: 45, stock: 37, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
-  { id: 'rf004', nameFr: 'Rajout Frontal Blond Balayage', nameAr: 'إضافة أمامية شقراء بالياج', image: '/images/perruques/frontaux/rf004.jpg', typeFr: 'Rajout Frontal — Blond', typeAr: 'إضافة أمامية — أشقر', basePrice: 400, rating: 4.9, reviews: 47, sold: 59, stock: 29, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'rf005', nameFr: 'Rajout Frontal Blond Racines Fondues', nameAr: 'إضافة أمامية شقراء بجذور متدرجة', image: '/images/perruques/frontaux/rf005.jpg', typeFr: 'Rajout Frontal — Blond', typeAr: 'إضافة أمامية — أشقر', basePrice: 395, rating: 4.8, reviews: 41, sold: 52, stock: 31, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
-  { id: 'rf006', nameFr: 'Rajout Frontal Blond Volume', nameAr: 'إضافة أمامية شقراء كثيفة', image: '/images/perruques/frontaux/rf006.jpg', typeFr: 'Rajout Frontal — Blond', typeAr: 'إضافة أمامية — أشقر', basePrice: 390, rating: 4.9, reviews: 39, sold: 50, stock: 33, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
+  { id: 'rf001', nameFr: 'Rajout Frontal Noir Lisse', nameAr: 'إضافة أمامية سوداء ناعمة', image: '/images/perruques/frontaux/rf001.jpg', gallery: ['/images/perruques/frontaux/rf002.jpg'], typeFr: 'Rajout Frontal — Noir Naturel', typeAr: 'إضافة أمامية — أسود طبيعي', basePrice: 1000, rating: 4.9, reviews: 44, sold: 56, stock: 32, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
+  { id: 'rf003', nameFr: 'Rajout Frontal Noir Volume', nameAr: 'إضافة أمامية سوداء كثيفة', image: '/images/perruques/frontaux/rf003.jpg', gallery: ['/images/perruques/frontaux/rf004.jpg'], typeFr: 'Rajout Frontal — Noir Naturel', typeAr: 'إضافة أمامية — أسود طبيعي', basePrice: 1000, rating: 4.8, reviews: 35, sold: 45, stock: 37, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
+  { id: 'rf005', nameFr: 'Rajout Frontal Blond Racines Fondues', nameAr: 'إضافة أمامية شقراء بجذور متدرجة', image: '/images/perruques/frontaux/rf005.jpg', gallery: ['/images/perruques/frontaux/rf006.jpg'], typeFr: 'Rajout Frontal — Blond', typeAr: 'إضافة أمامية — أشقر', basePrice: 1000, rating: 4.8, reviews: 41, sold: 52, stock: 31, category: 'blonde', categoryFr: 'Blond', categoryAr: 'أشقر' },
 ];
 
 
@@ -215,10 +213,15 @@ export default function PerruquesFrontaux() {
     back: lang === 'fr' ? 'Retour aux perruques' : '\u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0627\u0644\u0628\u0627\u0631\u0648\u0643\u0627\u062a',
   };
 
+  /* The photos this wig actually has: the main shot, then any others grouped
+     onto it. A product with one photo shows one, not the same one three
+     times. */
   const images = [
     { src: selectedProduct.image, alt: selectedProduct.nameFr },
-    { src: selectedProduct.image, alt: selectedProduct.nameFr + ' - vue 2' },
-    { src: selectedProduct.image, alt: selectedProduct.nameFr + ' - vue 3' },
+    ...(selectedProduct.gallery ?? []).map((src, i) => ({
+      src,
+      alt: `${selectedProduct.nameFr} - vue ${i + 2}`,
+    })),
   ];
 
   const catLabel = lang === 'fr' ? selectedProduct.categoryFr : selectedProduct.categoryAr;

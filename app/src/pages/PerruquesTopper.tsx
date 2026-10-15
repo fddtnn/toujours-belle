@@ -16,6 +16,7 @@ interface WigProduct {
   nameFr: string;
   nameAr: string;
   image: string;
+  gallery?: string[];
   typeFr: string;
   typeAr: string;
   basePrice: number;
@@ -29,12 +30,10 @@ interface WigProduct {
 }
 
 const products: WigProduct[] = [
-  { id: 'tp001', nameFr: 'Topper Noir Frange Élégance', nameAr: 'توبر أسود غرة أنيقة', image: '/images/perruques/topper/tp001.jpg', typeFr: 'Topper — Noir Naturel', typeAr: 'توبر — أسود طبيعي', basePrice: 265, rating: 4.8, reviews: 34, sold: 46, stock: 40, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
-  { id: 'tp002', nameFr: 'Topper Noir Frange Pleine', nameAr: 'توبر أسود غرة كاملة', image: '/images/perruques/topper/tp002.jpg', typeFr: 'Topper — Noir Naturel', typeAr: 'توبر — أسود طبيعي', basePrice: 285, rating: 4.7, reviews: 29, sold: 41, stock: 44, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
-  { id: 'tp003', nameFr: 'Topper Noir Volume Léger', nameAr: 'توبر أسود حجم خفيف', image: '/images/perruques/topper/tp003.jpg', typeFr: 'Topper — Noir Naturel', typeAr: 'توبر — أسود طبيعي', basePrice: 245, rating: 4.6, reviews: 26, sold: 38, stock: 48, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
-  { id: 'tp004', nameFr: 'Topper Châtain Clair Douceur', nameAr: 'توبر كستنائي فاتح ناعم', image: '/images/perruques/topper/tp004.jpg', typeFr: 'Topper — Châtain', typeAr: 'توبر — كستنائي', basePrice: 275, rating: 4.8, reviews: 37, sold: 49, stock: 42, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
-  { id: 'tp005', nameFr: 'Topper Châtain Dégradé Luxe', nameAr: 'توبر كستنائي متدرج فاخر', image: '/images/perruques/topper/tp005.jpg', typeFr: 'Topper — Châtain', typeAr: 'توبر — كستنائي', basePrice: 295, rating: 4.7, reviews: 32, sold: 44, stock: 39, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
-  { id: 'tp006', nameFr: 'Topper Châtain Frange Glamour', nameAr: 'توبر كستنائي غرة جلامور', image: '/images/perruques/topper/tp006.jpg', typeFr: 'Topper — Châtain', typeAr: 'توبر — كستنائي', basePrice: 280, rating: 4.8, reviews: 35, sold: 47, stock: 41, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
+  { id: 'tp001', nameFr: 'Topper Noir Frange Élégance', nameAr: 'توبر أسود غرة أنيقة', image: '/images/perruques/topper/tp001.jpg', gallery: ['/images/perruques/topper/tp005.jpg'], typeFr: 'Topper — Noir Naturel', typeAr: 'توبر — أسود طبيعي', basePrice: 1000, rating: 4.8, reviews: 34, sold: 46, stock: 40, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
+  { id: 'tp002', nameFr: 'Topper Noir Frange Pleine', nameAr: 'توبر أسود غرة كاملة', image: '/images/perruques/topper/tp002.jpg', gallery: ['/images/perruques/topper/tp006.jpg'], typeFr: 'Topper — Noir Naturel', typeAr: 'توبر — أسود طبيعي', basePrice: 1000, rating: 4.7, reviews: 29, sold: 41, stock: 44, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
+  { id: 'tp003', nameFr: 'Topper Noir Volume Léger', nameAr: 'توبر أسود حجم خفيف', image: '/images/perruques/topper/tp003.jpg', typeFr: 'Topper — Noir Naturel', typeAr: 'توبر — أسود طبيعي', basePrice: 1000, rating: 4.6, reviews: 26, sold: 38, stock: 48, category: 'natural-black', categoryFr: 'Noir Naturel', categoryAr: 'أسود طبيعي' },
+  { id: 'tp004', nameFr: 'Topper Châtain Clair Douceur', nameAr: 'توبر كستنائي فاتح ناعم', image: '/images/perruques/topper/tp004.jpg', typeFr: 'Topper — Châtain', typeAr: 'توبر — كستنائي', basePrice: 1000, rating: 4.8, reviews: 37, sold: 49, stock: 42, category: 'brown', categoryFr: 'Châtain', categoryAr: 'كستنائي' },
 ];
 
 
@@ -217,10 +216,15 @@ export default function PerruquesTopper() {
     back: lang === 'fr' ? 'Retour aux perruques' : '\u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0627\u0644\u0628\u0627\u0631\u0648\u0643\u0627\u062a',
   };
 
+  /* The photos this wig actually has: the main shot, then any others grouped
+     onto it. A product with one photo shows one, not the same one three
+     times. */
   const images = [
     { src: selectedProduct.image, alt: selectedProduct.nameFr },
-    { src: selectedProduct.image, alt: selectedProduct.nameFr + ' - vue 2' },
-    { src: selectedProduct.image, alt: selectedProduct.nameFr + ' - vue 3' },
+    ...(selectedProduct.gallery ?? []).map((src, i) => ({
+      src,
+      alt: `${selectedProduct.nameFr} - vue ${i + 2}`,
+    })),
   ];
 
   const catLabel = lang === 'fr' ? selectedProduct.categoryFr : selectedProduct.categoryAr;
