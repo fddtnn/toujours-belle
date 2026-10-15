@@ -24,6 +24,7 @@ const searchableItems = [
   { nameFr: 'Auburn', nameAr: 'أوبورن', href: '#colors' },
   { nameFr: 'Consultation', nameAr: 'استشارة', href: '#about' },
   { nameFr: 'Accessoires', nameAr: 'إكسسوارات', href: '/accessoires' },
+  { nameFr: 'Hair Care', nameAr: 'العناية بالشعر', href: '/accessoires' },
   { nameFr: 'E-Gift Cards', nameAr: 'بطاقات الهدايا', href: '/e-gift-cards' },
   { nameFr: 'Extensions', nameAr: 'إضافات', href: '/extensions' },
   { nameFr: 'Perruques', nameAr: 'باروكات', href: '/perruques' },
@@ -71,8 +72,7 @@ const cheveuxSubmenu: CheveuxItem[] = [
   { fr: 'Franges', ar: 'غرة', href: '/franges' },
   { fr: 'Queues de Cheval', ar: 'ذيول الحصان', href: '/queues' },
   { fr: 'Chignons & Chouchous', ar: 'كعكات وربطات', href: '/chignons' },
-  { fr: 'Hair Care', ar: 'العناية بالشعر', href: '#product' },
-  { fr: 'Accessoires', ar: 'إكسسوارات', href: '/accessoires' },
+  { fr: 'Hair Care & Accessoires', ar: 'العناية والإكسسوارات', href: '/accessoires' },
   { fr: 'E-Gift Cards', ar: 'بطاقات الهدايا الإلكترونية', href: '/e-gift-cards' },
   { fr: 'Extensions', ar: 'إضافات', href: '/extensions' },
 ];

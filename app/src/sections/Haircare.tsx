@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router';
 import { useLanguage } from '../context/LanguageContext';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -11,7 +12,6 @@ const products = [
     nameFr: 'Shampoing Nourrissant',
     nameAr: 'شامبو مغذي',
     image: '/images/accessoires/acc18.jpg',
-    price: 49,
     tagFr: 'Haircare',
     tagAr: 'العناية',
   },
@@ -19,7 +19,6 @@ const products = [
     nameFr: 'Après-Shampoing Hydratant',
     nameAr: 'بلسم مرطب',
     image: '/images/accessoires/acc27.jpg',
-    price: 49,
     tagFr: 'Haircare',
     tagAr: 'العناية',
   },
@@ -27,7 +26,6 @@ const products = [
     nameFr: 'Sérum Elixir Argan',
     nameAr: 'سيروم أرجان',
     image: '/images/accessoires/acc23.jpg',
-    price: 69,
     tagFr: 'Soin',
     tagAr: 'علاج',
   },
@@ -35,7 +33,6 @@ const products = [
     nameFr: 'Brosse Lissante',
     nameAr: 'فرشاة شعر',
     image: '/images/accessoires/acc9.jpg',
-    price: 39,
     tagFr: 'Accessoire',
     tagAr: 'إكسسوار',
   },
@@ -43,7 +40,6 @@ const products = [
     nameFr: 'Bonnet Satin',
     nameAr: 'بونيه ساتان',
     image: '/images/accessoires/acc10.jpg',
-    price: 29,
     tagFr: 'Accessoire',
     tagAr: 'إكسسوار',
   },
@@ -51,7 +47,6 @@ const products = [
     nameFr: 'Hair Spray Nourrissant',
     nameAr: 'بخاخ الشعر المغذي',
     image: '/images/accessoires/acc29.jpg',
-    price: 55,
     tagFr: 'Haircare',
     tagAr: 'العناية',
   },
@@ -59,7 +54,6 @@ const products = [
     nameFr: 'Barrettes Ornées',
     nameAr: 'مشابك ذهبية',
     image: '/images/accessoires/acc25.jpg',
-    price: 35,
     tagFr: 'Accessoire',
     tagAr: 'إكسسوار',
   },
@@ -67,7 +61,6 @@ const products = [
     nameFr: 'Masque Réparateur',
     nameAr: 'ماسك إصلاحي',
     image: '/images/accessoires/acc24.jpg',
-    price: 59,
     tagFr: 'Soin',
     tagAr: 'علاج',
   },
@@ -75,7 +68,6 @@ const products = [
     nameFr: 'Colle Perruque',
     nameAr: 'غراء الباروكة',
     image: '/images/accessoires/acc2.jpg',
-    price: 45,
     tagFr: 'Accessoire',
     tagAr: 'إكسسوار',
   },
@@ -83,6 +75,7 @@ const products = [
 
 export default function Haircare() {
   const { lang } = useLanguage();
+  const navigate = useNavigate();
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -250,19 +243,17 @@ export default function Haircare() {
                     />
                   ))}
                 </div>
-                <div className="flex items-center justify-between">
-                  <span
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontWeight: 600,
-                      fontSize: '15px',
-                      color: 'var(--tb-accent-text)',
-                    }}
-                  >
-                    {p.price} TND
-                  </span>
-                </div>
+                <span
+                  style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontSize: '15px',
+                    color: 'var(--tb-accent-text)',
+                  }}
+                >
+                  {lang === 'fr' ? 'Prix sur demande' : 'السعر عند الطلب'}
+                </span>
                 <button
+                  onClick={() => navigate('/accessoires')}
                   className="w-full mt-3"
                   style={{
                     height: '40px',
@@ -285,9 +276,7 @@ export default function Haircare() {
                     e.currentTarget.style.backgroundColor = 'var(--tb-text)';
                   }}
                 >
-                  {lang === 'fr'
-                    ? 'Ajouter au Panier'
-                    : 'أضيفي إلى السلة'}
+                  {lang === 'fr' ? 'Voir le produit' : 'شوفي المنتج'}
                 </button>
               </div>
             </div>
